@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="ar.unq.edu.objetos3.pdc.sdk"
+	label="Pdc SDK Feature "
+	version="1.0.0.qualifier">
+	<plugin
+			id="ar.unq.edu.objetos3.pdc"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="ar.unq.edu.objetos3.pdc.ui"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+</feature>

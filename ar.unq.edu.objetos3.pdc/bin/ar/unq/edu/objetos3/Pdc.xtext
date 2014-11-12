@@ -1,0 +1,9 @@
+grammar ar.unq.edu.objetos3.Pdc with org.eclipse.xtext.common.Terminals
+
+generate pdc "http://www.unq.ar/edu/objetos3/Pdc"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
