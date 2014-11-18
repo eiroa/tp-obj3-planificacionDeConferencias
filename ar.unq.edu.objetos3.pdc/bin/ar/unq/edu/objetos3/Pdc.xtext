@@ -1,6 +1,7 @@
 grammar ar.unq.edu.objetos3.Pdc with org.eclipse.xtext.common.Terminals
 
 generate pdc "http://www.unq.ar/edu/objetos3/Pdc"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 Schedule:
 	'Schedule' nombre= STRING ':' (actividades+=Actividad)* fin= 'Fin del schedule'
@@ -19,7 +20,8 @@ Orador:
 
 Actividad:
 	Charla | Taller | MesaDeDebate
-	'Actividad' ':' tipo= Actividad ',' titulo= STRING ',' duracion= INT ',' aula= Espacio;
+	'Actividad' ':' tipo= Actividad ',' titulo= STRING ',' duracion= INT ','
+	 espacio= Espacio ',' genteEsperada= INT;
 	
 Charla:
 	{Charla}
@@ -33,3 +35,6 @@ MesaDeDebate:
 	{MesaDeDebate}
 	'Mesa de debate' oradores+=Orador*
 ;
+
+	
+
