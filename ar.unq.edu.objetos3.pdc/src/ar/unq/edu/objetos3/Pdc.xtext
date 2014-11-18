@@ -6,9 +6,6 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 Schedule:
 	'Schedule' nombre= STRING ':' (actividades+=Actividad)* //fin= 'Fin del schedule'
 ;
-	
-Espacio:
-	'Espacio' ':' titulo= STRING ',' capacidad= INT;
 
 Organizacion:
 	'Organizacion' nombre= STRING
@@ -19,9 +16,12 @@ Orador:
 ;
 
 Actividad:
-	'Actividad' ':' tipo= [TipoDeActividad] ',' titulo= STRING ',' duracion= INT ','
-	 espacio= [Espacio] ',' genteEsperada= INT ',' oradores+=Orador*
+	'Actividad' ':' tipo= TipoDeActividad ',' titulo= STRING ',' duracion= INT ','
+	 espacio= Espacio ',' genteEsperada= INT ',' oradores+=Orador*
 ;
+	
+Espacio:
+	'Espacio' ':' nombre= STRING ',' capacidad= INT;
 
 TipoDeActividad:
 		Charla | Taller | MesaDeDebate
