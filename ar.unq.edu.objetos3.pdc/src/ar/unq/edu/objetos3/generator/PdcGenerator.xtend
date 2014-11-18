@@ -6,7 +6,7 @@ package ar.unq.edu.objetos3.generator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-import ar.unq.edu.objetos3.pdc.Greeting
+import ar.unq.edu.objetos3.pdc.Schedule
 
 /**
  * Generates code from your model files on save.
@@ -15,21 +15,23 @@ import ar.unq.edu.objetos3.pdc.Greeting
  */
 class PdcGenerator implements IGenerator {
 	
+	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 			resource.allContents
-				.filter(typeof(Greeting))
-				.map[name]
+				.filter(typeof(Schedule))
+				.map[nombre]
 				.join(', '))
 	}
 	
-//	def compile (Resource resource) '''
-//	package greetings;
-//	 
-//	 public class GreetingsApplication {
-//	 	public static void main(String[] args){
-//	 		System.Out.Println("People to greet:  <<resource.greetings>>");
-//	 	}
-//	 } 
-//	'''
+	def compile (Resource resource) '''
+	package schedule;
+	 
+	 public class Schedule {
+	 	public static void main(String[] args){
+	 		for(Actividad a : resource.actividades)
+	 			System.Out.Println("<<a>>");
+	 	}
+	 } 
+	'''
 }

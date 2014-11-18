@@ -4,7 +4,7 @@ generate pdc "http://www.unq.ar/edu/objetos3/Pdc"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 Schedule:
-	'Schedule' nombre= STRING ':' (actividades+=Actividad)* fin= 'Fin del schedule'
+	'Schedule' nombre= STRING ':' (actividades+=Actividad)* //fin= 'Fin del schedule'
 ;
 	
 Espacio:
@@ -19,21 +19,25 @@ Orador:
 ;
 
 Actividad:
-	Charla | Taller | MesaDeDebate
-	'Actividad' ':' tipo= Actividad ',' titulo= STRING ',' duracion= INT ','
-	 espacio= Espacio ',' genteEsperada= INT;
-	
+	'Actividad' ':' tipo= [TipoDeActividad] ',' titulo= STRING ',' duracion= INT ','
+	 espacio= [Espacio] ',' genteEsperada= INT ',' oradores+=Orador*
+;
+
+TipoDeActividad:
+		Charla | Taller | MesaDeDebate
+;
+
 Charla:
 	{Charla}
-	'Charla' oradores+=Orador*
+	'Charla' 
 ;
 Taller:
 	{Taller}
-	'Taller' oradores+=Orador*
+	'Taller'
 ;
 MesaDeDebate:
 	{MesaDeDebate}
-	'Mesa de debate' oradores+=Orador*
+	'Mesa de debate'
 ;
 
 	
