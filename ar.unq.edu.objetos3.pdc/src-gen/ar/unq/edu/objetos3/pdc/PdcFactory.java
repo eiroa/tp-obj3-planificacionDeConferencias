@@ -23,22 +23,76 @@ public interface PdcFactory extends EFactory
   PdcFactory eINSTANCE = ar.unq.edu.objetos3.pdc.impl.PdcFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model</em>'.
+   * Returns a new object of class '<em>Schedule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model</em>'.
+   * @return a new object of class '<em>Schedule</em>'.
    * @generated
    */
-  Model createModel();
+  Schedule createSchedule();
 
   /**
-   * Returns a new object of class '<em>Greeting</em>'.
+   * Returns a new object of class '<em>Espacio</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Greeting</em>'.
+   * @return a new object of class '<em>Espacio</em>'.
    * @generated
    */
-  Greeting createGreeting();
+  Espacio createEspacio();
+
+  /**
+   * Returns a new object of class '<em>Organizacion</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Organizacion</em>'.
+   * @generated
+   */
+  Organizacion createOrganizacion();
+
+  /**
+   * Returns a new object of class '<em>Orador</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Orador</em>'.
+   * @generated
+   */
+  Orador createOrador();
+
+  /**
+   * Returns a new object of class '<em>Actividad</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Actividad</em>'.
+   * @generated
+   */
+  Actividad createActividad();
+
+  /**
+   * Returns a new object of class '<em>Charla</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Charla</em>'.
+   * @generated
+   */
+  Charla createCharla();
+
+  /**
+   * Returns a new object of class '<em>Taller</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Taller</em>'.
+   * @generated
+   */
+  Taller createTaller();
+
+  /**
+   * Returns a new object of class '<em>Mesa De Debate</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mesa De Debate</em>'.
+   * @generated
+   */
+  MesaDeDebate createMesaDeDebate();
 
   /**
    * Returns the package supported by this factory.

@@ -25,7 +25,7 @@ public class PdcParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParse
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Model";
+		return "Schedule";
 	}
 	
 	public PdcGrammarAccess getGrammarAccess() {

@@ -7,11 +7,32 @@
     editorPluginID="ar.unq.edu.objetos3.pdc.editor" runtimeVersion="2.10">
   <genPackages prefix="Pdc" basePackage="ar.unq.edu.objetos3" disposableProviderFactory="true"
       fileExtensions="pdc" ecorePackage="Pdc.ecore#/">
-    <genClasses ecoreClass="Pdc.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Model/greetings"/>
+    <genClasses ecoreClass="Pdc.ecore#//Schedule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Schedule/nombre"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Schedule/actividades"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Schedule/fin"/>
     </genClasses>
-    <genClasses ecoreClass="Pdc.ecore#//Greeting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Greeting/name"/>
+    <genClasses ecoreClass="Pdc.ecore#//Espacio">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/titulo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/capacidad"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Organizacion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Organizacion/nombre"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Orador">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Orador/nombre"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Orador/organizacion"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Actividad">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/oradores"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Charla"/>
+    <genClasses ecoreClass="Pdc.ecore#//Taller"/>
+    <genClasses ecoreClass="Pdc.ecore#//MesaDeDebate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//MesaDeDebate/tipo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//MesaDeDebate/titulo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//MesaDeDebate/duracion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//MesaDeDebate/aula"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -2,6 +2,7 @@ grammar ar.unq.edu.objetos3.Pdc with org.eclipse.xtext.common.Terminals
 
 generate pdc "http://www.unq.ar/edu/objetos3/Pdc"
 
+<<<<<<< HEAD
 Schedule:
 	'Schedule' nombre= STRING ':' (actividades+=Actividad)* fin= 'Fin del schedule'
 ;
@@ -33,3 +34,31 @@ MesaDeDebate:
 	{MesaDeDebate}
 	'Mesa de debate' oradores+=Orador*
 ;
+=======
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
+Model:
+	(greetings+=Greeting*) 
+	(saludos+=Saludo)* 
+	(espacios+=Espacio*)
+	(actividades+=Actividad*)
+	;
+	
+	
+Greeting:
+	'Hello' name=ID '!';
+	
+Saludo:
+    'Holaaa' (aQuien+=STRING)* '!'
+;
+
+
+Espacio:
+	'Espacio' name=ID capacidad=INT
+;
+
+Actividad:
+	'Actividad' nombre=ID duracion=INT espacio=[Espacio] genteEsperada=INT
+;
+
+>>>>>>> 7e07e5cdbb2195af4d6a40db68f1d1b09235cebf

@@ -72,17 +72,62 @@ public class PdcSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case PdcPackage.MODEL:
+      case PdcPackage.SCHEDULE:
       {
-        Model model = (Model)theEObject;
-        T result = caseModel(model);
+        Schedule schedule = (Schedule)theEObject;
+        T result = caseSchedule(schedule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PdcPackage.GREETING:
+      case PdcPackage.ESPACIO:
       {
-        Greeting greeting = (Greeting)theEObject;
-        T result = caseGreeting(greeting);
+        Espacio espacio = (Espacio)theEObject;
+        T result = caseEspacio(espacio);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PdcPackage.ORGANIZACION:
+      {
+        Organizacion organizacion = (Organizacion)theEObject;
+        T result = caseOrganizacion(organizacion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PdcPackage.ORADOR:
+      {
+        Orador orador = (Orador)theEObject;
+        T result = caseOrador(orador);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PdcPackage.ACTIVIDAD:
+      {
+        Actividad actividad = (Actividad)theEObject;
+        T result = caseActividad(actividad);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PdcPackage.CHARLA:
+      {
+        Charla charla = (Charla)theEObject;
+        T result = caseCharla(charla);
+        if (result == null) result = caseActividad(charla);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PdcPackage.TALLER:
+      {
+        Taller taller = (Taller)theEObject;
+        T result = caseTaller(taller);
+        if (result == null) result = caseActividad(taller);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PdcPackage.MESA_DE_DEBATE:
+      {
+        MesaDeDebate mesaDeDebate = (MesaDeDebate)theEObject;
+        T result = caseMesaDeDebate(mesaDeDebate);
+        if (result == null) result = caseActividad(mesaDeDebate);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -91,33 +136,129 @@ public class PdcSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Schedule</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Schedule</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseModel(Model object)
+  public T caseSchedule(Schedule object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Greeting</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Espacio</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Greeting</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Espacio</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseGreeting(Greeting object)
+  public T caseEspacio(Espacio object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Organizacion</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Organizacion</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOrganizacion(Organizacion object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Orador</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Orador</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOrador(Orador object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Actividad</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Actividad</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseActividad(Actividad object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Charla</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Charla</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCharla(Charla object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Taller</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Taller</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTaller(Taller object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mesa De Debate</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mesa De Debate</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMesaDeDebate(MesaDeDebate object)
   {
     return null;
   }

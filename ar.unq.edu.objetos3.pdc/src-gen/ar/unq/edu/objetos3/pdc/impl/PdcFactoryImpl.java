@@ -64,8 +64,14 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
   {
     switch (eClass.getClassifierID())
     {
-      case PdcPackage.MODEL: return createModel();
-      case PdcPackage.GREETING: return createGreeting();
+      case PdcPackage.SCHEDULE: return createSchedule();
+      case PdcPackage.ESPACIO: return createEspacio();
+      case PdcPackage.ORGANIZACION: return createOrganizacion();
+      case PdcPackage.ORADOR: return createOrador();
+      case PdcPackage.ACTIVIDAD: return createActividad();
+      case PdcPackage.CHARLA: return createCharla();
+      case PdcPackage.TALLER: return createTaller();
+      case PdcPackage.MESA_DE_DEBATE: return createMesaDeDebate();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -76,10 +82,10 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  public Schedule createSchedule()
   {
-    ModelImpl model = new ModelImpl();
-    return model;
+    ScheduleImpl schedule = new ScheduleImpl();
+    return schedule;
   }
 
   /**
@@ -87,10 +93,76 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Greeting createGreeting()
+  public Espacio createEspacio()
   {
-    GreetingImpl greeting = new GreetingImpl();
-    return greeting;
+    EspacioImpl espacio = new EspacioImpl();
+    return espacio;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Organizacion createOrganizacion()
+  {
+    OrganizacionImpl organizacion = new OrganizacionImpl();
+    return organizacion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Orador createOrador()
+  {
+    OradorImpl orador = new OradorImpl();
+    return orador;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Actividad createActividad()
+  {
+    ActividadImpl actividad = new ActividadImpl();
+    return actividad;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Charla createCharla()
+  {
+    CharlaImpl charla = new CharlaImpl();
+    return charla;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Taller createTaller()
+  {
+    TallerImpl taller = new TallerImpl();
+    return taller;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MesaDeDebate createMesaDeDebate()
+  {
+    MesaDeDebateImpl mesaDeDebate = new MesaDeDebateImpl();
+    return mesaDeDebate;
   }
 
   /**

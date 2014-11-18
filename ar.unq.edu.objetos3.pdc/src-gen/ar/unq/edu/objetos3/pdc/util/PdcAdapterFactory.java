@@ -75,14 +75,44 @@ public class PdcAdapterFactory extends AdapterFactoryImpl
     new PdcSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModel(Model object)
+      public Adapter caseSchedule(Schedule object)
       {
-        return createModelAdapter();
+        return createScheduleAdapter();
       }
       @Override
-      public Adapter caseGreeting(Greeting object)
+      public Adapter caseEspacio(Espacio object)
       {
-        return createGreetingAdapter();
+        return createEspacioAdapter();
+      }
+      @Override
+      public Adapter caseOrganizacion(Organizacion object)
+      {
+        return createOrganizacionAdapter();
+      }
+      @Override
+      public Adapter caseOrador(Orador object)
+      {
+        return createOradorAdapter();
+      }
+      @Override
+      public Adapter caseActividad(Actividad object)
+      {
+        return createActividadAdapter();
+      }
+      @Override
+      public Adapter caseCharla(Charla object)
+      {
+        return createCharlaAdapter();
+      }
+      @Override
+      public Adapter caseTaller(Taller object)
+      {
+        return createTallerAdapter();
+      }
+      @Override
+      public Adapter caseMesaDeDebate(MesaDeDebate object)
+      {
+        return createMesaDeDebateAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -107,31 +137,121 @@ public class PdcAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Model <em>Model</em>}'.
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Schedule <em>Schedule</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see ar.unq.edu.objetos3.pdc.Model
+   * @see ar.unq.edu.objetos3.pdc.Schedule
    * @generated
    */
-  public Adapter createModelAdapter()
+  public Adapter createScheduleAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Greeting <em>Greeting</em>}'.
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Espacio <em>Espacio</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see ar.unq.edu.objetos3.pdc.Greeting
+   * @see ar.unq.edu.objetos3.pdc.Espacio
    * @generated
    */
-  public Adapter createGreetingAdapter()
+  public Adapter createEspacioAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Organizacion <em>Organizacion</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Organizacion
+   * @generated
+   */
+  public Adapter createOrganizacionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Orador <em>Orador</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Orador
+   * @generated
+   */
+  public Adapter createOradorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Actividad <em>Actividad</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Actividad
+   * @generated
+   */
+  public Adapter createActividadAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Charla <em>Charla</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Charla
+   * @generated
+   */
+  public Adapter createCharlaAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Taller <em>Taller</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Taller
+   * @generated
+   */
+  public Adapter createTallerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.MesaDeDebate <em>Mesa De Debate</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.MesaDeDebate
+   * @generated
+   */
+  public Adapter createMesaDeDebateAdapter()
   {
     return null;
   }
