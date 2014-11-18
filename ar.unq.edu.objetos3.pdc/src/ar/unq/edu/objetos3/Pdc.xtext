@@ -2,8 +2,34 @@ grammar ar.unq.edu.objetos3.Pdc with org.eclipse.xtext.common.Terminals
 
 generate pdc "http://www.unq.ar/edu/objetos3/Pdc"
 
-Model:
-	greetings+=Greeting*;
+Schedule:
+	'Schedule' nombre= STRING ':' (actividades+=Actividad)* fin= 'Fin del schedule'
+;
 	
-Greeting:
-	'Hello' name=ID '!';
+Espacio:
+	'Espacio' ':' titulo= STRING ',' capacidad= INT;
+
+Organizacion:
+	'Organizacion' nombre= STRING
+;
+
+Orador:
+	'Orador' nombre= STRING 'de:' organizacion= Organizacion 
+;
+
+Actividad:
+	Charla | Taller | MesaDeDebate
+	'Actividad' ':' tipo= Actividad ',' titulo= STRING ',' duracion= INT ',' aula= Espacio;
+	
+Charla:
+	{Charla}
+	'Charla' oradores+=Orador*
+;
+Taller:
+	{Taller}
+	'Taller' oradores+=Orador*
+;
+MesaDeDebate:
+	{MesaDeDebate}
+	'Mesa de debate' oradores+=Orador*
+;
