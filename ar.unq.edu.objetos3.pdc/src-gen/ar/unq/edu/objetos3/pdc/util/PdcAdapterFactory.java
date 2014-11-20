@@ -80,11 +80,6 @@ public class PdcAdapterFactory extends AdapterFactoryImpl
         return createScheduleAdapter();
       }
       @Override
-      public Adapter caseEspacio(Espacio object)
-      {
-        return createEspacioAdapter();
-      }
-      @Override
       public Adapter caseOrganizacion(Organizacion object)
       {
         return createOrganizacionAdapter();
@@ -98,6 +93,21 @@ public class PdcAdapterFactory extends AdapterFactoryImpl
       public Adapter caseActividad(Actividad object)
       {
         return createActividadAdapter();
+      }
+      @Override
+      public Adapter caseEspacio(Espacio object)
+      {
+        return createEspacioAdapter();
+      }
+      @Override
+      public Adapter caseTipoDeActividad(TipoDeActividad object)
+      {
+        return createTipoDeActividadAdapter();
+      }
+      @Override
+      public Adapter caseHora(Hora object)
+      {
+        return createHoraAdapter();
       }
       @Override
       public Adapter caseCharla(Charla object)
@@ -152,21 +162,6 @@ public class PdcAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Espacio <em>Espacio</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ar.unq.edu.objetos3.pdc.Espacio
-   * @generated
-   */
-  public Adapter createEspacioAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Organizacion <em>Organizacion</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -207,6 +202,51 @@ public class PdcAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActividadAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Espacio <em>Espacio</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Espacio
+   * @generated
+   */
+  public Adapter createEspacioAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.TipoDeActividad <em>Tipo De Actividad</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.TipoDeActividad
+   * @generated
+   */
+  public Adapter createTipoDeActividadAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ar.unq.edu.objetos3.pdc.Hora <em>Hora</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ar.unq.edu.objetos3.pdc.Hora
+   * @generated
+   */
+  public Adapter createHoraAdapter()
   {
     return null;
   }

@@ -1,7 +1,9 @@
 package ar.unq.edu.objetos3.serializer;
 
+import ar.unq.edu.objetos3.pdc.Actividad;
 import ar.unq.edu.objetos3.pdc.Charla;
 import ar.unq.edu.objetos3.pdc.Espacio;
+import ar.unq.edu.objetos3.pdc.Hora;
 import ar.unq.edu.objetos3.pdc.MesaDeDebate;
 import ar.unq.edu.objetos3.pdc.Orador;
 import ar.unq.edu.objetos3.pdc.Organizacion;
@@ -31,9 +33,15 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == PdcPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case PdcPackage.ACTIVIDAD:
+				if(context == grammarAccess.getActividadRule()) {
+					sequence_Actividad(context, (Actividad) semanticObject); 
+					return; 
+				}
+				else break;
 			case PdcPackage.CHARLA:
-				if(context == grammarAccess.getActividadRule() ||
-				   context == grammarAccess.getCharlaRule()) {
+				if(context == grammarAccess.getCharlaRule() ||
+				   context == grammarAccess.getTipoDeActividadRule()) {
 					sequence_Charla(context, (Charla) semanticObject); 
 					return; 
 				}
@@ -44,12 +52,15 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
-			case PdcPackage.MESA_DE_DEBATE:
-				if(context == grammarAccess.getActividadRule()) {
-					sequence_Actividad_MesaDeDebate(context, (MesaDeDebate) semanticObject); 
+			case PdcPackage.HORA:
+				if(context == grammarAccess.getHoraRule()) {
+					sequence_Hora(context, (Hora) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMesaDeDebateRule()) {
+				else break;
+			case PdcPackage.MESA_DE_DEBATE:
+				if(context == grammarAccess.getMesaDeDebateRule() ||
+				   context == grammarAccess.getTipoDeActividadRule()) {
 					sequence_MesaDeDebate(context, (MesaDeDebate) semanticObject); 
 					return; 
 				}
@@ -73,8 +84,8 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case PdcPackage.TALLER:
-				if(context == grammarAccess.getActividadRule() ||
-				   context == grammarAccess.getTallerRule()) {
+				if(context == grammarAccess.getTallerRule() ||
+				   context == grammarAccess.getTipoDeActividadRule()) {
 					sequence_Taller(context, (Taller) semanticObject); 
 					return; 
 				}
@@ -85,16 +96,24 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (oradores+=Orador* tipo=Actividad titulo=STRING duracion=INT aula=Espacio)
+	 *     (
+	 *         tipo=TipoDeActividad 
+	 *         titulo=STRING 
+	 *         duracion=INT 
+	 *         espacio=Espacio 
+	 *         genteEsperada=INT 
+	 *         oradores+=Orador* 
+	 *         horario=Hora
+	 *     )
 	 */
-	protected void sequence_Actividad_MesaDeDebate(EObject context, MesaDeDebate semanticObject) {
+	protected void sequence_Actividad(EObject context, Actividad semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (oradores+=Orador*)
+	 *     {Charla}
 	 */
 	protected void sequence_Charla(EObject context, Charla semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -103,18 +122,18 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (titulo=STRING capacidad=INT)
+	 *     (nombre=STRING capacidad=INT)
 	 */
 	protected void sequence_Espacio(EObject context, Espacio semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, PdcPackage.Literals.ESPACIO__TITULO) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PdcPackage.Literals.ESPACIO__TITULO));
+			if(transientValues.isValueTransient(semanticObject, PdcPackage.Literals.ESPACIO__NOMBRE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PdcPackage.Literals.ESPACIO__NOMBRE));
 			if(transientValues.isValueTransient(semanticObject, PdcPackage.Literals.ESPACIO__CAPACIDAD) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PdcPackage.Literals.ESPACIO__CAPACIDAD));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getEspacioAccess().getTituloSTRINGTerminalRuleCall_2_0(), semanticObject.getTitulo());
+		feeder.accept(grammarAccess.getEspacioAccess().getNombreSTRINGTerminalRuleCall_2_0(), semanticObject.getNombre());
 		feeder.accept(grammarAccess.getEspacioAccess().getCapacidadINTTerminalRuleCall_4_0(), semanticObject.getCapacidad());
 		feeder.finish();
 	}
@@ -122,7 +141,26 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (oradores+=Orador*)
+	 *     (hora=INT minutos=INT)
+	 */
+	protected void sequence_Hora(EObject context, Hora semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, PdcPackage.Literals.HORA__HORA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PdcPackage.Literals.HORA__HORA));
+			if(transientValues.isValueTransient(semanticObject, PdcPackage.Literals.HORA__MINUTOS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PdcPackage.Literals.HORA__MINUTOS));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getHoraAccess().getHoraINTTerminalRuleCall_2_0(), semanticObject.getHora());
+		feeder.accept(grammarAccess.getHoraAccess().getMinutosINTTerminalRuleCall_4_0(), semanticObject.getMinutos());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {MesaDeDebate}
 	 */
 	protected void sequence_MesaDeDebate(EObject context, MesaDeDebate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -166,7 +204,7 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (nombre=STRING actividades+=Actividad* fin='Fin del schedule')
+	 *     (nombre=STRING actividades+=Actividad* fin='/Fin del schedule')
 	 */
 	protected void sequence_Schedule(EObject context, Schedule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -175,7 +213,7 @@ public class PdcSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (oradores+=Orador*)
+	 *     {Taller}
 	 */
 	protected void sequence_Taller(EObject context, Taller semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

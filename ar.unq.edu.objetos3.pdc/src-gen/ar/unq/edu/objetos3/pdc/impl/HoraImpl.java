@@ -2,7 +2,7 @@
  */
 package ar.unq.edu.objetos3.pdc.impl;
 
-import ar.unq.edu.objetos3.pdc.Espacio;
+import ar.unq.edu.objetos3.pdc.Hora;
 import ar.unq.edu.objetos3.pdc.PdcPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -14,66 +14,66 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Espacio</b></em>'.
+ * An implementation of the model object '<em><b>Hora</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl#getNombre <em>Nombre</em>}</li>
- *   <li>{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl#getCapacidad <em>Capacidad</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.impl.HoraImpl#getHora <em>Hora</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.impl.HoraImpl#getMinutos <em>Minutos</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
+public class HoraImpl extends MinimalEObjectImpl.Container implements Hora
 {
   /**
-   * The default value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The default value of the '{@link #getHora() <em>Hora</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getHora()
    * @generated
    * @ordered
    */
-  protected static final String NOMBRE_EDEFAULT = null;
+  protected static final int HORA_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The cached value of the '{@link #getHora() <em>Hora</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getHora()
    * @generated
    * @ordered
    */
-  protected String nombre = NOMBRE_EDEFAULT;
+  protected int hora = HORA_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getCapacidad() <em>Capacidad</em>}' attribute.
+   * The default value of the '{@link #getMinutos() <em>Minutos</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCapacidad()
+   * @see #getMinutos()
    * @generated
    * @ordered
    */
-  protected static final int CAPACIDAD_EDEFAULT = 0;
+  protected static final int MINUTOS_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getCapacidad() <em>Capacidad</em>}' attribute.
+   * The cached value of the '{@link #getMinutos() <em>Minutos</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCapacidad()
+   * @see #getMinutos()
    * @generated
    * @ordered
    */
-  protected int capacidad = CAPACIDAD_EDEFAULT;
+  protected int minutos = MINUTOS_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EspacioImpl()
+  protected HoraImpl()
   {
     super();
   }
@@ -86,7 +86,7 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   @Override
   protected EClass eStaticClass()
   {
-    return PdcPackage.Literals.ESPACIO;
+    return PdcPackage.Literals.HORA;
   }
 
   /**
@@ -94,9 +94,9 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNombre()
+  public int getHora()
   {
-    return nombre;
+    return hora;
   }
 
   /**
@@ -104,12 +104,12 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNombre(String newNombre)
+  public void setHora(int newHora)
   {
-    String oldNombre = nombre;
-    nombre = newNombre;
+    int oldHora = hora;
+    hora = newHora;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ESPACIO__NOMBRE, oldNombre, nombre));
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.HORA__HORA, oldHora, hora));
   }
 
   /**
@@ -117,9 +117,9 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getCapacidad()
+  public int getMinutos()
   {
-    return capacidad;
+    return minutos;
   }
 
   /**
@@ -127,12 +127,12 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCapacidad(int newCapacidad)
+  public void setMinutos(int newMinutos)
   {
-    int oldCapacidad = capacidad;
-    capacidad = newCapacidad;
+    int oldMinutos = minutos;
+    minutos = newMinutos;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ESPACIO__CAPACIDAD, oldCapacidad, capacidad));
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.HORA__MINUTOS, oldMinutos, minutos));
   }
 
   /**
@@ -145,10 +145,10 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        return getNombre();
-      case PdcPackage.ESPACIO__CAPACIDAD:
-        return getCapacidad();
+      case PdcPackage.HORA__HORA:
+        return getHora();
+      case PdcPackage.HORA__MINUTOS:
+        return getMinutos();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -163,11 +163,11 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        setNombre((String)newValue);
+      case PdcPackage.HORA__HORA:
+        setHora((Integer)newValue);
         return;
-      case PdcPackage.ESPACIO__CAPACIDAD:
-        setCapacidad((Integer)newValue);
+      case PdcPackage.HORA__MINUTOS:
+        setMinutos((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -183,11 +183,11 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        setNombre(NOMBRE_EDEFAULT);
+      case PdcPackage.HORA__HORA:
+        setHora(HORA_EDEFAULT);
         return;
-      case PdcPackage.ESPACIO__CAPACIDAD:
-        setCapacidad(CAPACIDAD_EDEFAULT);
+      case PdcPackage.HORA__MINUTOS:
+        setMinutos(MINUTOS_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -203,10 +203,10 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        return NOMBRE_EDEFAULT == null ? nombre != null : !NOMBRE_EDEFAULT.equals(nombre);
-      case PdcPackage.ESPACIO__CAPACIDAD:
-        return capacidad != CAPACIDAD_EDEFAULT;
+      case PdcPackage.HORA__HORA:
+        return hora != HORA_EDEFAULT;
+      case PdcPackage.HORA__MINUTOS:
+        return minutos != MINUTOS_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -222,12 +222,12 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (nombre: ");
-    result.append(nombre);
-    result.append(", capacidad: ");
-    result.append(capacidad);
+    result.append(" (hora: ");
+    result.append(hora);
+    result.append(", minutos: ");
+    result.append(minutos);
     result.append(')');
     return result.toString();
   }
 
-} //EspacioImpl
+} //HoraImpl

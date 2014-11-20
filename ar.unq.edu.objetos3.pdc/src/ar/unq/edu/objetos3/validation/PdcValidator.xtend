@@ -3,9 +3,9 @@
  */
 package ar.unq.edu.objetos3.validation
 
-import ar.unq.edu.objetos3.pdc.Greeting
 import org.eclipse.xtext.validation.Check
 import ar.unq.edu.objetos3.pdc.*
+import java.lang.reflect.Field
 
 //import org.eclipse.xtext.validation.Check
 
@@ -20,18 +20,44 @@ class PdcValidator extends AbstractPdcValidator {
 	
 
 	@Check
-	def checkGreetingStartsWithCapital(Greeting greeting) {
-		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-			warning('Name should start with a capital', 
-					PdcPackage.Literals.GREETING__NAME,
+	def checkActivityStartsWithCapital(Actividad actividad) {
+		if (!Character.isUpperCase(actividad.titulo.charAt(0))) {
+			warning('Title should start with a capital', 
+					PdcPackage.Literals.ACTIVIDAD__TITULO,
+					INVALID_NAME
+					)
+		}
+	}
+	
+@Check
+def void checkTitleIsUnique(Schedule s) {
+	
+	 if  (s.actividades.map[a | a.titulo].toList.length > s.actividades.map[a | a.titulo].toSet.length) {
+	 	error('There are repeated titles', 
+					PdcPackage.Literals.SCHEDULE__NOMBRE,
+					INVALID_NAME)
+	 }
+	
+
+}
+
+	
+	
+	@Check
+	def checkActivityDurationl(Actividad actividad) {
+		
+		if (actividad.duracion < 30) {
+			error('Duration must be at least 30 minutes', 
+					PdcPackage.Literals.ACTIVIDAD__DURACION,
 					INVALID_NAME)
 		}
 	}
 	
-	@Check
-	def checkActivityDurationl(Actividad actividad) {
-		if (actividad.duracion < 30) {
-			error('Duration must be at least 30 minutes', 
+	
+   @Check
+	def checkTitleExistance(Actividad actividad) {
+		if (actividad.titulo.nullOrEmpty) {
+			error('Activity requires a title', 
 					PdcPackage.Literals.ACTIVIDAD__DURACION,
 					INVALID_NAME)
 		}

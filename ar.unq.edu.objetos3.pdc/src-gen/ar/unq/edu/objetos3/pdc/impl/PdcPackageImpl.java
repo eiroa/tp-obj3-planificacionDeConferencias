@@ -5,6 +5,7 @@ package ar.unq.edu.objetos3.pdc.impl;
 import ar.unq.edu.objetos3.pdc.Actividad;
 import ar.unq.edu.objetos3.pdc.Charla;
 import ar.unq.edu.objetos3.pdc.Espacio;
+import ar.unq.edu.objetos3.pdc.Hora;
 import ar.unq.edu.objetos3.pdc.MesaDeDebate;
 import ar.unq.edu.objetos3.pdc.Orador;
 import ar.unq.edu.objetos3.pdc.Organizacion;
@@ -12,6 +13,7 @@ import ar.unq.edu.objetos3.pdc.PdcFactory;
 import ar.unq.edu.objetos3.pdc.PdcPackage;
 import ar.unq.edu.objetos3.pdc.Schedule;
 import ar.unq.edu.objetos3.pdc.Taller;
+import ar.unq.edu.objetos3.pdc.TipoDeActividad;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -40,13 +42,6 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass espacioEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass organizacionEClass = null;
 
   /**
@@ -62,6 +57,27 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
    * @generated
    */
   private EClass actividadEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass espacioEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass tipoDeActividadEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass horaEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -192,36 +208,6 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEspacio()
-  {
-    return espacioEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getEspacio_Titulo()
-  {
-    return (EAttribute)espacioEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getEspacio_Capacidad()
-  {
-    return (EAttribute)espacioEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getOrganizacion()
   {
     return organizacionEClass;
@@ -282,9 +268,139 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActividad_Oradores()
+  public EReference getActividad_Tipo()
   {
     return (EReference)actividadEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getActividad_Titulo()
+  {
+    return (EAttribute)actividadEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getActividad_Duracion()
+  {
+    return (EAttribute)actividadEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getActividad_Espacio()
+  {
+    return (EReference)actividadEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getActividad_GenteEsperada()
+  {
+    return (EAttribute)actividadEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getActividad_Oradores()
+  {
+    return (EReference)actividadEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getActividad_Horario()
+  {
+    return (EReference)actividadEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEspacio()
+  {
+    return espacioEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEspacio_Nombre()
+  {
+    return (EAttribute)espacioEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEspacio_Capacidad()
+  {
+    return (EAttribute)espacioEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTipoDeActividad()
+  {
+    return tipoDeActividadEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getHora()
+  {
+    return horaEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getHora_Hora()
+  {
+    return (EAttribute)horaEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getHora_Minutos()
+  {
+    return (EAttribute)horaEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -322,46 +438,6 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMesaDeDebate_Tipo()
-  {
-    return (EReference)mesaDeDebateEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getMesaDeDebate_Titulo()
-  {
-    return (EAttribute)mesaDeDebateEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getMesaDeDebate_Duracion()
-  {
-    return (EAttribute)mesaDeDebateEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getMesaDeDebate_Aula()
-  {
-    return (EReference)mesaDeDebateEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public PdcFactory getPdcFactory()
   {
     return (PdcFactory)getEFactoryInstance();
@@ -392,10 +468,6 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
     createEReference(scheduleEClass, SCHEDULE__ACTIVIDADES);
     createEAttribute(scheduleEClass, SCHEDULE__FIN);
 
-    espacioEClass = createEClass(ESPACIO);
-    createEAttribute(espacioEClass, ESPACIO__TITULO);
-    createEAttribute(espacioEClass, ESPACIO__CAPACIDAD);
-
     organizacionEClass = createEClass(ORGANIZACION);
     createEAttribute(organizacionEClass, ORGANIZACION__NOMBRE);
 
@@ -404,17 +476,29 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
     createEReference(oradorEClass, ORADOR__ORGANIZACION);
 
     actividadEClass = createEClass(ACTIVIDAD);
+    createEReference(actividadEClass, ACTIVIDAD__TIPO);
+    createEAttribute(actividadEClass, ACTIVIDAD__TITULO);
+    createEAttribute(actividadEClass, ACTIVIDAD__DURACION);
+    createEReference(actividadEClass, ACTIVIDAD__ESPACIO);
+    createEAttribute(actividadEClass, ACTIVIDAD__GENTE_ESPERADA);
     createEReference(actividadEClass, ACTIVIDAD__ORADORES);
+    createEReference(actividadEClass, ACTIVIDAD__HORARIO);
+
+    espacioEClass = createEClass(ESPACIO);
+    createEAttribute(espacioEClass, ESPACIO__NOMBRE);
+    createEAttribute(espacioEClass, ESPACIO__CAPACIDAD);
+
+    tipoDeActividadEClass = createEClass(TIPO_DE_ACTIVIDAD);
+
+    horaEClass = createEClass(HORA);
+    createEAttribute(horaEClass, HORA__HORA);
+    createEAttribute(horaEClass, HORA__MINUTOS);
 
     charlaEClass = createEClass(CHARLA);
 
     tallerEClass = createEClass(TALLER);
 
     mesaDeDebateEClass = createEClass(MESA_DE_DEBATE);
-    createEReference(mesaDeDebateEClass, MESA_DE_DEBATE__TIPO);
-    createEAttribute(mesaDeDebateEClass, MESA_DE_DEBATE__TITULO);
-    createEAttribute(mesaDeDebateEClass, MESA_DE_DEBATE__DURACION);
-    createEReference(mesaDeDebateEClass, MESA_DE_DEBATE__AULA);
   }
 
   /**
@@ -446,19 +530,15 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    charlaEClass.getESuperTypes().add(this.getActividad());
-    tallerEClass.getESuperTypes().add(this.getActividad());
-    mesaDeDebateEClass.getESuperTypes().add(this.getActividad());
+    charlaEClass.getESuperTypes().add(this.getTipoDeActividad());
+    tallerEClass.getESuperTypes().add(this.getTipoDeActividad());
+    mesaDeDebateEClass.getESuperTypes().add(this.getTipoDeActividad());
 
     // Initialize classes and features; add operations and parameters
     initEClass(scheduleEClass, Schedule.class, "Schedule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSchedule_Nombre(), ecorePackage.getEString(), "nombre", null, 0, 1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSchedule_Actividades(), this.getActividad(), null, "actividades", null, 0, -1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSchedule_Fin(), ecorePackage.getEString(), "fin", null, 0, 1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(espacioEClass, Espacio.class, "Espacio", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEspacio_Titulo(), ecorePackage.getEString(), "titulo", null, 0, 1, Espacio.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEspacio_Capacidad(), ecorePackage.getEInt(), "capacidad", null, 0, 1, Espacio.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(organizacionEClass, Organizacion.class, "Organizacion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getOrganizacion_Nombre(), ecorePackage.getEString(), "nombre", null, 0, 1, Organizacion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -468,17 +548,29 @@ public class PdcPackageImpl extends EPackageImpl implements PdcPackage
     initEReference(getOrador_Organizacion(), this.getOrganizacion(), null, "organizacion", null, 0, 1, Orador.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actividadEClass, Actividad.class, "Actividad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getActividad_Tipo(), this.getTipoDeActividad(), null, "tipo", null, 0, 1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getActividad_Titulo(), ecorePackage.getEString(), "titulo", null, 0, 1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getActividad_Duracion(), ecorePackage.getEInt(), "duracion", null, 0, 1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActividad_Espacio(), this.getEspacio(), null, "espacio", null, 0, 1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getActividad_GenteEsperada(), ecorePackage.getEInt(), "genteEsperada", null, 0, 1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActividad_Oradores(), this.getOrador(), null, "oradores", null, 0, -1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActividad_Horario(), this.getHora(), null, "horario", null, 0, 1, Actividad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(espacioEClass, Espacio.class, "Espacio", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEspacio_Nombre(), ecorePackage.getEString(), "nombre", null, 0, 1, Espacio.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEspacio_Capacidad(), ecorePackage.getEInt(), "capacidad", null, 0, 1, Espacio.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(tipoDeActividadEClass, TipoDeActividad.class, "TipoDeActividad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(horaEClass, Hora.class, "Hora", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getHora_Hora(), ecorePackage.getEInt(), "hora", null, 0, 1, Hora.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getHora_Minutos(), ecorePackage.getEInt(), "minutos", null, 0, 1, Hora.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(charlaEClass, Charla.class, "Charla", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(tallerEClass, Taller.class, "Taller", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(mesaDeDebateEClass, MesaDeDebate.class, "MesaDeDebate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMesaDeDebate_Tipo(), this.getActividad(), null, "tipo", null, 0, 1, MesaDeDebate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMesaDeDebate_Titulo(), ecorePackage.getEString(), "titulo", null, 0, 1, MesaDeDebate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMesaDeDebate_Duracion(), ecorePackage.getEInt(), "duracion", null, 0, 1, MesaDeDebate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMesaDeDebate_Aula(), this.getEspacio(), null, "aula", null, 0, 1, MesaDeDebate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

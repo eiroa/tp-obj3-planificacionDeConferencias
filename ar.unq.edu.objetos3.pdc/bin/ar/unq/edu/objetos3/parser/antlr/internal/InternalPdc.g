@@ -81,11 +81,15 @@ ruleSchedule returns [EObject current=null]
     {
     	newLeafNode(otherlv_0, grammarAccess.getScheduleAccess().getScheduleKeyword_0());
     }
+	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getScheduleAccess().getColonKeyword_1());
+    }
 (
 (
-		lv_nombre_1_0=RULE_STRING
+		lv_nombre_2_0=RULE_STRING
 		{
-			newLeafNode(lv_nombre_1_0, grammarAccess.getScheduleAccess().getNombreSTRINGTerminalRuleCall_1_0()); 
+			newLeafNode(lv_nombre_2_0, grammarAccess.getScheduleAccess().getNombreSTRINGTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -94,16 +98,12 @@ ruleSchedule returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"nombre",
-        		lv_nombre_1_0, 
+        		lv_nombre_2_0, 
         		"STRING");
 	    }
 
 )
-)	otherlv_2=':' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getScheduleAccess().getColonKeyword_2());
-    }
-(
+)(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getScheduleAccess().getActividadesActividadParserRuleCall_3_0()); 
@@ -123,7 +123,7 @@ ruleSchedule returns [EObject current=null]
 )
 )*(
 (
-		lv_fin_4_0=	'Fin del schedule' 
+		lv_fin_4_0=	'/Fin del schedule' 
     {
         newLeafNode(lv_fin_4_0, grammarAccess.getScheduleAccess().getFinFinDelScheduleKeyword_4_0());
     }
@@ -132,76 +132,7 @@ ruleSchedule returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getScheduleRule());
 	        }
-       		setWithLastConsumed($current, "fin", lv_fin_4_0, "Fin del schedule");
-	    }
-
-)
-))
-;
-
-
-
-
-
-// Entry rule entryRuleEspacio
-entryRuleEspacio returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getEspacioRule()); }
-	 iv_ruleEspacio=ruleEspacio 
-	 { $current=$iv_ruleEspacio.current; } 
-	 EOF 
-;
-
-// Rule Espacio
-ruleEspacio returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='Espacio' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getEspacioAccess().getEspacioKeyword_0());
-    }
-	otherlv_1=':' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getEspacioAccess().getColonKeyword_1());
-    }
-(
-(
-		lv_titulo_2_0=RULE_STRING
-		{
-			newLeafNode(lv_titulo_2_0, grammarAccess.getEspacioAccess().getTituloSTRINGTerminalRuleCall_2_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEspacioRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"titulo",
-        		lv_titulo_2_0, 
-        		"STRING");
-	    }
-
-)
-)	otherlv_3=',' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getEspacioAccess().getCommaKeyword_3());
-    }
-(
-(
-		lv_capacidad_4_0=RULE_INT
-		{
-			newLeafNode(lv_capacidad_4_0, grammarAccess.getEspacioAccess().getCapacidadINTTerminalRuleCall_4_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEspacioRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"capacidad",
-        		lv_capacidad_4_0, 
-        		"INT");
+       		setWithLastConsumed($current, "fin", lv_fin_4_0, "/Fin del schedule");
 	    }
 
 )
@@ -334,9 +265,261 @@ ruleActividad returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
+(	otherlv_0='Actividad' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getActividadAccess().getActividadKeyword_0());
+    }
+	otherlv_1='{' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getActividadAccess().getLeftCurlyBracketKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getActividadAccess().getTipoTipoDeActividadParserRuleCall_2_0()); 
+	    }
+		lv_tipo_2_0=ruleTipoDeActividad		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getActividadRule());
+	        }
+       		set(
+       			$current, 
+       			"tipo",
+        		lv_tipo_2_0, 
+        		"TipoDeActividad");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=',' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getActividadAccess().getCommaKeyword_3());
+    }
+(
+(
+		lv_titulo_4_0=RULE_STRING
+		{
+			newLeafNode(lv_titulo_4_0, grammarAccess.getActividadAccess().getTituloSTRINGTerminalRuleCall_4_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getActividadRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"titulo",
+        		lv_titulo_4_0, 
+        		"STRING");
+	    }
+
+)
+)	otherlv_5=',' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getActividadAccess().getCommaKeyword_5());
+    }
+(
+(
+		lv_duracion_6_0=RULE_INT
+		{
+			newLeafNode(lv_duracion_6_0, grammarAccess.getActividadAccess().getDuracionINTTerminalRuleCall_6_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getActividadRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"duracion",
+        		lv_duracion_6_0, 
+        		"INT");
+	    }
+
+)
+)	otherlv_7=',' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getActividadAccess().getCommaKeyword_7());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getActividadAccess().getEspacioEspacioParserRuleCall_8_0()); 
+	    }
+		lv_espacio_8_0=ruleEspacio		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getActividadRule());
+	        }
+       		set(
+       			$current, 
+       			"espacio",
+        		lv_espacio_8_0, 
+        		"Espacio");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_9=',' 
+    {
+    	newLeafNode(otherlv_9, grammarAccess.getActividadAccess().getCommaKeyword_9());
+    }
+(
+(
+		lv_genteEsperada_10_0=RULE_INT
+		{
+			newLeafNode(lv_genteEsperada_10_0, grammarAccess.getActividadAccess().getGenteEsperadaINTTerminalRuleCall_10_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getActividadRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"genteEsperada",
+        		lv_genteEsperada_10_0, 
+        		"INT");
+	    }
+
+)
+)	otherlv_11=',' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getActividadAccess().getCommaKeyword_11());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getActividadAccess().getOradoresOradorParserRuleCall_12_0()); 
+	    }
+		lv_oradores_12_0=ruleOrador		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getActividadRule());
+	        }
+       		add(
+       			$current, 
+       			"oradores",
+        		lv_oradores_12_0, 
+        		"Orador");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*	otherlv_13=',' 
+    {
+    	newLeafNode(otherlv_13, grammarAccess.getActividadAccess().getCommaKeyword_13());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getActividadAccess().getHorarioHoraParserRuleCall_14_0()); 
+	    }
+		lv_horario_14_0=ruleHora		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getActividadRule());
+	        }
+       		set(
+       			$current, 
+       			"horario",
+        		lv_horario_14_0, 
+        		"Hora");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_15='}' 
+    {
+    	newLeafNode(otherlv_15, grammarAccess.getActividadAccess().getRightCurlyBracketKeyword_15());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleEspacio
+entryRuleEspacio returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getEspacioRule()); }
+	 iv_ruleEspacio=ruleEspacio 
+	 { $current=$iv_ruleEspacio.current; } 
+	 EOF 
+;
+
+// Rule Espacio
+ruleEspacio returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='Espacio' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getEspacioAccess().getEspacioKeyword_0());
+    }
+	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getEspacioAccess().getColonKeyword_1());
+    }
+(
+(
+		lv_nombre_2_0=RULE_STRING
+		{
+			newLeafNode(lv_nombre_2_0, grammarAccess.getEspacioAccess().getNombreSTRINGTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getEspacioRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"nombre",
+        		lv_nombre_2_0, 
+        		"STRING");
+	    }
+
+)
+)	otherlv_3=',' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getEspacioAccess().getCommaKeyword_3());
+    }
+(
+(
+		lv_capacidad_4_0=RULE_INT
+		{
+			newLeafNode(lv_capacidad_4_0, grammarAccess.getEspacioAccess().getCapacidadINTTerminalRuleCall_4_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getEspacioRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"capacidad",
+        		lv_capacidad_4_0, 
+        		"INT");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleTipoDeActividad
+entryRuleTipoDeActividad returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTipoDeActividadRule()); }
+	 iv_ruleTipoDeActividad=ruleTipoDeActividad 
+	 { $current=$iv_ruleTipoDeActividad.current; } 
+	 EOF 
+;
+
+// Rule TipoDeActividad
+ruleTipoDeActividad returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getActividadAccess().getCharlaParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getTipoDeActividadAccess().getCharlaParserRuleCall_0()); 
     }
     this_Charla_0=ruleCharla
     { 
@@ -346,7 +529,7 @@ ruleActividad returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getActividadAccess().getTallerParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getTipoDeActividadAccess().getTallerParserRuleCall_1()); 
     }
     this_Taller_1=ruleTaller
     { 
@@ -354,108 +537,89 @@ ruleActividad returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
-    |(
+    |
     { 
-        newCompositeNode(grammarAccess.getActividadAccess().getMesaDeDebateParserRuleCall_2_0()); 
+        newCompositeNode(grammarAccess.getTipoDeActividadAccess().getMesaDeDebateParserRuleCall_2()); 
     }
     this_MesaDeDebate_2=ruleMesaDeDebate
     { 
         $current = $this_MesaDeDebate_2.current; 
         afterParserOrEnumRuleCall();
     }
-	otherlv_3='Actividad' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getActividadAccess().getActividadKeyword_2_1());
-    }
-	otherlv_4=':' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getActividadAccess().getColonKeyword_2_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getActividadAccess().getTipoActividadParserRuleCall_2_3_0()); 
-	    }
-		lv_tipo_5_0=ruleActividad		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getActividadRule());
-	        }
-       		set(
-       			$current, 
-       			"tipo",
-        		lv_tipo_5_0, 
-        		"Actividad");
-	        afterParserOrEnumRuleCall();
-	    }
-
 )
-)	otherlv_6=',' 
+;
+
+
+
+
+
+// Entry rule entryRuleHora
+entryRuleHora returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getHoraRule()); }
+	 iv_ruleHora=ruleHora 
+	 { $current=$iv_ruleHora.current; } 
+	 EOF 
+;
+
+// Rule Hora
+ruleHora returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='Horario' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getActividadAccess().getCommaKeyword_2_4());
+    	newLeafNode(otherlv_0, grammarAccess.getHoraAccess().getHorarioKeyword_0());
+    }
+	otherlv_1='(' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getHoraAccess().getLeftParenthesisKeyword_1());
     }
 (
 (
-		lv_titulo_7_0=RULE_STRING
+		lv_hora_2_0=RULE_INT
 		{
-			newLeafNode(lv_titulo_7_0, grammarAccess.getActividadAccess().getTituloSTRINGTerminalRuleCall_2_5_0()); 
+			newLeafNode(lv_hora_2_0, grammarAccess.getHoraAccess().getHoraINTTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getActividadRule());
+	            $current = createModelElement(grammarAccess.getHoraRule());
 	        }
        		setWithLastConsumed(
        			$current, 
-       			"titulo",
-        		lv_titulo_7_0, 
-        		"STRING");
-	    }
-
-)
-)	otherlv_8=',' 
-    {
-    	newLeafNode(otherlv_8, grammarAccess.getActividadAccess().getCommaKeyword_2_6());
-    }
-(
-(
-		lv_duracion_9_0=RULE_INT
-		{
-			newLeafNode(lv_duracion_9_0, grammarAccess.getActividadAccess().getDuracionINTTerminalRuleCall_2_7_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getActividadRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"duracion",
-        		lv_duracion_9_0, 
+       			"hora",
+        		lv_hora_2_0, 
         		"INT");
 	    }
 
 )
-)	otherlv_10=',' 
+)	otherlv_3=':' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getActividadAccess().getCommaKeyword_2_8());
+    	newLeafNode(otherlv_3, grammarAccess.getHoraAccess().getColonKeyword_3());
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getActividadAccess().getAulaEspacioParserRuleCall_2_9_0()); 
-	    }
-		lv_aula_11_0=ruleEspacio		{
+		lv_minutos_4_0=RULE_INT
+		{
+			newLeafNode(lv_minutos_4_0, grammarAccess.getHoraAccess().getMinutosINTTerminalRuleCall_4_0()); 
+		}
+		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getActividadRule());
+	            $current = createModelElement(grammarAccess.getHoraRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
-       			"aula",
-        		lv_aula_11_0, 
-        		"Espacio");
-	        afterParserOrEnumRuleCall();
+       			"minutos",
+        		lv_minutos_4_0, 
+        		"INT");
 	    }
 
 )
-)))
+)	otherlv_5=')' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getHoraAccess().getRightParenthesisKeyword_5());
+    }
+)
 ;
 
 
@@ -486,25 +650,7 @@ ruleCharla returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getCharlaAccess().getCharlaKeyword_1());
     }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getCharlaAccess().getOradoresOradorParserRuleCall_2_0()); 
-	    }
-		lv_oradores_2_0=ruleOrador		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getCharlaRule());
-	        }
-       		add(
-       			$current, 
-       			"oradores",
-        		lv_oradores_2_0, 
-        		"Orador");
-	        afterParserOrEnumRuleCall();
-	    }
-
 )
-)*)
 ;
 
 
@@ -535,25 +681,7 @@ ruleTaller returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getTallerAccess().getTallerKeyword_1());
     }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTallerAccess().getOradoresOradorParserRuleCall_2_0()); 
-	    }
-		lv_oradores_2_0=ruleOrador		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTallerRule());
-	        }
-       		add(
-       			$current, 
-       			"oradores",
-        		lv_oradores_2_0, 
-        		"Orador");
-	        afterParserOrEnumRuleCall();
-	    }
-
 )
-)*)
 ;
 
 
@@ -584,25 +712,7 @@ ruleMesaDeDebate returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getMesaDeDebateAccess().getMesaDeDebateKeyword_1());
     }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMesaDeDebateAccess().getOradoresOradorParserRuleCall_2_0()); 
-	    }
-		lv_oradores_2_0=ruleOrador		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMesaDeDebateRule());
-	        }
-       		add(
-       			$current, 
-       			"oradores",
-        		lv_oradores_2_0, 
-        		"Orador");
-	        afterParserOrEnumRuleCall();
-	    }
-
 )
-)*)
 ;
 
 

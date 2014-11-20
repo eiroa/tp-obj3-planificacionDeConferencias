@@ -12,10 +12,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Schedule/actividades"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Schedule/fin"/>
     </genClasses>
-    <genClasses ecoreClass="Pdc.ecore#//Espacio">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/titulo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/capacidad"/>
-    </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Organizacion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Organizacion/nombre"/>
     </genClasses>
@@ -24,15 +20,25 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Orador/organizacion"/>
     </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Actividad">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/tipo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/titulo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/duracion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/espacio"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/genteEsperada"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/oradores"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/horario"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Espacio">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/nombre"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/capacidad"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//TipoDeActividad"/>
+    <genClasses ecoreClass="Pdc.ecore#//Hora">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Hora/hora"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Hora/minutos"/>
     </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Charla"/>
     <genClasses ecoreClass="Pdc.ecore#//Taller"/>
-    <genClasses ecoreClass="Pdc.ecore#//MesaDeDebate">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//MesaDeDebate/tipo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//MesaDeDebate/titulo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//MesaDeDebate/duracion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//MesaDeDebate/aula"/>
-    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//MesaDeDebate"/>
   </genPackages>
 </genmodel:GenModel>

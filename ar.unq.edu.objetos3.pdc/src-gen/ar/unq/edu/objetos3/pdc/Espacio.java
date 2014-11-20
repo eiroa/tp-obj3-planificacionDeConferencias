@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ar.unq.edu.objetos3.pdc.Espacio#getTitulo <em>Titulo</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.Espacio#getNombre <em>Nombre</em>}</li>
  *   <li>{@link ar.unq.edu.objetos3.pdc.Espacio#getCapacidad <em>Capacidad</em>}</li>
  * </ul>
  * </p>
@@ -24,30 +24,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface Espacio extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Titulo</b></em>' attribute.
+   * Returns the value of the '<em><b>Nombre</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Titulo</em>' attribute isn't clear,
+   * If the meaning of the '<em>Nombre</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Titulo</em>' attribute.
-   * @see #setTitulo(String)
-   * @see ar.unq.edu.objetos3.pdc.PdcPackage#getEspacio_Titulo()
+   * @return the value of the '<em>Nombre</em>' attribute.
+   * @see #setNombre(String)
+   * @see ar.unq.edu.objetos3.pdc.PdcPackage#getEspacio_Nombre()
    * @model
    * @generated
    */
-  String getTitulo();
+  String getNombre();
 
   /**
-   * Sets the value of the '{@link ar.unq.edu.objetos3.pdc.Espacio#getTitulo <em>Titulo</em>}' attribute.
+   * Sets the value of the '{@link ar.unq.edu.objetos3.pdc.Espacio#getNombre <em>Nombre</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Titulo</em>' attribute.
-   * @see #getTitulo()
+   * @param value the new value of the '<em>Nombre</em>' attribute.
+   * @see #getNombre()
    * @generated
    */
-  void setTitulo(String value);
+  void setNombre(String value);
 
   /**
    * Returns the value of the '<em><b>Capacidad</b></em>' attribute.

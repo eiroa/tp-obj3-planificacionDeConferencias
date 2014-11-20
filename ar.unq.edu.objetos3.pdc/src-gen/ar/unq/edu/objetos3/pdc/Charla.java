@@ -13,6 +13,6 @@ package ar.unq.edu.objetos3.pdc;
  * @model
  * @generated
  */
-public interface Charla extends Actividad
+public interface Charla extends TipoDeActividad
 {
 } // Charla

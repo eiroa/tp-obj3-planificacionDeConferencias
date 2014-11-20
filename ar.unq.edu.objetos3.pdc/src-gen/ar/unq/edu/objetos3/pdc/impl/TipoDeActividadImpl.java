@@ -3,27 +3,29 @@
 package ar.unq.edu.objetos3.pdc.impl;
 
 import ar.unq.edu.objetos3.pdc.PdcPackage;
-import ar.unq.edu.objetos3.pdc.Taller;
+import ar.unq.edu.objetos3.pdc.TipoDeActividad;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Taller</b></em>'.
+ * An implementation of the model object '<em><b>Tipo De Actividad</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class TallerImpl extends TipoDeActividadImpl implements Taller
+public class TipoDeActividadImpl extends MinimalEObjectImpl.Container implements TipoDeActividad
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TallerImpl()
+  protected TipoDeActividadImpl()
   {
     super();
   }
@@ -36,7 +38,7 @@ public class TallerImpl extends TipoDeActividadImpl implements Taller
   @Override
   protected EClass eStaticClass()
   {
-    return PdcPackage.Literals.TALLER;
+    return PdcPackage.Literals.TIPO_DE_ACTIVIDAD;
   }
 
-} //TallerImpl
+} //TipoDeActividadImpl

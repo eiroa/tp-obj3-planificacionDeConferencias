@@ -103,43 +103,6 @@ public interface PdcPackage extends EPackage
   int SCHEDULE_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl <em>Espacio</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see ar.unq.edu.objetos3.pdc.impl.EspacioImpl
-   * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getEspacio()
-   * @generated
-   */
-  int ESPACIO = 1;
-
-  /**
-   * The feature id for the '<em><b>Titulo</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESPACIO__TITULO = 0;
-
-  /**
-   * The feature id for the '<em><b>Capacidad</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESPACIO__CAPACIDAD = 1;
-
-  /**
-   * The number of structural features of the '<em>Espacio</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESPACIO_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.OrganizacionImpl <em>Organizacion</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -147,7 +110,7 @@ public interface PdcPackage extends EPackage
    * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getOrganizacion()
    * @generated
    */
-  int ORGANIZACION = 2;
+  int ORGANIZACION = 1;
 
   /**
    * The feature id for the '<em><b>Nombre</b></em>' attribute.
@@ -175,7 +138,7 @@ public interface PdcPackage extends EPackage
    * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getOrador()
    * @generated
    */
-  int ORADOR = 3;
+  int ORADOR = 2;
 
   /**
    * The feature id for the '<em><b>Nombre</b></em>' attribute.
@@ -212,7 +175,52 @@ public interface PdcPackage extends EPackage
    * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getActividad()
    * @generated
    */
-  int ACTIVIDAD = 4;
+  int ACTIVIDAD = 3;
+
+  /**
+   * The feature id for the '<em><b>Tipo</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTIVIDAD__TIPO = 0;
+
+  /**
+   * The feature id for the '<em><b>Titulo</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTIVIDAD__TITULO = 1;
+
+  /**
+   * The feature id for the '<em><b>Duracion</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTIVIDAD__DURACION = 2;
+
+  /**
+   * The feature id for the '<em><b>Espacio</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTIVIDAD__ESPACIO = 3;
+
+  /**
+   * The feature id for the '<em><b>Gente Esperada</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTIVIDAD__GENTE_ESPERADA = 4;
 
   /**
    * The feature id for the '<em><b>Oradores</b></em>' containment reference list.
@@ -221,7 +229,16 @@ public interface PdcPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTIVIDAD__ORADORES = 0;
+  int ACTIVIDAD__ORADORES = 5;
+
+  /**
+   * The feature id for the '<em><b>Horario</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTIVIDAD__HORARIO = 6;
 
   /**
    * The number of structural features of the '<em>Actividad</em>' class.
@@ -230,7 +247,100 @@ public interface PdcPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTIVIDAD_FEATURE_COUNT = 1;
+  int ACTIVIDAD_FEATURE_COUNT = 7;
+
+  /**
+   * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl <em>Espacio</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ar.unq.edu.objetos3.pdc.impl.EspacioImpl
+   * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getEspacio()
+   * @generated
+   */
+  int ESPACIO = 4;
+
+  /**
+   * The feature id for the '<em><b>Nombre</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESPACIO__NOMBRE = 0;
+
+  /**
+   * The feature id for the '<em><b>Capacidad</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESPACIO__CAPACIDAD = 1;
+
+  /**
+   * The number of structural features of the '<em>Espacio</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESPACIO_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.TipoDeActividadImpl <em>Tipo De Actividad</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ar.unq.edu.objetos3.pdc.impl.TipoDeActividadImpl
+   * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getTipoDeActividad()
+   * @generated
+   */
+  int TIPO_DE_ACTIVIDAD = 5;
+
+  /**
+   * The number of structural features of the '<em>Tipo De Actividad</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TIPO_DE_ACTIVIDAD_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.HoraImpl <em>Hora</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ar.unq.edu.objetos3.pdc.impl.HoraImpl
+   * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getHora()
+   * @generated
+   */
+  int HORA = 6;
+
+  /**
+   * The feature id for the '<em><b>Hora</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HORA__HORA = 0;
+
+  /**
+   * The feature id for the '<em><b>Minutos</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HORA__MINUTOS = 1;
+
+  /**
+   * The number of structural features of the '<em>Hora</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HORA_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.CharlaImpl <em>Charla</em>}' class.
@@ -240,16 +350,7 @@ public interface PdcPackage extends EPackage
    * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getCharla()
    * @generated
    */
-  int CHARLA = 5;
-
-  /**
-   * The feature id for the '<em><b>Oradores</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHARLA__ORADORES = ACTIVIDAD__ORADORES;
+  int CHARLA = 7;
 
   /**
    * The number of structural features of the '<em>Charla</em>' class.
@@ -258,7 +359,7 @@ public interface PdcPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHARLA_FEATURE_COUNT = ACTIVIDAD_FEATURE_COUNT + 0;
+  int CHARLA_FEATURE_COUNT = TIPO_DE_ACTIVIDAD_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.TallerImpl <em>Taller</em>}' class.
@@ -268,16 +369,7 @@ public interface PdcPackage extends EPackage
    * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getTaller()
    * @generated
    */
-  int TALLER = 6;
-
-  /**
-   * The feature id for the '<em><b>Oradores</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TALLER__ORADORES = ACTIVIDAD__ORADORES;
+  int TALLER = 8;
 
   /**
    * The number of structural features of the '<em>Taller</em>' class.
@@ -286,7 +378,7 @@ public interface PdcPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TALLER_FEATURE_COUNT = ACTIVIDAD_FEATURE_COUNT + 0;
+  int TALLER_FEATURE_COUNT = TIPO_DE_ACTIVIDAD_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link ar.unq.edu.objetos3.pdc.impl.MesaDeDebateImpl <em>Mesa De Debate</em>}' class.
@@ -296,52 +388,7 @@ public interface PdcPackage extends EPackage
    * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getMesaDeDebate()
    * @generated
    */
-  int MESA_DE_DEBATE = 7;
-
-  /**
-   * The feature id for the '<em><b>Oradores</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESA_DE_DEBATE__ORADORES = ACTIVIDAD__ORADORES;
-
-  /**
-   * The feature id for the '<em><b>Tipo</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESA_DE_DEBATE__TIPO = ACTIVIDAD_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Titulo</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESA_DE_DEBATE__TITULO = ACTIVIDAD_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Duracion</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESA_DE_DEBATE__DURACION = ACTIVIDAD_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Aula</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESA_DE_DEBATE__AULA = ACTIVIDAD_FEATURE_COUNT + 3;
+  int MESA_DE_DEBATE = 9;
 
   /**
    * The number of structural features of the '<em>Mesa De Debate</em>' class.
@@ -350,7 +397,7 @@ public interface PdcPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MESA_DE_DEBATE_FEATURE_COUNT = ACTIVIDAD_FEATURE_COUNT + 4;
+  int MESA_DE_DEBATE_FEATURE_COUNT = TIPO_DE_ACTIVIDAD_FEATURE_COUNT + 0;
 
 
   /**
@@ -395,38 +442,6 @@ public interface PdcPackage extends EPackage
    * @generated
    */
   EAttribute getSchedule_Fin();
-
-  /**
-   * Returns the meta object for class '{@link ar.unq.edu.objetos3.pdc.Espacio <em>Espacio</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Espacio</em>'.
-   * @see ar.unq.edu.objetos3.pdc.Espacio
-   * @generated
-   */
-  EClass getEspacio();
-
-  /**
-   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Espacio#getTitulo <em>Titulo</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Titulo</em>'.
-   * @see ar.unq.edu.objetos3.pdc.Espacio#getTitulo()
-   * @see #getEspacio()
-   * @generated
-   */
-  EAttribute getEspacio_Titulo();
-
-  /**
-   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Espacio#getCapacidad <em>Capacidad</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Capacidad</em>'.
-   * @see ar.unq.edu.objetos3.pdc.Espacio#getCapacidad()
-   * @see #getEspacio()
-   * @generated
-   */
-  EAttribute getEspacio_Capacidad();
 
   /**
    * Returns the meta object for class '{@link ar.unq.edu.objetos3.pdc.Organizacion <em>Organizacion</em>}'.
@@ -492,6 +507,61 @@ public interface PdcPackage extends EPackage
   EClass getActividad();
 
   /**
+   * Returns the meta object for the containment reference '{@link ar.unq.edu.objetos3.pdc.Actividad#getTipo <em>Tipo</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Tipo</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Actividad#getTipo()
+   * @see #getActividad()
+   * @generated
+   */
+  EReference getActividad_Tipo();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Actividad#getTitulo <em>Titulo</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Titulo</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Actividad#getTitulo()
+   * @see #getActividad()
+   * @generated
+   */
+  EAttribute getActividad_Titulo();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Actividad#getDuracion <em>Duracion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Duracion</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Actividad#getDuracion()
+   * @see #getActividad()
+   * @generated
+   */
+  EAttribute getActividad_Duracion();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ar.unq.edu.objetos3.pdc.Actividad#getEspacio <em>Espacio</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Espacio</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Actividad#getEspacio()
+   * @see #getActividad()
+   * @generated
+   */
+  EReference getActividad_Espacio();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Actividad#getGenteEsperada <em>Gente Esperada</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Gente Esperada</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Actividad#getGenteEsperada()
+   * @see #getActividad()
+   * @generated
+   */
+  EAttribute getActividad_GenteEsperada();
+
+  /**
    * Returns the meta object for the containment reference list '{@link ar.unq.edu.objetos3.pdc.Actividad#getOradores <em>Oradores</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -501,6 +571,91 @@ public interface PdcPackage extends EPackage
    * @generated
    */
   EReference getActividad_Oradores();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ar.unq.edu.objetos3.pdc.Actividad#getHorario <em>Horario</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Horario</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Actividad#getHorario()
+   * @see #getActividad()
+   * @generated
+   */
+  EReference getActividad_Horario();
+
+  /**
+   * Returns the meta object for class '{@link ar.unq.edu.objetos3.pdc.Espacio <em>Espacio</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Espacio</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Espacio
+   * @generated
+   */
+  EClass getEspacio();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Espacio#getNombre <em>Nombre</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Nombre</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Espacio#getNombre()
+   * @see #getEspacio()
+   * @generated
+   */
+  EAttribute getEspacio_Nombre();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Espacio#getCapacidad <em>Capacidad</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Capacidad</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Espacio#getCapacidad()
+   * @see #getEspacio()
+   * @generated
+   */
+  EAttribute getEspacio_Capacidad();
+
+  /**
+   * Returns the meta object for class '{@link ar.unq.edu.objetos3.pdc.TipoDeActividad <em>Tipo De Actividad</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Tipo De Actividad</em>'.
+   * @see ar.unq.edu.objetos3.pdc.TipoDeActividad
+   * @generated
+   */
+  EClass getTipoDeActividad();
+
+  /**
+   * Returns the meta object for class '{@link ar.unq.edu.objetos3.pdc.Hora <em>Hora</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Hora</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Hora
+   * @generated
+   */
+  EClass getHora();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Hora#getHora <em>Hora</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Hora</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Hora#getHora()
+   * @see #getHora()
+   * @generated
+   */
+  EAttribute getHora_Hora();
+
+  /**
+   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.Hora#getMinutos <em>Minutos</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Minutos</em>'.
+   * @see ar.unq.edu.objetos3.pdc.Hora#getMinutos()
+   * @see #getHora()
+   * @generated
+   */
+  EAttribute getHora_Minutos();
 
   /**
    * Returns the meta object for class '{@link ar.unq.edu.objetos3.pdc.Charla <em>Charla</em>}'.
@@ -531,50 +686,6 @@ public interface PdcPackage extends EPackage
    * @generated
    */
   EClass getMesaDeDebate();
-
-  /**
-   * Returns the meta object for the containment reference '{@link ar.unq.edu.objetos3.pdc.MesaDeDebate#getTipo <em>Tipo</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Tipo</em>'.
-   * @see ar.unq.edu.objetos3.pdc.MesaDeDebate#getTipo()
-   * @see #getMesaDeDebate()
-   * @generated
-   */
-  EReference getMesaDeDebate_Tipo();
-
-  /**
-   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.MesaDeDebate#getTitulo <em>Titulo</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Titulo</em>'.
-   * @see ar.unq.edu.objetos3.pdc.MesaDeDebate#getTitulo()
-   * @see #getMesaDeDebate()
-   * @generated
-   */
-  EAttribute getMesaDeDebate_Titulo();
-
-  /**
-   * Returns the meta object for the attribute '{@link ar.unq.edu.objetos3.pdc.MesaDeDebate#getDuracion <em>Duracion</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Duracion</em>'.
-   * @see ar.unq.edu.objetos3.pdc.MesaDeDebate#getDuracion()
-   * @see #getMesaDeDebate()
-   * @generated
-   */
-  EAttribute getMesaDeDebate_Duracion();
-
-  /**
-   * Returns the meta object for the containment reference '{@link ar.unq.edu.objetos3.pdc.MesaDeDebate#getAula <em>Aula</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Aula</em>'.
-   * @see ar.unq.edu.objetos3.pdc.MesaDeDebate#getAula()
-   * @see #getMesaDeDebate()
-   * @generated
-   */
-  EReference getMesaDeDebate_Aula();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -634,32 +745,6 @@ public interface PdcPackage extends EPackage
     EAttribute SCHEDULE__FIN = eINSTANCE.getSchedule_Fin();
 
     /**
-     * The meta object literal for the '{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl <em>Espacio</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see ar.unq.edu.objetos3.pdc.impl.EspacioImpl
-     * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getEspacio()
-     * @generated
-     */
-    EClass ESPACIO = eINSTANCE.getEspacio();
-
-    /**
-     * The meta object literal for the '<em><b>Titulo</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ESPACIO__TITULO = eINSTANCE.getEspacio_Titulo();
-
-    /**
-     * The meta object literal for the '<em><b>Capacidad</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ESPACIO__CAPACIDAD = eINSTANCE.getEspacio_Capacidad();
-
-    /**
      * The meta object literal for the '{@link ar.unq.edu.objetos3.pdc.impl.OrganizacionImpl <em>Organizacion</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -714,12 +799,122 @@ public interface PdcPackage extends EPackage
     EClass ACTIVIDAD = eINSTANCE.getActividad();
 
     /**
+     * The meta object literal for the '<em><b>Tipo</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTIVIDAD__TIPO = eINSTANCE.getActividad_Tipo();
+
+    /**
+     * The meta object literal for the '<em><b>Titulo</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTIVIDAD__TITULO = eINSTANCE.getActividad_Titulo();
+
+    /**
+     * The meta object literal for the '<em><b>Duracion</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTIVIDAD__DURACION = eINSTANCE.getActividad_Duracion();
+
+    /**
+     * The meta object literal for the '<em><b>Espacio</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTIVIDAD__ESPACIO = eINSTANCE.getActividad_Espacio();
+
+    /**
+     * The meta object literal for the '<em><b>Gente Esperada</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTIVIDAD__GENTE_ESPERADA = eINSTANCE.getActividad_GenteEsperada();
+
+    /**
      * The meta object literal for the '<em><b>Oradores</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference ACTIVIDAD__ORADORES = eINSTANCE.getActividad_Oradores();
+
+    /**
+     * The meta object literal for the '<em><b>Horario</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTIVIDAD__HORARIO = eINSTANCE.getActividad_Horario();
+
+    /**
+     * The meta object literal for the '{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl <em>Espacio</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ar.unq.edu.objetos3.pdc.impl.EspacioImpl
+     * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getEspacio()
+     * @generated
+     */
+    EClass ESPACIO = eINSTANCE.getEspacio();
+
+    /**
+     * The meta object literal for the '<em><b>Nombre</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESPACIO__NOMBRE = eINSTANCE.getEspacio_Nombre();
+
+    /**
+     * The meta object literal for the '<em><b>Capacidad</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESPACIO__CAPACIDAD = eINSTANCE.getEspacio_Capacidad();
+
+    /**
+     * The meta object literal for the '{@link ar.unq.edu.objetos3.pdc.impl.TipoDeActividadImpl <em>Tipo De Actividad</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ar.unq.edu.objetos3.pdc.impl.TipoDeActividadImpl
+     * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getTipoDeActividad()
+     * @generated
+     */
+    EClass TIPO_DE_ACTIVIDAD = eINSTANCE.getTipoDeActividad();
+
+    /**
+     * The meta object literal for the '{@link ar.unq.edu.objetos3.pdc.impl.HoraImpl <em>Hora</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ar.unq.edu.objetos3.pdc.impl.HoraImpl
+     * @see ar.unq.edu.objetos3.pdc.impl.PdcPackageImpl#getHora()
+     * @generated
+     */
+    EClass HORA = eINSTANCE.getHora();
+
+    /**
+     * The meta object literal for the '<em><b>Hora</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HORA__HORA = eINSTANCE.getHora_Hora();
+
+    /**
+     * The meta object literal for the '<em><b>Minutos</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HORA__MINUTOS = eINSTANCE.getHora_Minutos();
 
     /**
      * The meta object literal for the '{@link ar.unq.edu.objetos3.pdc.impl.CharlaImpl <em>Charla</em>}' class.
@@ -750,38 +945,6 @@ public interface PdcPackage extends EPackage
      * @generated
      */
     EClass MESA_DE_DEBATE = eINSTANCE.getMesaDeDebate();
-
-    /**
-     * The meta object literal for the '<em><b>Tipo</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MESA_DE_DEBATE__TIPO = eINSTANCE.getMesaDeDebate_Tipo();
-
-    /**
-     * The meta object literal for the '<em><b>Titulo</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MESA_DE_DEBATE__TITULO = eINSTANCE.getMesaDeDebate_Titulo();
-
-    /**
-     * The meta object literal for the '<em><b>Duracion</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MESA_DE_DEBATE__DURACION = eINSTANCE.getMesaDeDebate_Duracion();
-
-    /**
-     * The meta object literal for the '<em><b>Aula</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MESA_DE_DEBATE__AULA = eINSTANCE.getMesaDeDebate_Aula();
 
   }
 

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class CharlaImpl extends ActividadImpl implements Charla
+public class CharlaImpl extends TipoDeActividadImpl implements Charla
 {
   /**
    * <!-- begin-user-doc -->

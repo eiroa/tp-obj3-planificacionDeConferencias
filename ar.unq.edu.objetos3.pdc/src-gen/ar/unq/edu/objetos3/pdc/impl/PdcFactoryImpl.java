@@ -65,10 +65,12 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
     switch (eClass.getClassifierID())
     {
       case PdcPackage.SCHEDULE: return createSchedule();
-      case PdcPackage.ESPACIO: return createEspacio();
       case PdcPackage.ORGANIZACION: return createOrganizacion();
       case PdcPackage.ORADOR: return createOrador();
       case PdcPackage.ACTIVIDAD: return createActividad();
+      case PdcPackage.ESPACIO: return createEspacio();
+      case PdcPackage.TIPO_DE_ACTIVIDAD: return createTipoDeActividad();
+      case PdcPackage.HORA: return createHora();
       case PdcPackage.CHARLA: return createCharla();
       case PdcPackage.TALLER: return createTaller();
       case PdcPackage.MESA_DE_DEBATE: return createMesaDeDebate();
@@ -86,17 +88,6 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
   {
     ScheduleImpl schedule = new ScheduleImpl();
     return schedule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Espacio createEspacio()
-  {
-    EspacioImpl espacio = new EspacioImpl();
-    return espacio;
   }
 
   /**
@@ -130,6 +121,39 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
   {
     ActividadImpl actividad = new ActividadImpl();
     return actividad;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Espacio createEspacio()
+  {
+    EspacioImpl espacio = new EspacioImpl();
+    return espacio;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TipoDeActividad createTipoDeActividad()
+  {
+    TipoDeActividadImpl tipoDeActividad = new TipoDeActividadImpl();
+    return tipoDeActividad;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Hora createHora()
+  {
+    HoraImpl hora = new HoraImpl();
+    return hora;
   }
 
   /**

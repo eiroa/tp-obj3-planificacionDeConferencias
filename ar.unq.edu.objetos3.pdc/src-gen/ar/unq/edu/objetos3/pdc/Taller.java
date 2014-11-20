@@ -13,6 +13,6 @@ package ar.unq.edu.objetos3.pdc;
  * @model
  * @generated
  */
-public interface Taller extends Actividad
+public interface Taller extends TipoDeActividad
 {
 } // Taller

@@ -7,10 +7,6 @@
         eType="#//Actividad" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Espacio">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titulo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacidad" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Organizacion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -20,17 +16,28 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Actividad">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oradores" upperBound="-1"
-        eType="#//Orador" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Charla" eSuperTypes="#//Actividad"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Taller" eSuperTypes="#//Actividad"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MesaDeDebate" eSuperTypes="#//Actividad">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tipo" eType="#//Actividad"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tipo" eType="#//TipoDeActividad"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="titulo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duracion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aula" eType="#//Espacio"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="espacio" eType="#//Espacio"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="genteEsperada" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oradores" upperBound="-1"
+        eType="#//Orador" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="horario" eType="#//Hora"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Espacio">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacidad" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TipoDeActividad"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Hora">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hora" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minutos" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Charla" eSuperTypes="#//TipoDeActividad"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Taller" eSuperTypes="#//TipoDeActividad"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MesaDeDebate" eSuperTypes="#//TipoDeActividad"/>
 </ecore:EPackage>

@@ -32,15 +32,6 @@ public interface PdcFactory extends EFactory
   Schedule createSchedule();
 
   /**
-   * Returns a new object of class '<em>Espacio</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Espacio</em>'.
-   * @generated
-   */
-  Espacio createEspacio();
-
-  /**
    * Returns a new object of class '<em>Organizacion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -66,6 +57,33 @@ public interface PdcFactory extends EFactory
    * @generated
    */
   Actividad createActividad();
+
+  /**
+   * Returns a new object of class '<em>Espacio</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Espacio</em>'.
+   * @generated
+   */
+  Espacio createEspacio();
+
+  /**
+   * Returns a new object of class '<em>Tipo De Actividad</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Tipo De Actividad</em>'.
+   * @generated
+   */
+  TipoDeActividad createTipoDeActividad();
+
+  /**
+   * Returns a new object of class '<em>Hora</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Hora</em>'.
+   * @generated
+   */
+  Hora createHora();
 
   /**
    * Returns a new object of class '<em>Charla</em>'.

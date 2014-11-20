@@ -3,9 +3,17 @@
  */
 package ar.unq.edu.objetos3.generator;
 
+import ar.unq.edu.objetos3.pdc.Schedule;
+import com.google.common.collect.Iterators;
+import java.util.Iterator;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 /**
  * Generates code from your model files on save.
@@ -15,5 +23,43 @@ import org.eclipse.xtext.generator.IGenerator;
 @SuppressWarnings("all")
 public class PdcGenerator implements IGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+    TreeIterator<EObject> _allContents = resource.getAllContents();
+    Iterator<Schedule> _filter = Iterators.<Schedule>filter(_allContents, Schedule.class);
+    final Function1<Schedule, String> _function = new Function1<Schedule, String>() {
+      public String apply(final Schedule it) {
+        return it.getNombre();
+      }
+    };
+    Iterator<String> _map = IteratorExtensions.<Schedule, String>map(_filter, _function);
+    String _join = IteratorExtensions.join(_map, ", ");
+    String _plus = ("People to greet: " + _join);
+    fsa.generateFile("greetings.txt", _plus);
+  }
+  
+  public CharSequence compile(final Resource resource) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package schedule;");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("public class Schedule {");
+    _builder.newLine();
+    _builder.append(" \t");
+    _builder.append("public static void main(String[] args){");
+    _builder.newLine();
+    _builder.append(" \t\t");
+    _builder.append("for(Actividad a : resource.actividades)");
+    _builder.newLine();
+    _builder.append(" \t\t\t");
+    _builder.append("System.Out.Println(\"<<a>>\");");
+    _builder.newLine();
+    _builder.append(" \t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("} ");
+    _builder.newLine();
+    return _builder;
   }
 }

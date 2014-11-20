@@ -22,32 +22,32 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Schedule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cScheduleKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNombreAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNombreSTRINGTerminalRuleCall_1_0 = (RuleCall)cNombreAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNombreAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNombreSTRINGTerminalRuleCall_2_0 = (RuleCall)cNombreAssignment_2.eContents().get(0);
 		private final Assignment cActividadesAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cActividadesActividadParserRuleCall_3_0 = (RuleCall)cActividadesAssignment_3.eContents().get(0);
 		private final Assignment cFinAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final Keyword cFinFinDelScheduleKeyword_4_0 = (Keyword)cFinAssignment_4.eContents().get(0);
 		
 		//Schedule:
-		//	"Schedule" nombre=STRING ":" actividades+=Actividad* fin="Fin del schedule";
+		//	"Schedule" ":" nombre=STRING actividades+=Actividad* fin="/Fin del schedule";
 		public ParserRule getRule() { return rule; }
 
-		//"Schedule" nombre=STRING ":" actividades+=Actividad* fin="Fin del schedule"
+		//"Schedule" ":" nombre=STRING actividades+=Actividad* fin="/Fin del schedule"
 		public Group getGroup() { return cGroup; }
 
 		//"Schedule"
 		public Keyword getScheduleKeyword_0() { return cScheduleKeyword_0; }
 
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
 		//nombre=STRING
-		public Assignment getNombreAssignment_1() { return cNombreAssignment_1; }
+		public Assignment getNombreAssignment_2() { return cNombreAssignment_2; }
 
 		//STRING
-		public RuleCall getNombreSTRINGTerminalRuleCall_1_0() { return cNombreSTRINGTerminalRuleCall_1_0; }
-
-		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public RuleCall getNombreSTRINGTerminalRuleCall_2_0() { return cNombreSTRINGTerminalRuleCall_2_0; }
 
 		//actividades+=Actividad*
 		public Assignment getActividadesAssignment_3() { return cActividadesAssignment_3; }
@@ -55,51 +55,11 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		//Actividad
 		public RuleCall getActividadesActividadParserRuleCall_3_0() { return cActividadesActividadParserRuleCall_3_0; }
 
-		//fin="Fin del schedule"
+		//fin="/Fin del schedule"
 		public Assignment getFinAssignment_4() { return cFinAssignment_4; }
 
-		//"Fin del schedule"
+		//"/Fin del schedule"
 		public Keyword getFinFinDelScheduleKeyword_4_0() { return cFinFinDelScheduleKeyword_4_0; }
-	}
-
-	public class EspacioElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Espacio");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEspacioKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cTituloAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTituloSTRINGTerminalRuleCall_2_0 = (RuleCall)cTituloAssignment_2.eContents().get(0);
-		private final Keyword cCommaKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cCapacidadAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cCapacidadINTTerminalRuleCall_4_0 = (RuleCall)cCapacidadAssignment_4.eContents().get(0);
-		
-		//Espacio:
-		//	"Espacio" ":" titulo=STRING "," capacidad=INT;
-		public ParserRule getRule() { return rule; }
-
-		//"Espacio" ":" titulo=STRING "," capacidad=INT
-		public Group getGroup() { return cGroup; }
-
-		//"Espacio"
-		public Keyword getEspacioKeyword_0() { return cEspacioKeyword_0; }
-
-		//":"
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-
-		//titulo=STRING
-		public Assignment getTituloAssignment_2() { return cTituloAssignment_2; }
-
-		//STRING
-		public RuleCall getTituloSTRINGTerminalRuleCall_2_0() { return cTituloSTRINGTerminalRuleCall_2_0; }
-
-		//","
-		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
-
-		//capacidad=INT
-		public Assignment getCapacidadAssignment_4() { return cCapacidadAssignment_4; }
-
-		//INT
-		public RuleCall getCapacidadINTTerminalRuleCall_4_0() { return cCapacidadINTTerminalRuleCall_4_0; }
 	}
 
 	public class OrganizacionElements extends AbstractParserRuleElementFinder {
@@ -164,30 +124,162 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ActividadElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Actividad");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cActividadKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTipoAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTipoTipoDeActividadParserRuleCall_2_0 = (RuleCall)cTipoAssignment_2.eContents().get(0);
+		private final Keyword cCommaKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTituloAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTituloSTRINGTerminalRuleCall_4_0 = (RuleCall)cTituloAssignment_4.eContents().get(0);
+		private final Keyword cCommaKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cDuracionAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cDuracionINTTerminalRuleCall_6_0 = (RuleCall)cDuracionAssignment_6.eContents().get(0);
+		private final Keyword cCommaKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cEspacioAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cEspacioEspacioParserRuleCall_8_0 = (RuleCall)cEspacioAssignment_8.eContents().get(0);
+		private final Keyword cCommaKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cGenteEsperadaAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cGenteEsperadaINTTerminalRuleCall_10_0 = (RuleCall)cGenteEsperadaAssignment_10.eContents().get(0);
+		private final Keyword cCommaKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cOradoresAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cOradoresOradorParserRuleCall_12_0 = (RuleCall)cOradoresAssignment_12.eContents().get(0);
+		private final Keyword cCommaKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Assignment cHorarioAssignment_14 = (Assignment)cGroup.eContents().get(14);
+		private final RuleCall cHorarioHoraParserRuleCall_14_0 = (RuleCall)cHorarioAssignment_14.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
+		
+		//Actividad:
+		//	"Actividad" "{" tipo=TipoDeActividad "," titulo=STRING "," duracion=INT "," espacio=Espacio "," genteEsperada=INT ","
+		//	oradores+=Orador* "," horario=Hora "}";
+		public ParserRule getRule() { return rule; }
+
+		//"Actividad" "{" tipo=TipoDeActividad "," titulo=STRING "," duracion=INT "," espacio=Espacio "," genteEsperada=INT ","
+		//oradores+=Orador* "," horario=Hora "}"
+		public Group getGroup() { return cGroup; }
+
+		//"Actividad"
+		public Keyword getActividadKeyword_0() { return cActividadKeyword_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+
+		//tipo=TipoDeActividad
+		public Assignment getTipoAssignment_2() { return cTipoAssignment_2; }
+
+		//TipoDeActividad
+		public RuleCall getTipoTipoDeActividadParserRuleCall_2_0() { return cTipoTipoDeActividadParserRuleCall_2_0; }
+
+		//","
+		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
+
+		//titulo=STRING
+		public Assignment getTituloAssignment_4() { return cTituloAssignment_4; }
+
+		//STRING
+		public RuleCall getTituloSTRINGTerminalRuleCall_4_0() { return cTituloSTRINGTerminalRuleCall_4_0; }
+
+		//","
+		public Keyword getCommaKeyword_5() { return cCommaKeyword_5; }
+
+		//duracion=INT
+		public Assignment getDuracionAssignment_6() { return cDuracionAssignment_6; }
+
+		//INT
+		public RuleCall getDuracionINTTerminalRuleCall_6_0() { return cDuracionINTTerminalRuleCall_6_0; }
+
+		//","
+		public Keyword getCommaKeyword_7() { return cCommaKeyword_7; }
+
+		//espacio=Espacio
+		public Assignment getEspacioAssignment_8() { return cEspacioAssignment_8; }
+
+		//Espacio
+		public RuleCall getEspacioEspacioParserRuleCall_8_0() { return cEspacioEspacioParserRuleCall_8_0; }
+
+		//","
+		public Keyword getCommaKeyword_9() { return cCommaKeyword_9; }
+
+		//genteEsperada=INT
+		public Assignment getGenteEsperadaAssignment_10() { return cGenteEsperadaAssignment_10; }
+
+		//INT
+		public RuleCall getGenteEsperadaINTTerminalRuleCall_10_0() { return cGenteEsperadaINTTerminalRuleCall_10_0; }
+
+		//","
+		public Keyword getCommaKeyword_11() { return cCommaKeyword_11; }
+
+		//oradores+=Orador*
+		public Assignment getOradoresAssignment_12() { return cOradoresAssignment_12; }
+
+		//Orador
+		public RuleCall getOradoresOradorParserRuleCall_12_0() { return cOradoresOradorParserRuleCall_12_0; }
+
+		//","
+		public Keyword getCommaKeyword_13() { return cCommaKeyword_13; }
+
+		//horario=Hora
+		public Assignment getHorarioAssignment_14() { return cHorarioAssignment_14; }
+
+		//Hora
+		public RuleCall getHorarioHoraParserRuleCall_14_0() { return cHorarioHoraParserRuleCall_14_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
+	}
+
+	public class EspacioElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Espacio");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEspacioKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNombreAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNombreSTRINGTerminalRuleCall_2_0 = (RuleCall)cNombreAssignment_2.eContents().get(0);
+		private final Keyword cCommaKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cCapacidadAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cCapacidadINTTerminalRuleCall_4_0 = (RuleCall)cCapacidadAssignment_4.eContents().get(0);
+		
+		//Espacio:
+		//	"Espacio" ":" nombre=STRING "," capacidad=INT;
+		public ParserRule getRule() { return rule; }
+
+		//"Espacio" ":" nombre=STRING "," capacidad=INT
+		public Group getGroup() { return cGroup; }
+
+		//"Espacio"
+		public Keyword getEspacioKeyword_0() { return cEspacioKeyword_0; }
+
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
+		//nombre=STRING
+		public Assignment getNombreAssignment_2() { return cNombreAssignment_2; }
+
+		//STRING
+		public RuleCall getNombreSTRINGTerminalRuleCall_2_0() { return cNombreSTRINGTerminalRuleCall_2_0; }
+
+		//","
+		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
+
+		//capacidad=INT
+		public Assignment getCapacidadAssignment_4() { return cCapacidadAssignment_4; }
+
+		//INT
+		public RuleCall getCapacidadINTTerminalRuleCall_4_0() { return cCapacidadINTTerminalRuleCall_4_0; }
+	}
+
+	public class TipoDeActividadElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TipoDeActividad");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cCharlaParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTallerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final RuleCall cMesaDeDebateParserRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final Keyword cActividadKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Keyword cColonKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Assignment cTipoAssignment_2_3 = (Assignment)cGroup_2.eContents().get(3);
-		private final RuleCall cTipoActividadParserRuleCall_2_3_0 = (RuleCall)cTipoAssignment_2_3.eContents().get(0);
-		private final Keyword cCommaKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
-		private final Assignment cTituloAssignment_2_5 = (Assignment)cGroup_2.eContents().get(5);
-		private final RuleCall cTituloSTRINGTerminalRuleCall_2_5_0 = (RuleCall)cTituloAssignment_2_5.eContents().get(0);
-		private final Keyword cCommaKeyword_2_6 = (Keyword)cGroup_2.eContents().get(6);
-		private final Assignment cDuracionAssignment_2_7 = (Assignment)cGroup_2.eContents().get(7);
-		private final RuleCall cDuracionINTTerminalRuleCall_2_7_0 = (RuleCall)cDuracionAssignment_2_7.eContents().get(0);
-		private final Keyword cCommaKeyword_2_8 = (Keyword)cGroup_2.eContents().get(8);
-		private final Assignment cAulaAssignment_2_9 = (Assignment)cGroup_2.eContents().get(9);
-		private final RuleCall cAulaEspacioParserRuleCall_2_9_0 = (RuleCall)cAulaAssignment_2_9.eContents().get(0);
+		private final RuleCall cMesaDeDebateParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//Actividad:
-		//	Charla | Taller | MesaDeDebate "Actividad" ":" tipo=Actividad "," titulo=STRING "," duracion=INT "," aula=Espacio;
+		//TipoDeActividad:
+		//	Charla | Taller | MesaDeDebate;
 		public ParserRule getRule() { return rule; }
 
-		//Charla | Taller | MesaDeDebate "Actividad" ":" tipo=Actividad "," titulo=STRING "," duracion=INT "," aula=Espacio
+		//Charla | Taller | MesaDeDebate
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Charla
@@ -196,50 +288,52 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		//Taller
 		public RuleCall getTallerParserRuleCall_1() { return cTallerParserRuleCall_1; }
 
-		//MesaDeDebate "Actividad" ":" tipo=Actividad "," titulo=STRING "," duracion=INT "," aula=Espacio
-		public Group getGroup_2() { return cGroup_2; }
-
 		//MesaDeDebate
-		public RuleCall getMesaDeDebateParserRuleCall_2_0() { return cMesaDeDebateParserRuleCall_2_0; }
+		public RuleCall getMesaDeDebateParserRuleCall_2() { return cMesaDeDebateParserRuleCall_2; }
+	}
 
-		//"Actividad"
-		public Keyword getActividadKeyword_2_1() { return cActividadKeyword_2_1; }
+	public class HoraElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Hora");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHorarioKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cHoraAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cHoraINTTerminalRuleCall_2_0 = (RuleCall)cHoraAssignment_2.eContents().get(0);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cMinutosAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMinutosINTTerminalRuleCall_4_0 = (RuleCall)cMinutosAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//Hora:
+		//	"Horario" "(" hora=INT ":" minutos=INT ")";
+		public ParserRule getRule() { return rule; }
 
-		//":"
-		public Keyword getColonKeyword_2_2() { return cColonKeyword_2_2; }
+		//"Horario" "(" hora=INT ":" minutos=INT ")"
+		public Group getGroup() { return cGroup; }
 
-		//tipo=Actividad
-		public Assignment getTipoAssignment_2_3() { return cTipoAssignment_2_3; }
+		//"Horario"
+		public Keyword getHorarioKeyword_0() { return cHorarioKeyword_0; }
 
-		//Actividad
-		public RuleCall getTipoActividadParserRuleCall_2_3_0() { return cTipoActividadParserRuleCall_2_3_0; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//","
-		public Keyword getCommaKeyword_2_4() { return cCommaKeyword_2_4; }
-
-		//titulo=STRING
-		public Assignment getTituloAssignment_2_5() { return cTituloAssignment_2_5; }
-
-		//STRING
-		public RuleCall getTituloSTRINGTerminalRuleCall_2_5_0() { return cTituloSTRINGTerminalRuleCall_2_5_0; }
-
-		//","
-		public Keyword getCommaKeyword_2_6() { return cCommaKeyword_2_6; }
-
-		//duracion=INT
-		public Assignment getDuracionAssignment_2_7() { return cDuracionAssignment_2_7; }
+		//hora=INT
+		public Assignment getHoraAssignment_2() { return cHoraAssignment_2; }
 
 		//INT
-		public RuleCall getDuracionINTTerminalRuleCall_2_7_0() { return cDuracionINTTerminalRuleCall_2_7_0; }
+		public RuleCall getHoraINTTerminalRuleCall_2_0() { return cHoraINTTerminalRuleCall_2_0; }
 
-		//","
-		public Keyword getCommaKeyword_2_8() { return cCommaKeyword_2_8; }
+		//":"
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
-		//aula=Espacio
-		public Assignment getAulaAssignment_2_9() { return cAulaAssignment_2_9; }
+		//minutos=INT
+		public Assignment getMinutosAssignment_4() { return cMinutosAssignment_4; }
 
-		//Espacio
-		public RuleCall getAulaEspacioParserRuleCall_2_9_0() { return cAulaEspacioParserRuleCall_2_9_0; }
+		//INT
+		public RuleCall getMinutosINTTerminalRuleCall_4_0() { return cMinutosINTTerminalRuleCall_4_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class CharlaElements extends AbstractParserRuleElementFinder {
@@ -247,14 +341,12 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cCharlaAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cCharlaKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cOradoresAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOradoresOradorParserRuleCall_2_0 = (RuleCall)cOradoresAssignment_2.eContents().get(0);
 		
 		//Charla:
-		//	{Charla} "Charla" oradores+=Orador*;
+		//	{Charla} "Charla";
 		public ParserRule getRule() { return rule; }
 
-		//{Charla} "Charla" oradores+=Orador*
+		//{Charla} "Charla"
 		public Group getGroup() { return cGroup; }
 
 		//{Charla}
@@ -262,12 +354,6 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"Charla"
 		public Keyword getCharlaKeyword_1() { return cCharlaKeyword_1; }
-
-		//oradores+=Orador*
-		public Assignment getOradoresAssignment_2() { return cOradoresAssignment_2; }
-
-		//Orador
-		public RuleCall getOradoresOradorParserRuleCall_2_0() { return cOradoresOradorParserRuleCall_2_0; }
 	}
 
 	public class TallerElements extends AbstractParserRuleElementFinder {
@@ -275,14 +361,12 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTallerAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cTallerKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cOradoresAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOradoresOradorParserRuleCall_2_0 = (RuleCall)cOradoresAssignment_2.eContents().get(0);
 		
 		//Taller:
-		//	{Taller} "Taller" oradores+=Orador*;
+		//	{Taller} "Taller";
 		public ParserRule getRule() { return rule; }
 
-		//{Taller} "Taller" oradores+=Orador*
+		//{Taller} "Taller"
 		public Group getGroup() { return cGroup; }
 
 		//{Taller}
@@ -290,12 +374,6 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"Taller"
 		public Keyword getTallerKeyword_1() { return cTallerKeyword_1; }
-
-		//oradores+=Orador*
-		public Assignment getOradoresAssignment_2() { return cOradoresAssignment_2; }
-
-		//Orador
-		public RuleCall getOradoresOradorParserRuleCall_2_0() { return cOradoresOradorParserRuleCall_2_0; }
 	}
 
 	public class MesaDeDebateElements extends AbstractParserRuleElementFinder {
@@ -303,14 +381,12 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cMesaDeDebateAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cMesaDeDebateKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cOradoresAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOradoresOradorParserRuleCall_2_0 = (RuleCall)cOradoresAssignment_2.eContents().get(0);
 		
 		//MesaDeDebate:
-		//	{MesaDeDebate} "Mesa de debate" oradores+=Orador*;
+		//	{MesaDeDebate} "Mesa de debate";
 		public ParserRule getRule() { return rule; }
 
-		//{MesaDeDebate} "Mesa de debate" oradores+=Orador*
+		//{MesaDeDebate} "Mesa de debate"
 		public Group getGroup() { return cGroup; }
 
 		//{MesaDeDebate}
@@ -318,20 +394,16 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"Mesa de debate"
 		public Keyword getMesaDeDebateKeyword_1() { return cMesaDeDebateKeyword_1; }
-
-		//oradores+=Orador*
-		public Assignment getOradoresAssignment_2() { return cOradoresAssignment_2; }
-
-		//Orador
-		public RuleCall getOradoresOradorParserRuleCall_2_0() { return cOradoresOradorParserRuleCall_2_0; }
 	}
 	
 	
 	private final ScheduleElements pSchedule;
-	private final EspacioElements pEspacio;
 	private final OrganizacionElements pOrganizacion;
 	private final OradorElements pOrador;
 	private final ActividadElements pActividad;
+	private final EspacioElements pEspacio;
+	private final TipoDeActividadElements pTipoDeActividad;
+	private final HoraElements pHora;
 	private final CharlaElements pCharla;
 	private final TallerElements pTaller;
 	private final MesaDeDebateElements pMesaDeDebate;
@@ -346,10 +418,12 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pSchedule = new ScheduleElements();
-		this.pEspacio = new EspacioElements();
 		this.pOrganizacion = new OrganizacionElements();
 		this.pOrador = new OradorElements();
 		this.pActividad = new ActividadElements();
+		this.pEspacio = new EspacioElements();
+		this.pTipoDeActividad = new TipoDeActividadElements();
+		this.pHora = new HoraElements();
 		this.pCharla = new CharlaElements();
 		this.pTaller = new TallerElements();
 		this.pMesaDeDebate = new MesaDeDebateElements();
@@ -383,23 +457,13 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Schedule:
-	//	"Schedule" nombre=STRING ":" actividades+=Actividad* fin="Fin del schedule";
+	//	"Schedule" ":" nombre=STRING actividades+=Actividad* fin="/Fin del schedule";
 	public ScheduleElements getScheduleAccess() {
 		return pSchedule;
 	}
 	
 	public ParserRule getScheduleRule() {
 		return getScheduleAccess().getRule();
-	}
-
-	//Espacio:
-	//	"Espacio" ":" titulo=STRING "," capacidad=INT;
-	public EspacioElements getEspacioAccess() {
-		return pEspacio;
-	}
-	
-	public ParserRule getEspacioRule() {
-		return getEspacioAccess().getRule();
 	}
 
 	//Organizacion:
@@ -423,7 +487,8 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Actividad:
-	//	Charla | Taller | MesaDeDebate "Actividad" ":" tipo=Actividad "," titulo=STRING "," duracion=INT "," aula=Espacio;
+	//	"Actividad" "{" tipo=TipoDeActividad "," titulo=STRING "," duracion=INT "," espacio=Espacio "," genteEsperada=INT ","
+	//	oradores+=Orador* "," horario=Hora "}";
 	public ActividadElements getActividadAccess() {
 		return pActividad;
 	}
@@ -432,8 +497,38 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 		return getActividadAccess().getRule();
 	}
 
+	//Espacio:
+	//	"Espacio" ":" nombre=STRING "," capacidad=INT;
+	public EspacioElements getEspacioAccess() {
+		return pEspacio;
+	}
+	
+	public ParserRule getEspacioRule() {
+		return getEspacioAccess().getRule();
+	}
+
+	//TipoDeActividad:
+	//	Charla | Taller | MesaDeDebate;
+	public TipoDeActividadElements getTipoDeActividadAccess() {
+		return pTipoDeActividad;
+	}
+	
+	public ParserRule getTipoDeActividadRule() {
+		return getTipoDeActividadAccess().getRule();
+	}
+
+	//Hora:
+	//	"Horario" "(" hora=INT ":" minutos=INT ")";
+	public HoraElements getHoraAccess() {
+		return pHora;
+	}
+	
+	public ParserRule getHoraRule() {
+		return getHoraAccess().getRule();
+	}
+
 	//Charla:
-	//	{Charla} "Charla" oradores+=Orador*;
+	//	{Charla} "Charla";
 	public CharlaElements getCharlaAccess() {
 		return pCharla;
 	}
@@ -443,7 +538,7 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Taller:
-	//	{Taller} "Taller" oradores+=Orador*;
+	//	{Taller} "Taller";
 	public TallerElements getTallerAccess() {
 		return pTaller;
 	}
@@ -453,7 +548,7 @@ public class PdcGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MesaDeDebate:
-	//	{MesaDeDebate} "Mesa de debate" oradores+=Orador*;
+	//	{MesaDeDebate} "Mesa de debate";
 	public MesaDeDebateElements getMesaDeDebateAccess() {
 		return pMesaDeDebate;
 	}
