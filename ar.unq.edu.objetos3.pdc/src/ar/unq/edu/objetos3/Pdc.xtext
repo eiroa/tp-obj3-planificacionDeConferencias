@@ -3,25 +3,49 @@ grammar ar.unq.edu.objetos3.Pdc with org.eclipse.xtext.common.Terminals
 generate pdc "http://www.unq.ar/edu/objetos3/Pdc"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
+
+PDC:
+	(lasOrganizaciones+=Organizaciones) 
+	(losOradores+=Oradores)
+	(losEspacios+=Espacios)
+	schedule=Schedule
+;
+
+Organizaciones:
+	{Organizaciones}
+	'Organizaciones' '{' (organizaciones+=Organizacion)* '}'
+;
+
+Oradores:
+	{Oradores} 
+	'Oradores' '{' (oradores+=Orador)* '}'	
+;
+
+Espacios:
+	{Espacios}
+	'Espacios' '{' (espacios+=Espacio)* '}'
+;
+
 Schedule:
 	'Schedule' ':' nombre= STRING  (actividades+=Actividad)*  fin='/Fin del schedule'
 ; 
 
 Organizacion:
-	'Organizacion' nombre= STRING
+	'Organizacion' name = ID
 ;
 
 Orador:
-	'Orador' nombre= STRING 'de:' organizacion= Organizacion 
+	'Orador' name = ID 'de:' organizacion=[Organizacion] 
 ;
+
+Espacio:
+	'Espacio' ':' name= ID ',' capacidad= INT;
 
 Actividad:
 	'Actividad' '{' tipo= TipoDeActividad ',' titulo= STRING ',' duracion= INT ','
-	 espacio= Espacio ',' genteEsperada= INT ',' oradores+=Orador* ',' horario=Hora'}'
+	 espacio= [Espacio]',' genteEsperada= INT ',' oradores+=[Orador]* ',' horario=Hora'}'
 ;
 	
-Espacio:
-	'Espacio' ':' nombre= STRING ',' capacidad= INT;
 
 TipoDeActividad:
 		Charla | Taller | MesaDeDebate
