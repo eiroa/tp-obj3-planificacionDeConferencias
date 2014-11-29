@@ -5,7 +5,6 @@ package ar.unq.edu.objetos3.validation
 
 import org.eclipse.xtext.validation.Check
 import ar.unq.edu.objetos3.pdc.*
-import java.lang.reflect.Field
 
 //import org.eclipse.xtext.validation.Check
 
@@ -31,7 +30,6 @@ class PdcValidator extends AbstractPdcValidator {
 	
 @Check
 def void checkTitleIsUnique(Schedule s) {
-	
 	 if  (s.actividades.map[a | a.titulo].toList.length > s.actividades.map[a | a.titulo].toSet.length) {
 	 	error('There are repeated titles', 
 					PdcPackage.Literals.SCHEDULE__NOMBRE,
@@ -61,6 +59,18 @@ def void checkTitleIsUnique(Schedule s) {
 					PdcPackage.Literals.ACTIVIDAD__DURACION,
 					INVALID_NAME)
 		}
+	}
+	
+	
+	@Check
+	def checkConcurrentActivities(PDC pdc) {
+		//Genero un mapa con actividades y espacio, si resulta que un espacio tiene dos actividades, hacer algo
+		pdc.schedule.actividades.groupBy[a|a.espacio].forEach[p1, p2| 
+			if(p2.length >1){
+				error('Two Activities at the same place!',PdcPackage.Literals.PDC__SCHEDULE,INVALID_NAME)
+			}
+		]
+	
 	}
 	
 	@Check

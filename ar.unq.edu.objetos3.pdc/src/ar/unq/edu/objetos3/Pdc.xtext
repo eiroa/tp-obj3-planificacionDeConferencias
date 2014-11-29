@@ -43,7 +43,7 @@ Espacio:
 
 Actividad:
 	'Actividad' '{' tipo= TipoDeActividad ',' titulo= STRING ',' duracion= INT ','
-	 espacio= [Espacio]',' genteEsperada= INT ',' oradores+=[Orador]* ',' horario=Hora'}'
+	 espacio= [Espacio]',' genteEsperada= INT ',' oradores+=[Orador]* ',' horario=Horario'}'
 ;
 	
 
@@ -51,7 +51,7 @@ TipoDeActividad:
 		Charla | Taller | MesaDeDebate
 ;
 
-Hora:
+Horario:
 	'Horario' '('hora=INT':'minutos=INT')'
 ;
 
