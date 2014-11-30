@@ -48,11 +48,26 @@ Actividad:
 	
 
 TipoDeActividad:
-		Charla | Taller | MesaDeDebate
+		Charla | Taller | MesaDeDebate | Break | EventoDeInauguracion | EventoDeCierre
 ;
 
 Horario:
 	'Horario' '('hora=INT':'minutos=INT')'
+;
+
+Break:
+	{Break}
+	'Break'
+;
+
+EventoDeInauguracion:
+	{EventoDeInauguracion}
+	'Evento de Inauguracion'
+;
+
+EventoDeCierre:
+	{EventoDeCierre}
+	'Evento de Cierre'
 ;
 
 Charla:
