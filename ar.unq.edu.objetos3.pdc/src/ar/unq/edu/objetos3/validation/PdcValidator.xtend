@@ -73,6 +73,15 @@ def void checkTitleIsUnique(Schedule s) {
 	
 	}
 	
+		@Check
+	def checkMesaDebate2Oradores(Actividad actividad) {
+//		println(actividad.tipo.eClass)
+		if(actividad.tipo.eClass.name.equals("MesaDeDebate") && actividad.oradores.length < 2){
+			error('Debate activity needs at least two speakers',PdcPackage.Literals.ACTIVIDAD__ORADORES,INVALID_NAME)
+		}		
+	
+	}
+	
 	@Check
 	def checkActivityCapacity(Actividad actividad) {
 		val x = actividad.genteEsperada
