@@ -73,13 +73,25 @@ def void checkTitleIsUnique(Schedule s) {
 	
 	}
 	
-		@Check
+	@Check
 	def checkMesaDebate2Oradores(Actividad actividad) {
-//		println(actividad.tipo.eClass)
 		if(actividad.tipo.eClass.name.equals("MesaDeDebate") && actividad.oradores.length < 2){
-			error('Debate activity needs at least two speakers',PdcPackage.Literals.ACTIVIDAD__ORADORES,INVALID_NAME)
-		}		
+			error('Mesa de debate necesita 2 oradores al menos',PdcPackage.Literals.ACTIVIDAD__ORADORES,INVALID_NAME)
+		}
+	}
 	
+	@Check
+	def checkKeynote(Actividad actividad){
+		if(actividad.keynote){
+			warning('Keynote detected',PdcPackage.Literals.ACTIVIDAD__KEYNOTE,INVALID_NAME)
+		}	
+	}
+	
+	@Check
+	def checkAulasConMaquinasSoloParaTalleres(Actividad actividad){
+		if( actividad.espacio.tieneComputadoras && !actividad.tipo.eClass.name.equals("Taller")){
+			error('Un aula con computadoras solo puede utilizarse para talleres',PdcPackage.Literals.ACTIVIDAD__ESPACIO,INVALID_NAME)
+		}	
 	}
 	
 	@Check

@@ -8,6 +8,7 @@ PDC:
 	(lasOrganizaciones+=Organizaciones) 
 	(losOradores+=Oradores)
 	(losEspacios+=Espacios)
+	(losTracks+=Tracks)
 	schedule=Schedule
 ;
 
@@ -26,8 +27,13 @@ Espacios:
 	'Espacios' '{' (espacios+=Espacio)* '}'
 ;
 
+Tracks:
+	{Tracks}
+	'Tracks' '{' (tracks+=Track)* '}'
+;
+
 Schedule:
-	'Schedule' ':' nombre= STRING  (actividades+=Actividad)*  fin='/Fin del schedule'
+	'Schedule' ':' nombre= STRING  (actividades+=Actividad)*  
 ; 
 
 Organizacion:
@@ -39,25 +45,49 @@ Orador:
 ;
 
 Espacio:
-	'Espacio' ':' name= ID ',' capacidad= INT;
+	'Espacio' ':' name= ID ',' capacidad= INT (tieneComputadoras?='poseeComputadoras')?;
 
 Actividad:
-	'Actividad' '{' tipo= TipoDeActividad ',' titulo= STRING ',' duracion= INT ','
+	'Actividad' '{'  (keynote?='keynote')? tipo= TipoDeActividad ',' titulo= STRING ',' duracion= INT ','
 	 espacio= [Espacio]',' genteEsperada= INT ',' oradores+=[Orador]* ',' horario=Horario'}'
 ;
 	
 
 TipoDeActividad:
-		Charla | Taller | MesaDeDebate | Break | EventoDeInauguracion | EventoDeCierre
+		Charla | Taller | MesaDeDebate | Break | EventoDeInauguracion | EventoDeCierre | Registracion
+;
+
+TipoDeBreak:
+	Desayuno | Almuerzo | Merienda
+;
+
+Desayuno:
+	{Desayuno}
+	'Desayuno' 
+;
+
+Almuerzo:
+	{Almuerzo}
+	'Almuerzo' 
+;
+
+Merienda:
+	{Merienda}
+	'Merienda' 
 ;
 
 Horario:
 	'Horario' '('hora=INT':'minutos=INT')'
 ;
 
+Registracion:
+	{Registracion}
+	'Registracion'
+;
+
 Break:
 	{Break}
-	'Break'
+	'Break' 'para' tipoDeBreak=TipoDeBreak
 ;
 
 EventoDeInauguracion:
@@ -72,15 +102,20 @@ EventoDeCierre:
 
 Charla:
 	{Charla}
-	'Charla' 
+	'Charla'  'parte de' track=[Track]
 ;
 Taller:
 	{Taller}
-	'Taller'
+	'Taller' 'parte de' track=[Track]
 ;
 MesaDeDebate:
 	{MesaDeDebate}
-	'Mesa de debate'
+	'Mesa de debate' 'parte de' track=[Track]
+;
+
+Track:
+	{Track}
+	'Track' name=ID
 ;
 
 	
