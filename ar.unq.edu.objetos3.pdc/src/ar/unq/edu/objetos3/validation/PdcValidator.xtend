@@ -75,7 +75,7 @@ def void checkTitleIsUnique(Schedule s) {
 	
 	@Check
 	def checkMesaDebate2Oradores(Actividad actividad) {
-		if(actividad.tipo.eClass.name.equals("MesaDeDebate") && actividad.oradores.length < 2){
+		if(actividad.esMesaDeDebate && actividad.oradores.length < 2){
 			error('Mesa de debate necesita 2 oradores al menos',PdcPackage.Literals.ACTIVIDAD__ORADORES,INVALID_NAME)
 		}
 	}
@@ -88,8 +88,34 @@ def void checkTitleIsUnique(Schedule s) {
 	}
 	
 	@Check
+	def checkDuracionBreak(Actividad actividad){
+		if(actividad.esBreak && actividad.duracion < 15 ){
+			error('Los breaks no pueden durar menos de 15 minutos',PdcPackage.Literals.ACTIVIDAD__DURACION,INVALID_NAME)
+		}	
+	}
+	
+	@Check
+	def checkDuracionAlmuerzo(Actividad actividad){
+		if(actividad.esBreak && actividad.tipoDeBreak.eClass.name.equals("Almuerzo") && actividad.duracion < 45  ){
+			error('Los almuerzos no pueden durar menos de 45 minutos',PdcPackage.Literals.ACTIVIDAD__DURACION,INVALID_NAME)
+		}	
+	}
+	
+	@Check
+	def checkBreaks(Actividad actividad){
+		if( true){
+			
+		}
+	}
+	
+//	@Check
+//	def checkTipoBreaks(TipoDeBreak tipo){
+//			println("tipo "+tipo.eClass.name)
+//	}
+	
+	@Check
 	def checkAulasConMaquinasSoloParaTalleres(Actividad actividad){
-		if( actividad.espacio.tieneComputadoras && !actividad.tipo.eClass.name.equals("Taller")){
+		if( actividad.espacio.tieneComputadoras && !actividad.esTaller){
 			error('Un aula con computadoras solo puede utilizarse para talleres',PdcPackage.Literals.ACTIVIDAD__ESPACIO,INVALID_NAME)
 		}	
 	}

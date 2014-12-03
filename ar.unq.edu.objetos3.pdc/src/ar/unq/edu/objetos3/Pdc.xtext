@@ -48,14 +48,14 @@ Espacio:
 	'Espacio' ':' name= ID ',' capacidad= INT (tieneComputadoras?='poseeComputadoras')?;
 
 Actividad:
-	'Actividad' '{'  (keynote?='keynote')? tipo= TipoDeActividad ',' titulo= STRING ',' duracion= INT ','
-	 espacio= [Espacio]',' genteEsperada= INT ',' oradores+=[Orador]* ',' horario=Horario'}'
+	  (esCharla?='Charla')? (esMesaDeDebate?='Mesa de debate')? (esTaller?='Taller')? 
+	  (esBreak?='Break')? (esEventoDeInauguracion?='Evento de Inauguración')? (esRegistracion?='Registracion')?  
+	  (esEventoDeCierre?='Evento de cierre')? (keynote?='Keynote')?  (tipoDeBreak=TipoDeBreak)?  
+	  ( 'parte de 'track=[Track])? ',' titulo= STRING ',' 'Duracion:'duracion= INT ','
+	 'Lugar:'espacio= [Espacio]',' 'Gente esperada:'genteEsperada= INT (',' 'Oradores:' oradores+=[Orador]* )?',' horario=Horario
 ;
-	
 
-TipoDeActividad:
-		Charla | Taller | MesaDeDebate | Break | EventoDeInauguracion | EventoDeCierre | Registracion
-;
+
 
 TipoDeBreak:
 	Desayuno | Almuerzo | Merienda
@@ -80,38 +80,6 @@ Horario:
 	'Horario' '('hora=INT':'minutos=INT')'
 ;
 
-Registracion:
-	{Registracion}
-	'Registracion'
-;
-
-Break:
-	{Break}
-	'Break' 'para' tipoDeBreak=TipoDeBreak
-;
-
-EventoDeInauguracion:
-	{EventoDeInauguracion}
-	'Evento de Inauguracion'
-;
-
-EventoDeCierre:
-	{EventoDeCierre}
-	'Evento de Cierre'
-;
-
-Charla:
-	{Charla}
-	'Charla'  'parte de' track=[Track]
-;
-Taller:
-	{Taller}
-	'Taller' 'parte de' track=[Track]
-;
-MesaDeDebate:
-	{MesaDeDebate}
-	'Mesa de debate' 'parte de' track=[Track]
-;
 
 Track:
 	{Track}
