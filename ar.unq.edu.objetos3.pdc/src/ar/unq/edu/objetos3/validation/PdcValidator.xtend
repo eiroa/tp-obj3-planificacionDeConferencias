@@ -21,7 +21,7 @@ class PdcValidator extends AbstractPdcValidator {
 	@Check
 	def checkActivityStartsWithCapital(Actividad actividad) {
 		if (!Character.isUpperCase(actividad.titulo.charAt(0))) {
-			warning('Title should start with a capital', 
+			warning('El titulo deberia comenzar con mayuscula', 
 					PdcPackage.Literals.ACTIVIDAD__TITULO,
 					INVALID_NAME
 					)
@@ -31,21 +31,17 @@ class PdcValidator extends AbstractPdcValidator {
 @Check
 def void checkTitleIsUnique(Schedule s) {
 	 if  (s.actividades.map[a | a.titulo].toList.length > s.actividades.map[a | a.titulo].toSet.length) {
-	 	error('There are repeated titles', 
+	 	error('Existen titulos repetidos', 
 					PdcPackage.Literals.SCHEDULE__NOMBRE,
 					INVALID_NAME)
 	 }
-	
-
 }
 
-	
-	
 	@Check
 	def checkActivityDurationl(Actividad actividad) {
 		
 		if (actividad.duracion < 30) {
-			error('Duration must be at least 30 minutes', 
+			error('Una actividad no puede durar menos de 30 minutos', 
 					PdcPackage.Literals.ACTIVIDAD__DURACION,
 					INVALID_NAME)
 		}
@@ -55,7 +51,7 @@ def void checkTitleIsUnique(Schedule s) {
    @Check
 	def checkTitleExistance(Actividad actividad) {
 		if (actividad.titulo.nullOrEmpty) {
-			error('Activity requires a title', 
+			error('Actividad requiere titulo', 
 					PdcPackage.Literals.ACTIVIDAD__DURACION,
 					INVALID_NAME)
 		}
@@ -64,12 +60,29 @@ def void checkTitleIsUnique(Schedule s) {
 	
 	@Check
 	def checkConcurrentActivities(PDC pdc) {
-		//Genero un mapa con actividades y espacio, si resulta que un espacio tiene dos actividades, hacer algo
-		pdc.schedule.actividades.groupBy[a|a.espacio].forEach[p1, p2| 
+//		Genero un mapa con actividades y espacio, si resulta que un espacio tiene dos actividades, 
+//		verificar concurrencias 
+		pdc.schedule.actividades.groupBy[a|a.espacio].forEach[p1, p2| //key,value
 			if(p2.length >1){
-				error('Two Activities at the same place!',PdcPackage.Literals.PDC__SCHEDULE,INVALID_NAME)
+				var sortedValues = p2.sortBy[horario.minutos]
+				sortedValues = sortedValues.sortBy[horario.hora]
+				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
+				//Ahora debemos corroborar que no se superpongan
+				var x = 0
+				for(a : sortedValues){
+					var totalMinutes = a.horario.hora*60 + a.horario.minutos + a.duracion
+					if(sortedValues.size - x > 1){
+						var next = sortedValues.get(x+1)
+						var nextTotalMinutes = next.horario.hora*60 + next.horario.minutos
+						if(totalMinutes > nextTotalMinutes){
+							error("Error! hay superposicion de actividades",PdcPackage.Literals.PDC__LOS_ESPACIOS,INVALID_NAME)
+						}
+					x++
+					}
+				}
 			}
 		]
+		
 	
 	}
 	
@@ -81,9 +94,19 @@ def void checkTitleIsUnique(Schedule s) {
 	}
 	
 	@Check
+	def checkHorariosValidos(Horario horario){
+		if(horario.hora <0 || horario.hora > 23){
+			error('Hora invalida utilice valores entre 0 y 23',PdcPackage.Literals.HORARIO__HORA,INVALID_NAME)
+		}
+		if(horario.minutos <0 || horario.minutos > 59){
+			error('Minutos invalidos utilice valores entre 0 y 59',PdcPackage.Literals.HORARIO__MINUTOS,INVALID_NAME)
+		}
+	}
+	
+	@Check
 	def checkKeynote(Actividad actividad){
 		if(actividad.keynote){
-			warning('Keynote detected',PdcPackage.Literals.ACTIVIDAD__KEYNOTE,INVALID_NAME)
+			warning('Keynote detecteda',PdcPackage.Literals.ACTIVIDAD__KEYNOTE,INVALID_NAME)
 		}	
 	}
 	
@@ -101,17 +124,7 @@ def void checkTitleIsUnique(Schedule s) {
 		}	
 	}
 	
-	@Check
-	def checkBreaks(Actividad actividad){
-		if( true){
-			
-		}
-	}
 	
-//	@Check
-//	def checkTipoBreaks(TipoDeBreak tipo){
-//			println("tipo "+tipo.eClass.name)
-//	}
 	
 	@Check
 	def checkAulasConMaquinasSoloParaTalleres(Actividad actividad){
@@ -124,16 +137,16 @@ def void checkTitleIsUnique(Schedule s) {
 	def checkActivityCapacity(Actividad actividad) {
 		val x = actividad.genteEsperada
 		switch (x){
-			case null: error("Specify Expected people",
+			case null: error("Especifique la gente esperada",
 					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA,
 					INVALID_NAME)
-			case x>actividad.espacio.capacidad: error('There is not enough space', 
+			case x>actividad.espacio.capacidad: error('No hay suficiente espacio', 
 					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA,
 					INVALID_NAME)
-			case x<(actividad.espacio.capacidad / 2) : warning('There is way too much space without being used', 
+			case x<(actividad.espacio.capacidad / 2) : warning('Existe demasiado espacio sin usar', 
 					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA,
 					INVALID_NAME)
-			case x>( (90 * actividad.espacio.capacidad) / 100) : warning('Expected people almost exceeds capacity', 
+			case x>( (90 * actividad.espacio.capacidad) / 100) : warning('La cantidad de gente esperada supera la capacidad del lugar', 
 					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA,
 					INVALID_NAME)
 		}
