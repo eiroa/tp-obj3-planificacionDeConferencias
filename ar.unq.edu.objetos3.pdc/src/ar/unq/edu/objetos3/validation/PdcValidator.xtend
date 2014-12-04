@@ -7,6 +7,8 @@ import org.eclipse.xtext.validation.Check
 import ar.unq.edu.objetos3.pdc.*
 import java.util.HashMap
 import java.util.List
+import java.util.ArrayList
+import java.lang.reflect.Array
 
 //import org.eclipse.xtext.validation.Check
 /**
@@ -81,10 +83,92 @@ class PdcValidator extends AbstractPdcValidator {
 						if (totalMinutes > nextTotalMinutes) {
 							error(
 								"Las actividades " + a.titulo + " y " + next.titulo + " se superponen en el mismo lugar",
-								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+								PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
 						}
 						x++
 					}
+				}
+			}
+		]
+	}
+	
+	@Check
+	def checkBloquesValidos(PDC pdc){
+				pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
+				
+				
+				// Premisa: Un bloque representa actividades encerradas entre 2 breaks, por lo tanto, espacios
+				// con menos de 3 actividades no califican
+			if (p2.length > 3) {
+				println("Actividades posibles de constituir bloque para espacio " +p1+ " ---> " +p2)
+				var sortedValues = p2.sortBy[horario.minutos]
+				sortedValues = sortedValues.sortBy[horario.hora]
+
+				var primerBreakEncontrado = false
+				
+				var duracionTotal = 0
+				var List tracks = new ArrayList
+				val List organizaciones = new ArrayList
+				
+				for (a : sortedValues) {
+					if(primerBreakEncontrado && !a.esBreak){
+						//Encontramos una actividad del bloque
+						println("posible actividad de bloque...")
+						duracionTotal =  duracionTotal + a.duracion
+						//Agregamos el track
+						println("Duracion hasta el momento: "+duracionTotal)
+						tracks.add(a.track)
+						println("tracks al momento: "+tracks)
+						//Agregamos organizaciones involucradas
+						a.oradores.forEach[o | 
+							organizaciones.add(o.organizacion)
+						]
+						println("organizaciones de momento... " + organizaciones)
+					}
+					if(primerBreakEncontrado && a.esBreak){
+						//Encontramos el segundo break, verificar si es bloque
+						println("Encontrado el segundo Break")
+						if(tracks.size >1){
+							//Hay al menos 2 actividades, se ha encontrado un bloque
+							if(duracionTotal > 120){
+								//El bloque dura más de 2 horas
+								error(
+								"Existe un bloque de actividades en el lugar " +p1.name + " con una duracion mayor de 2 horas",
+								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+							}
+							if(tracks.toSet.size > 1){
+								//El bloque posee tracks distintos
+								error(
+								"Existe un bloque de actividades en el lugar " +p1.name + " cuyos tracks no corresponden al mismo",
+								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+							}
+							if(organizaciones.toSet.size == 1){
+								//El bloque esta compuesto por una sola organizacion
+								warning(
+								"Existe un bloque de actividades en el lugar " +p1.name + " perteneciente a una unica organizacion",
+								PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
+							}
+							//Bloque encontrado y validado, reiniciar valores y continuar checkeo
+							duracionTotal= 0
+							tracks = new ArrayList
+							organizaciones.clear
+						}else{
+							//Solo 1 actividad entre dos Breaks, no califica como bloque y el break se toma
+							//como posible inicio de otro bloque
+							duracionTotal= 0
+							tracks = new ArrayList
+							organizaciones.clear
+						}
+					}
+
+					if(!primerBreakEncontrado ){
+						if(a.esBreak){
+							//Encontramos el primer Break, posible bloque
+							println("primer break encontrado...")
+							primerBreakEncontrado = true
+						}
+					}
+					/////////////////
 				}
 			}
 		]
@@ -97,7 +181,7 @@ class PdcValidator extends AbstractPdcValidator {
 		//		Genero un mapa con actividades y oradores
 		pdc.losOradores.head.oradores.forEach [ o |
 			var actividadesRelacionadas = pdc.schedule.actividades.filter[act|act.oradores.contains(o)]
-			println("orador: " + o.toString + " posee las actividades: " + actividadesRelacionadas)
+//			println("orador: " + o.toString + " posee las actividades: " + actividadesRelacionadas)
 			map.put(o, actividadesRelacionadas)
 		]
 		map.forEach [ p1, p2 |
@@ -116,7 +200,7 @@ class PdcValidator extends AbstractPdcValidator {
 						if (totalMinutes == nextTotalMinutes) {
 							warning(
 								"Advertencia, el orador " + p1.name + " esta asignado a las actividades adyacentes" +
-									a.titulo + " y " + next.titulo, PdcPackage.Literals.PDC__SCHEDULE,
+									a.titulo + " y " + next.titulo, PdcPackage.Literals.PDC__LOS_ORADORES,
 								INVALID_NAME)
 						} else {
 							if (totalMinutes > nextTotalMinutes) {
