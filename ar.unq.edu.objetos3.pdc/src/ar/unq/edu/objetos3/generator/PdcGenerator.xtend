@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
 import ar.unq.edu.objetos3.pdc.Schedule
+import ar.unq.edu.objetos3.pdc.Actividad
+import ar.unq.edu.objetos3.pdc.Orador
 
 /**
  * Generates code from your model files on save.
@@ -26,22 +28,46 @@ class PdcGenerator implements IGenerator {
 	
 	
 		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+//			println(" Actividades ?-> "+resource.allContents.filter(typeof(Actividad)).map[titulo].join('</li><li>'))
+		var actividades = resource.allContents.filter(typeof(Actividad))
 		fsa.generateFile('schedule.html', 	'<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Sistema de gestión</title>
+<title>' +resource.allContents
+				.filter(typeof(Schedule))
+				.map[nombre]
+				.join +'</title>
 <meta name="description" content="">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-</head>
+
 <body ng-app="schedule" class="">
 	
-Hello
+<h2>'+ 'Cronograma para conferencia'+'</h2>
+<h1>'+ resource.allContents
+				.filter(typeof(Schedule))
+				.map[nombre]
+				.join+ '</h1>
+
+
+<ul>Lista de Oradores
+
+<li>'+resource.allContents.filter(typeof(Orador)).map[name].join('</li><li>')+'
+
+</ul>
+
+
+<ul>Lista de Actividades
+
+<li>'+actividades.map[a|
+	a.titulo +
+	'  en horario '+ a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
+].join('</li><li>')+'
+
+</ul>
 
 </body>
 </html>')
@@ -50,14 +76,14 @@ Hello
 
 	
 	
-	def compile (Resource resource) '''
-	package schedule;
-	 
-	 public class Schedule {
-	 	public static void main(String[] args){
-	 		for(Actividad a : resource.actividades)
-	 			System.Out.Println("<<a>>");
-	 	}
-	 } 
-	'''
+//	def compile (Resource resource) '''
+//	package schedule;
+//	 
+//	 public class Schedule {
+//	 	public static void main(String[] args){
+//	 		for(Actividad a : resource.actividades)
+//	 			System.Out.Println("<<a>>");
+//	 	}
+//	 } 
+//	'''
 }

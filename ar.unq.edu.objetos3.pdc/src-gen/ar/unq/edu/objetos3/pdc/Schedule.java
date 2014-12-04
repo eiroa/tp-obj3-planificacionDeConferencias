@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link ar.unq.edu.objetos3.pdc.Schedule#getNombre <em>Nombre</em>}</li>
  *   <li>{@link ar.unq.edu.objetos3.pdc.Schedule#getActividades <em>Actividades</em>}</li>
- *   <li>{@link ar.unq.edu.objetos3.pdc.Schedule#getFin <em>Fin</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,31 +66,5 @@ public interface Schedule extends EObject
    * @generated
    */
   EList<Actividad> getActividades();
-
-  /**
-   * Returns the value of the '<em><b>Fin</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Fin</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Fin</em>' attribute.
-   * @see #setFin(String)
-   * @see ar.unq.edu.objetos3.pdc.PdcPackage#getSchedule_Fin()
-   * @model
-   * @generated
-   */
-  String getFin();
-
-  /**
-   * Sets the value of the '{@link ar.unq.edu.objetos3.pdc.Schedule#getFin <em>Fin</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Fin</em>' attribute.
-   * @see #getFin()
-   * @generated
-   */
-  void setFin(String value);
 
 } // Schedule

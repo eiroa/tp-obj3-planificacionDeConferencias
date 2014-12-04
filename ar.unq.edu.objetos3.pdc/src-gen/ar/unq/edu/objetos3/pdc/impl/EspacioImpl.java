@@ -19,8 +19,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl#getNombre <em>Nombre</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl#getName <em>Name</em>}</li>
  *   <li>{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl#getCapacidad <em>Capacidad</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.impl.EspacioImpl#isTieneComputadoras <em>Tiene Computadoras</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,24 +30,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
 {
   /**
-   * The default value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String NOMBRE_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String nombre = NOMBRE_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * The default value of the '{@link #getCapacidad() <em>Capacidad</em>}' attribute.
@@ -67,6 +68,26 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * @ordered
    */
   protected int capacidad = CAPACIDAD_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isTieneComputadoras() <em>Tiene Computadoras</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isTieneComputadoras()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean TIENE_COMPUTADORAS_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isTieneComputadoras() <em>Tiene Computadoras</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isTieneComputadoras()
+   * @generated
+   * @ordered
+   */
+  protected boolean tieneComputadoras = TIENE_COMPUTADORAS_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -94,9 +115,9 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNombre()
+  public String getName()
   {
-    return nombre;
+    return name;
   }
 
   /**
@@ -104,12 +125,12 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNombre(String newNombre)
+  public void setName(String newName)
   {
-    String oldNombre = nombre;
-    nombre = newNombre;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ESPACIO__NOMBRE, oldNombre, nombre));
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ESPACIO__NAME, oldName, name));
   }
 
   /**
@@ -140,15 +161,40 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isTieneComputadoras()
+  {
+    return tieneComputadoras;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTieneComputadoras(boolean newTieneComputadoras)
+  {
+    boolean oldTieneComputadoras = tieneComputadoras;
+    tieneComputadoras = newTieneComputadoras;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ESPACIO__TIENE_COMPUTADORAS, oldTieneComputadoras, tieneComputadoras));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        return getNombre();
+      case PdcPackage.ESPACIO__NAME:
+        return getName();
       case PdcPackage.ESPACIO__CAPACIDAD:
         return getCapacidad();
+      case PdcPackage.ESPACIO__TIENE_COMPUTADORAS:
+        return isTieneComputadoras();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -163,11 +209,14 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        setNombre((String)newValue);
+      case PdcPackage.ESPACIO__NAME:
+        setName((String)newValue);
         return;
       case PdcPackage.ESPACIO__CAPACIDAD:
         setCapacidad((Integer)newValue);
+        return;
+      case PdcPackage.ESPACIO__TIENE_COMPUTADORAS:
+        setTieneComputadoras((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -183,11 +232,14 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        setNombre(NOMBRE_EDEFAULT);
+      case PdcPackage.ESPACIO__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case PdcPackage.ESPACIO__CAPACIDAD:
         setCapacidad(CAPACIDAD_EDEFAULT);
+        return;
+      case PdcPackage.ESPACIO__TIENE_COMPUTADORAS:
+        setTieneComputadoras(TIENE_COMPUTADORAS_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -203,10 +255,12 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
   {
     switch (featureID)
     {
-      case PdcPackage.ESPACIO__NOMBRE:
-        return NOMBRE_EDEFAULT == null ? nombre != null : !NOMBRE_EDEFAULT.equals(nombre);
+      case PdcPackage.ESPACIO__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case PdcPackage.ESPACIO__CAPACIDAD:
         return capacidad != CAPACIDAD_EDEFAULT;
+      case PdcPackage.ESPACIO__TIENE_COMPUTADORAS:
+        return tieneComputadoras != TIENE_COMPUTADORAS_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -222,10 +276,12 @@ public class EspacioImpl extends MinimalEObjectImpl.Container implements Espacio
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (nombre: ");
-    result.append(nombre);
+    result.append(" (name: ");
+    result.append(name);
     result.append(", capacidad: ");
     result.append(capacidad);
+    result.append(", tieneComputadoras: ");
+    result.append(tieneComputadoras);
     result.append(')');
     return result.toString();
   }

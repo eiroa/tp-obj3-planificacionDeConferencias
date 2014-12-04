@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ar.unq.edu.objetos3.pdc.Organizacion#getNombre <em>Nombre</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.Organizacion#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,29 +23,29 @@ import org.eclipse.emf.ecore.EObject;
 public interface Organizacion extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Nombre</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Nombre</em>' attribute isn't clear,
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Nombre</em>' attribute.
-   * @see #setNombre(String)
-   * @see ar.unq.edu.objetos3.pdc.PdcPackage#getOrganizacion_Nombre()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see ar.unq.edu.objetos3.pdc.PdcPackage#getOrganizacion_Name()
    * @model
    * @generated
    */
-  String getNombre();
+  String getName();
 
   /**
-   * Sets the value of the '{@link ar.unq.edu.objetos3.pdc.Organizacion#getNombre <em>Nombre</em>}' attribute.
+   * Sets the value of the '{@link ar.unq.edu.objetos3.pdc.Organizacion#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Nombre</em>' attribute.
-   * @see #getNombre()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setNombre(String value);
+  void setName(String value);
 
 } // Organizacion

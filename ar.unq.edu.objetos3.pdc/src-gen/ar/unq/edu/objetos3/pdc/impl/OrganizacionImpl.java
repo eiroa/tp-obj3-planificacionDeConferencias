@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ar.unq.edu.objetos3.pdc.impl.OrganizacionImpl#getNombre <em>Nombre</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.impl.OrganizacionImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,24 +28,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Organizacion
 {
   /**
-   * The default value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String NOMBRE_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String nombre = NOMBRE_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,9 +73,9 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNombre()
+  public String getName()
   {
-    return nombre;
+    return name;
   }
 
   /**
@@ -83,12 +83,12 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNombre(String newNombre)
+  public void setName(String newName)
   {
-    String oldNombre = nombre;
-    nombre = newNombre;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ORGANIZACION__NOMBRE, oldNombre, nombre));
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ORGANIZACION__NAME, oldName, name));
   }
 
   /**
@@ -101,8 +101,8 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
   {
     switch (featureID)
     {
-      case PdcPackage.ORGANIZACION__NOMBRE:
-        return getNombre();
+      case PdcPackage.ORGANIZACION__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,8 +117,8 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
   {
     switch (featureID)
     {
-      case PdcPackage.ORGANIZACION__NOMBRE:
-        setNombre((String)newValue);
+      case PdcPackage.ORGANIZACION__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +134,8 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
   {
     switch (featureID)
     {
-      case PdcPackage.ORGANIZACION__NOMBRE:
-        setNombre(NOMBRE_EDEFAULT);
+      case PdcPackage.ORGANIZACION__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -151,8 +151,8 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
   {
     switch (featureID)
     {
-      case PdcPackage.ORGANIZACION__NOMBRE:
-        return NOMBRE_EDEFAULT == null ? nombre != null : !NOMBRE_EDEFAULT.equals(nombre);
+      case PdcPackage.ORGANIZACION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
@@ -168,8 +168,8 @@ public class OrganizacionImpl extends MinimalEObjectImpl.Container implements Or
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (nombre: ");
-    result.append(nombre);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

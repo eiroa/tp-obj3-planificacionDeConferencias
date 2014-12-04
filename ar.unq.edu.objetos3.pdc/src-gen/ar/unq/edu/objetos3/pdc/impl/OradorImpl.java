@@ -7,7 +7,6 @@ import ar.unq.edu.objetos3.pdc.Organizacion;
 import ar.unq.edu.objetos3.pdc.PdcPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ar.unq.edu.objetos3.pdc.impl.OradorImpl#getNombre <em>Nombre</em>}</li>
+ *   <li>{@link ar.unq.edu.objetos3.pdc.impl.OradorImpl#getName <em>Name</em>}</li>
  *   <li>{@link ar.unq.edu.objetos3.pdc.impl.OradorImpl#getOrganizacion <em>Organizacion</em>}</li>
  * </ul>
  * </p>
@@ -32,27 +31,27 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
 {
   /**
-   * The default value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String NOMBRE_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNombre()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String nombre = NOMBRE_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getOrganizacion() <em>Organizacion</em>}' containment reference.
+   * The cached value of the '{@link #getOrganizacion() <em>Organizacion</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getOrganizacion()
@@ -87,9 +86,9 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNombre()
+  public String getName()
   {
-    return nombre;
+    return name;
   }
 
   /**
@@ -97,12 +96,12 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNombre(String newNombre)
+  public void setName(String newName)
   {
-    String oldNombre = nombre;
-    nombre = newNombre;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ORADOR__NOMBRE, oldNombre, nombre));
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ORADOR__NAME, oldName, name));
   }
 
   /**
@@ -112,6 +111,16 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
    */
   public Organizacion getOrganizacion()
   {
+    if (organizacion != null && organizacion.eIsProxy())
+    {
+      InternalEObject oldOrganizacion = (InternalEObject)organizacion;
+      organizacion = (Organizacion)eResolveProxy(oldOrganizacion);
+      if (organizacion != oldOrganizacion)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, PdcPackage.ORADOR__ORGANIZACION, oldOrganizacion, organizacion));
+      }
+    }
     return organizacion;
   }
 
@@ -120,16 +129,9 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetOrganizacion(Organizacion newOrganizacion, NotificationChain msgs)
+  public Organizacion basicGetOrganizacion()
   {
-    Organizacion oldOrganizacion = organizacion;
-    organizacion = newOrganizacion;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PdcPackage.ORADOR__ORGANIZACION, oldOrganizacion, newOrganizacion);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+    return organizacion;
   }
 
   /**
@@ -139,34 +141,10 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
    */
   public void setOrganizacion(Organizacion newOrganizacion)
   {
-    if (newOrganizacion != organizacion)
-    {
-      NotificationChain msgs = null;
-      if (organizacion != null)
-        msgs = ((InternalEObject)organizacion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PdcPackage.ORADOR__ORGANIZACION, null, msgs);
-      if (newOrganizacion != null)
-        msgs = ((InternalEObject)newOrganizacion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PdcPackage.ORADOR__ORGANIZACION, null, msgs);
-      msgs = basicSetOrganizacion(newOrganizacion, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ORADOR__ORGANIZACION, newOrganizacion, newOrganizacion));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case PdcPackage.ORADOR__ORGANIZACION:
-        return basicSetOrganizacion(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    Organizacion oldOrganizacion = organizacion;
+    organizacion = newOrganizacion;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.ORADOR__ORGANIZACION, oldOrganizacion, organizacion));
   }
 
   /**
@@ -179,10 +157,11 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
   {
     switch (featureID)
     {
-      case PdcPackage.ORADOR__NOMBRE:
-        return getNombre();
+      case PdcPackage.ORADOR__NAME:
+        return getName();
       case PdcPackage.ORADOR__ORGANIZACION:
-        return getOrganizacion();
+        if (resolve) return getOrganizacion();
+        return basicGetOrganizacion();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -197,8 +176,8 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
   {
     switch (featureID)
     {
-      case PdcPackage.ORADOR__NOMBRE:
-        setNombre((String)newValue);
+      case PdcPackage.ORADOR__NAME:
+        setName((String)newValue);
         return;
       case PdcPackage.ORADOR__ORGANIZACION:
         setOrganizacion((Organizacion)newValue);
@@ -217,8 +196,8 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
   {
     switch (featureID)
     {
-      case PdcPackage.ORADOR__NOMBRE:
-        setNombre(NOMBRE_EDEFAULT);
+      case PdcPackage.ORADOR__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case PdcPackage.ORADOR__ORGANIZACION:
         setOrganizacion((Organizacion)null);
@@ -237,8 +216,8 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
   {
     switch (featureID)
     {
-      case PdcPackage.ORADOR__NOMBRE:
-        return NOMBRE_EDEFAULT == null ? nombre != null : !NOMBRE_EDEFAULT.equals(nombre);
+      case PdcPackage.ORADOR__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case PdcPackage.ORADOR__ORGANIZACION:
         return organizacion != null;
     }
@@ -256,8 +235,8 @@ public class OradorImpl extends MinimalEObjectImpl.Container implements Orador
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (nombre: ");
-    result.append(nombre);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ar.unq.edu.objetos3.pdc.impl.ScheduleImpl#getNombre <em>Nombre</em>}</li>
  *   <li>{@link ar.unq.edu.objetos3.pdc.impl.ScheduleImpl#getActividades <em>Actividades</em>}</li>
- *   <li>{@link ar.unq.edu.objetos3.pdc.impl.ScheduleImpl#getFin <em>Fin</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,26 +67,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
    * @ordered
    */
   protected EList<Actividad> actividades;
-
-  /**
-   * The default value of the '{@link #getFin() <em>Fin</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFin()
-   * @generated
-   * @ordered
-   */
-  protected static final String FIN_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFin() <em>Fin</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFin()
-   * @generated
-   * @ordered
-   */
-  protected String fin = FIN_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -152,29 +131,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFin()
-  {
-    return fin;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setFin(String newFin)
-  {
-    String oldFin = fin;
-    fin = newFin;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PdcPackage.SCHEDULE__FIN, oldFin, fin));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -200,8 +156,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
         return getNombre();
       case PdcPackage.SCHEDULE__ACTIVIDADES:
         return getActividades();
-      case PdcPackage.SCHEDULE__FIN:
-        return getFin();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -224,9 +178,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
         getActividades().clear();
         getActividades().addAll((Collection<? extends Actividad>)newValue);
         return;
-      case PdcPackage.SCHEDULE__FIN:
-        setFin((String)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -247,9 +198,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
       case PdcPackage.SCHEDULE__ACTIVIDADES:
         getActividades().clear();
         return;
-      case PdcPackage.SCHEDULE__FIN:
-        setFin(FIN_EDEFAULT);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -268,8 +216,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
         return NOMBRE_EDEFAULT == null ? nombre != null : !NOMBRE_EDEFAULT.equals(nombre);
       case PdcPackage.SCHEDULE__ACTIVIDADES:
         return actividades != null && !actividades.isEmpty();
-      case PdcPackage.SCHEDULE__FIN:
-        return FIN_EDEFAULT == null ? fin != null : !FIN_EDEFAULT.equals(fin);
     }
     return super.eIsSet(featureID);
   }
@@ -287,8 +233,6 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (nombre: ");
     result.append(nombre);
-    result.append(", fin: ");
-    result.append(fin);
     result.append(')');
     return result.toString();
   }

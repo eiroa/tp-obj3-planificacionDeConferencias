@@ -7,38 +7,69 @@
     editorPluginID="ar.unq.edu.objetos3.pdc.editor" runtimeVersion="2.10">
   <genPackages prefix="Pdc" basePackage="ar.unq.edu.objetos3" disposableProviderFactory="true"
       fileExtensions="pdc" ecorePackage="Pdc.ecore#/">
+    <genClasses ecoreClass="Pdc.ecore#//PDC">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//PDC/lasOrganizaciones"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//PDC/losOradores"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//PDC/losEspacios"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//PDC/losTracks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//PDC/schedule"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Organizaciones">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Organizaciones/organizaciones"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Oradores">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Oradores/oradores"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Espacios">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Espacios/espacios"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Tracks">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Tracks/tracks"/>
+    </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Schedule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Schedule/nombre"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Schedule/actividades"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Schedule/fin"/>
     </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Organizacion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Organizacion/nombre"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Organizacion/name"/>
     </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Orador">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Orador/nombre"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Orador/organizacion"/>
-    </genClasses>
-    <genClasses ecoreClass="Pdc.ecore#//Actividad">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/tipo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/titulo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/duracion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/espacio"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/genteEsperada"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/oradores"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/horario"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Orador/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pdc.ecore#//Orador/organizacion"/>
     </genClasses>
     <genClasses ecoreClass="Pdc.ecore#//Espacio">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/nombre"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/capacidad"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Espacio/tieneComputadoras"/>
     </genClasses>
-    <genClasses ecoreClass="Pdc.ecore#//TipoDeActividad"/>
-    <genClasses ecoreClass="Pdc.ecore#//Hora">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Hora/hora"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Hora/minutos"/>
+    <genClasses ecoreClass="Pdc.ecore#//Actividad">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esCharla"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esMesaDeDebate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esTaller"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esBreak"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esEventoDeInauguracion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esRegistracion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/esEventoDeCierre"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/keynote"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/tipoDeBreak"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/track"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/titulo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/duracion"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/espacio"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Actividad/genteEsperada"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/oradores"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Pdc.ecore#//Actividad/horario"/>
     </genClasses>
-    <genClasses ecoreClass="Pdc.ecore#//Charla"/>
-    <genClasses ecoreClass="Pdc.ecore#//Taller"/>
-    <genClasses ecoreClass="Pdc.ecore#//MesaDeDebate"/>
+    <genClasses ecoreClass="Pdc.ecore#//TipoDeBreak"/>
+    <genClasses ecoreClass="Pdc.ecore#//Desayuno"/>
+    <genClasses ecoreClass="Pdc.ecore#//Almuerzo"/>
+    <genClasses ecoreClass="Pdc.ecore#//Merienda"/>
+    <genClasses ecoreClass="Pdc.ecore#//Horario">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Horario/hora"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Horario/minutos"/>
+    </genClasses>
+    <genClasses ecoreClass="Pdc.ecore#//Track">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Pdc.ecore#//Track/name"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -64,19 +64,80 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
   {
     switch (eClass.getClassifierID())
     {
+      case PdcPackage.PDC: return createPDC();
+      case PdcPackage.ORGANIZACIONES: return createOrganizaciones();
+      case PdcPackage.ORADORES: return createOradores();
+      case PdcPackage.ESPACIOS: return createEspacios();
+      case PdcPackage.TRACKS: return createTracks();
       case PdcPackage.SCHEDULE: return createSchedule();
       case PdcPackage.ORGANIZACION: return createOrganizacion();
       case PdcPackage.ORADOR: return createOrador();
-      case PdcPackage.ACTIVIDAD: return createActividad();
       case PdcPackage.ESPACIO: return createEspacio();
-      case PdcPackage.TIPO_DE_ACTIVIDAD: return createTipoDeActividad();
-      case PdcPackage.HORA: return createHora();
-      case PdcPackage.CHARLA: return createCharla();
-      case PdcPackage.TALLER: return createTaller();
-      case PdcPackage.MESA_DE_DEBATE: return createMesaDeDebate();
+      case PdcPackage.ACTIVIDAD: return createActividad();
+      case PdcPackage.TIPO_DE_BREAK: return createTipoDeBreak();
+      case PdcPackage.DESAYUNO: return createDesayuno();
+      case PdcPackage.ALMUERZO: return createAlmuerzo();
+      case PdcPackage.MERIENDA: return createMerienda();
+      case PdcPackage.HORARIO: return createHorario();
+      case PdcPackage.TRACK: return createTrack();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PDC createPDC()
+  {
+    PDCImpl pdc = new PDCImpl();
+    return pdc;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Organizaciones createOrganizaciones()
+  {
+    OrganizacionesImpl organizaciones = new OrganizacionesImpl();
+    return organizaciones;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Oradores createOradores()
+  {
+    OradoresImpl oradores = new OradoresImpl();
+    return oradores;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Espacios createEspacios()
+  {
+    EspaciosImpl espacios = new EspaciosImpl();
+    return espacios;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Tracks createTracks()
+  {
+    TracksImpl tracks = new TracksImpl();
+    return tracks;
   }
 
   /**
@@ -117,17 +178,6 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Actividad createActividad()
-  {
-    ActividadImpl actividad = new ActividadImpl();
-    return actividad;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Espacio createEspacio()
   {
     EspacioImpl espacio = new EspacioImpl();
@@ -139,10 +189,10 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TipoDeActividad createTipoDeActividad()
+  public Actividad createActividad()
   {
-    TipoDeActividadImpl tipoDeActividad = new TipoDeActividadImpl();
-    return tipoDeActividad;
+    ActividadImpl actividad = new ActividadImpl();
+    return actividad;
   }
 
   /**
@@ -150,10 +200,10 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Hora createHora()
+  public TipoDeBreak createTipoDeBreak()
   {
-    HoraImpl hora = new HoraImpl();
-    return hora;
+    TipoDeBreakImpl tipoDeBreak = new TipoDeBreakImpl();
+    return tipoDeBreak;
   }
 
   /**
@@ -161,10 +211,10 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Charla createCharla()
+  public Desayuno createDesayuno()
   {
-    CharlaImpl charla = new CharlaImpl();
-    return charla;
+    DesayunoImpl desayuno = new DesayunoImpl();
+    return desayuno;
   }
 
   /**
@@ -172,10 +222,10 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Taller createTaller()
+  public Almuerzo createAlmuerzo()
   {
-    TallerImpl taller = new TallerImpl();
-    return taller;
+    AlmuerzoImpl almuerzo = new AlmuerzoImpl();
+    return almuerzo;
   }
 
   /**
@@ -183,10 +233,32 @@ public class PdcFactoryImpl extends EFactoryImpl implements PdcFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public MesaDeDebate createMesaDeDebate()
+  public Merienda createMerienda()
   {
-    MesaDeDebateImpl mesaDeDebate = new MesaDeDebateImpl();
-    return mesaDeDebate;
+    MeriendaImpl merienda = new MeriendaImpl();
+    return merienda;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Horario createHorario()
+  {
+    HorarioImpl horario = new HorarioImpl();
+    return horario;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Track createTrack()
+  {
+    TrackImpl track = new TrackImpl();
+    return track;
   }
 
   /**

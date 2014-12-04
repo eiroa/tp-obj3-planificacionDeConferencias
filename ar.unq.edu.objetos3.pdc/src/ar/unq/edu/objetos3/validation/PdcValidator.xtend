@@ -54,6 +54,14 @@ class PdcValidator extends AbstractPdcValidator {
 				INVALID_NAME)
 		}
 	}
+	
+	@Check
+	def checkOradoresDeDistintaOrganizacion(Actividad actividad){
+		if(actividad.esMesaDeDebate && actividad.oradores.map[organizacion].toSet.size <2 ){
+			error('Una mesa de debate no puede estar asociada a una sola organizacion', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
+				INVALID_NAME)
+		}
+	}
 
 	@Check
 	def checkExistenciaDeTitulos(Actividad actividad) {
@@ -274,6 +282,14 @@ class PdcValidator extends AbstractPdcValidator {
 	def checkAulasConMaquinasSoloParaTalleres(Actividad actividad) {
 		if (actividad.espacio.tieneComputadoras && !actividad.esTaller) {
 			error('Un aula con computadoras solo puede utilizarse para talleres', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
+				INVALID_NAME)
+		}
+	}
+	
+		@Check
+	def checkTallerDebeTenerComputadoras(Actividad actividad) {
+		if (actividad.esTaller && actividad.espacio.tieneComputadoras) {
+			error('Un taller solo puede llevarse a cabo en un aula con maquinas', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
 				INVALID_NAME)
 		}
 	}

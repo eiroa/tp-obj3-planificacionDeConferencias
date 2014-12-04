@@ -3,13 +3,15 @@
  */
 package ar.unq.edu.objetos3.generator;
 
+import ar.unq.edu.objetos3.pdc.Actividad;
+import ar.unq.edu.objetos3.pdc.Horario;
+import ar.unq.edu.objetos3.pdc.Orador;
 import ar.unq.edu.objetos3.pdc.Schedule;
 import com.google.common.collect.Iterators;
 import java.util.Iterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -24,42 +26,70 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 public class PdcGenerator implements IGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     TreeIterator<EObject> _allContents = resource.getAllContents();
-    Iterator<Schedule> _filter = Iterators.<Schedule>filter(_allContents, Schedule.class);
+    Iterator<Actividad> actividades = Iterators.<Actividad>filter(_allContents, Actividad.class);
+    TreeIterator<EObject> _allContents_1 = resource.getAllContents();
+    Iterator<Schedule> _filter = Iterators.<Schedule>filter(_allContents_1, Schedule.class);
     final Function1<Schedule, String> _function = new Function1<Schedule, String>() {
       public String apply(final Schedule it) {
         return it.getNombre();
       }
     };
     Iterator<String> _map = IteratorExtensions.<Schedule, String>map(_filter, _function);
-    String _join = IteratorExtensions.join(_map, ", ");
-    String _plus = ("People to greet: " + _join);
-    fsa.generateFile("greetings.txt", _plus);
-  }
-  
-  public CharSequence compile(final Resource resource) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package schedule;");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("public class Schedule {");
-    _builder.newLine();
-    _builder.append(" \t");
-    _builder.append("public static void main(String[] args){");
-    _builder.newLine();
-    _builder.append(" \t\t");
-    _builder.append("for(Actividad a : resource.actividades)");
-    _builder.newLine();
-    _builder.append(" \t\t\t");
-    _builder.append("System.Out.Println(\"<<a>>\");");
-    _builder.newLine();
-    _builder.append(" \t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("} ");
-    _builder.newLine();
-    return _builder;
+    String _join = IteratorExtensions.join(_map);
+    String _plus = ("<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>" + _join);
+    String _plus_1 = (_plus + "</title>\n<meta name=\"description\" content=\"\">\n\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n\n<body ng-app=\"schedule\" class=\"\">\n\t\n<h2>");
+    String _plus_2 = (_plus_1 + "Cronograma para conferencia");
+    String _plus_3 = (_plus_2 + "</h2>\n<h1>");
+    TreeIterator<EObject> _allContents_2 = resource.getAllContents();
+    Iterator<Schedule> _filter_1 = Iterators.<Schedule>filter(_allContents_2, Schedule.class);
+    final Function1<Schedule, String> _function_1 = new Function1<Schedule, String>() {
+      public String apply(final Schedule it) {
+        return it.getNombre();
+      }
+    };
+    Iterator<String> _map_1 = IteratorExtensions.<Schedule, String>map(_filter_1, _function_1);
+    String _join_1 = IteratorExtensions.join(_map_1);
+    String _plus_4 = (_plus_3 + _join_1);
+    String _plus_5 = (_plus_4 + "</h1>\n\n\n<ul>Lista de Oradores\n\n<li>");
+    TreeIterator<EObject> _allContents_3 = resource.getAllContents();
+    Iterator<Orador> _filter_2 = Iterators.<Orador>filter(_allContents_3, Orador.class);
+    final Function1<Orador, String> _function_2 = new Function1<Orador, String>() {
+      public String apply(final Orador it) {
+        return it.getName();
+      }
+    };
+    Iterator<String> _map_2 = IteratorExtensions.<Orador, String>map(_filter_2, _function_2);
+    String _join_2 = IteratorExtensions.join(_map_2, "</li><li>");
+    String _plus_6 = (_plus_5 + _join_2);
+    String _plus_7 = (_plus_6 + "\n\n</ul>\n\n\n<ul>Lista de Actividades\n\n<li>");
+    final Function1<Actividad, String> _function_3 = new Function1<Actividad, String>() {
+      public String apply(final Actividad a) {
+        String _titulo = a.getTitulo();
+        String _plus = (_titulo + 
+          "  en horario ");
+        Horario _horario = a.getHorario();
+        int _hora = _horario.getHora();
+        String _plus_1 = (_plus + Integer.valueOf(_hora));
+        String _plus_2 = (_plus_1 + ":");
+        Horario _horario_1 = a.getHorario();
+        int _minutos = _horario_1.getMinutos();
+        String _plus_3 = (_plus_2 + Integer.valueOf(_minutos));
+        String _xifexpression = null;
+        Horario _horario_2 = a.getHorario();
+        int _minutos_1 = _horario_2.getMinutos();
+        boolean _equals = (_minutos_1 == 0);
+        if (_equals) {
+          _xifexpression = "0";
+        } else {
+          _xifexpression = "";
+        }
+        return (_plus_3 + _xifexpression);
+      }
+    };
+    Iterator<String> _map_3 = IteratorExtensions.<Actividad, String>map(actividades, _function_3);
+    String _join_3 = IteratorExtensions.join(_map_3, "</li><li>");
+    String _plus_8 = (_plus_7 + _join_3);
+    String _plus_9 = (_plus_8 + "\n\n</ul>\n\n</body>\n</html>");
+    fsa.generateFile("schedule.html", _plus_9);
   }
 }

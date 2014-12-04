@@ -23,6 +23,51 @@ public interface PdcFactory extends EFactory
   PdcFactory eINSTANCE = ar.unq.edu.objetos3.pdc.impl.PdcFactoryImpl.init();
 
   /**
+   * Returns a new object of class '<em>PDC</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>PDC</em>'.
+   * @generated
+   */
+  PDC createPDC();
+
+  /**
+   * Returns a new object of class '<em>Organizaciones</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Organizaciones</em>'.
+   * @generated
+   */
+  Organizaciones createOrganizaciones();
+
+  /**
+   * Returns a new object of class '<em>Oradores</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Oradores</em>'.
+   * @generated
+   */
+  Oradores createOradores();
+
+  /**
+   * Returns a new object of class '<em>Espacios</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Espacios</em>'.
+   * @generated
+   */
+  Espacios createEspacios();
+
+  /**
+   * Returns a new object of class '<em>Tracks</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Tracks</em>'.
+   * @generated
+   */
+  Tracks createTracks();
+
+  /**
    * Returns a new object of class '<em>Schedule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -50,15 +95,6 @@ public interface PdcFactory extends EFactory
   Orador createOrador();
 
   /**
-   * Returns a new object of class '<em>Actividad</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Actividad</em>'.
-   * @generated
-   */
-  Actividad createActividad();
-
-  /**
    * Returns a new object of class '<em>Espacio</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -68,49 +104,67 @@ public interface PdcFactory extends EFactory
   Espacio createEspacio();
 
   /**
-   * Returns a new object of class '<em>Tipo De Actividad</em>'.
+   * Returns a new object of class '<em>Actividad</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Tipo De Actividad</em>'.
+   * @return a new object of class '<em>Actividad</em>'.
    * @generated
    */
-  TipoDeActividad createTipoDeActividad();
+  Actividad createActividad();
 
   /**
-   * Returns a new object of class '<em>Hora</em>'.
+   * Returns a new object of class '<em>Tipo De Break</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Hora</em>'.
+   * @return a new object of class '<em>Tipo De Break</em>'.
    * @generated
    */
-  Hora createHora();
+  TipoDeBreak createTipoDeBreak();
 
   /**
-   * Returns a new object of class '<em>Charla</em>'.
+   * Returns a new object of class '<em>Desayuno</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Charla</em>'.
+   * @return a new object of class '<em>Desayuno</em>'.
    * @generated
    */
-  Charla createCharla();
+  Desayuno createDesayuno();
 
   /**
-   * Returns a new object of class '<em>Taller</em>'.
+   * Returns a new object of class '<em>Almuerzo</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Taller</em>'.
+   * @return a new object of class '<em>Almuerzo</em>'.
    * @generated
    */
-  Taller createTaller();
+  Almuerzo createAlmuerzo();
 
   /**
-   * Returns a new object of class '<em>Mesa De Debate</em>'.
+   * Returns a new object of class '<em>Merienda</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Mesa De Debate</em>'.
+   * @return a new object of class '<em>Merienda</em>'.
    * @generated
    */
-  MesaDeDebate createMesaDeDebate();
+  Merienda createMerienda();
+
+  /**
+   * Returns a new object of class '<em>Horario</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Horario</em>'.
+   * @generated
+   */
+  Horario createHorario();
+
+  /**
+   * Returns a new object of class '<em>Track</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Track</em>'.
+   * @generated
+   */
+  Track createTrack();
 
   /**
    * Returns the package supported by this factory.
