@@ -131,6 +131,26 @@ class PdcValidator extends AbstractPdcValidator {
 			}
 		]
 	}
+	
+	@Check
+	def checkExclusividadCharlasKeynote(PDC pdc){
+		var sortedValues =pdc.schedule.actividades.filter[act | act.esCharla].sortBy[horario.minutos]
+		sortedValues = sortedValues.sortBy[horario.hora]
+		var x = 0
+				for (a : sortedValues) {
+					var totalMinutes = a.horario.hora * 60 + a.horario.minutos + a.duracion
+					if (sortedValues.size - x > 1) {
+						var next = sortedValues.get(x + 1)
+						var nextTotalMinutes = next.horario.hora * 60 + next.horario.minutos
+						if ( a.keynote && totalMinutes > nextTotalMinutes) {
+							error(
+								"La charla keynote " + a.titulo +" se superpone con el horario de la actividad " + next.titulo,
+								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+						}
+						x++
+					}
+				}
+	}
 
 	@Check
 	def checkMesaDebate2Oradores(Actividad actividad) {
@@ -149,12 +169,6 @@ class PdcValidator extends AbstractPdcValidator {
 		}
 	}
 
-	@Check
-	def checkKeynote(Actividad actividad) {
-		if (actividad.keynote) {
-			warning('Keynote detecteda', PdcPackage.Literals.ACTIVIDAD__KEYNOTE, INVALID_NAME)
-		}
-	}
 
 	@Check
 	def checkDuracionBreak(Actividad actividad) {
