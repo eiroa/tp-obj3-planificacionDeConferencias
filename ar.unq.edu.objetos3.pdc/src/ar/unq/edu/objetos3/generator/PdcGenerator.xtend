@@ -16,13 +16,39 @@ import ar.unq.edu.objetos3.pdc.Schedule
 class PdcGenerator implements IGenerator {
 	
 	
-	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-			resource.allContents
-				.filter(typeof(Schedule))
-				.map[nombre]
-				.join(', '))
+//	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+//		fsa.generateFile('schedule.html', 'People to greet: ' + 
+//			resource.allContents
+//				.filter(typeof(Schedule))
+//				.map[nombre]
+//				.join(', '))
+//	}
+	
+	
+		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+		fsa.generateFile('schedule.html', 	'<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sistema de gestión</title>
+<meta name="description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+</head>
+<body ng-app="schedule" class="">
+	
+Hello
+
+</body>
+</html>')
 	}
+	
+
+	
 	
 	def compile (Resource resource) '''
 	package schedule;
