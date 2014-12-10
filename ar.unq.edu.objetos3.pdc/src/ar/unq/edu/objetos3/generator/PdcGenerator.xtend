@@ -11,25 +11,31 @@ import ar.unq.edu.objetos3.pdc.Actividad
 import ar.unq.edu.objetos3.pdc.Orador
 
 /**
- * Generates code from your model files on save.
+ * Genera el HTML del schedule
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#TutorialCodeGeneration
+ * NOTA IMPORTANTE:
+ * El html generado está pensado para mirarlo localmente.
+ * Debido a restricciones de origen cruzado, se debe inicializar el navegador con el flag que desactive la verificacion
+ * De dominio cruzado para archivos locales. En particular, para Chrome, se debe inicializarlo con el siguiente flag:
+ * 
+ * --allow-file-access-from-files
+ * 
+ * 
  */
 class PdcGenerator implements IGenerator {
 	
 	
-//	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-//		fsa.generateFile('schedule.html', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(typeof(Schedule))
-//				.map[nombre]
-//				.join(', '))
-//	}
-	
 	
 		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-//			println(" Actividades ?-> "+resource.allContents.filter(typeof(Actividad)).map[titulo].join('</li><li>'))
-		var actividades = resource.allContents.filter(typeof(Actividad))
+		var actividades = resource.allContents.filter(typeof(Actividad)).toList
+		.sortBy[a|a.horario.minutos]
+		.sortBy[a|a.horario.hora]
+		fsa.generateFile('actividades.json', 	'[
+
+{'+actividades.map[a|
+	" \"titulo\":"+"\""+ a.titulo +"\""+','+" \"horario\": "+"\""+a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
+].join("\"},{")+"\"
+    }]")
 		fsa.generateFile('schedule.html', 	'<!doctype html>
 <html>
 <head>
@@ -43,11 +49,18 @@ class PdcGenerator implements IGenerator {
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.4.0/bootstrap-table.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.4.0/bootstrap-table.min.js"></script>
 <body ng-app="schedule" class="">
 	
-<h2>'+ 'Cronograma para conferencia'+'</h2>
-<h1>'+ resource.allContents
+<h4 class"text-right">'+ 'Cronograma para conferencia'+'</h4>
+<h1 class="text-center text-info">'+ resource.allContents
 				.filter(typeof(Schedule))
 				.map[nombre]
 				.join+ '</h1>
@@ -60,20 +73,31 @@ class PdcGenerator implements IGenerator {
 </ul>
 
 
-<ul>Lista de Actividades
 
-<li>'+actividades.map[a|
-	a.titulo +
-	'  en horario '+ a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
-].join('</li><li>')+'
 
-</ul>
+<script>
+</script>
+<table data-toggle="table" data-url="actividades.json" data-cache="false" data-height="299">
+    <thead>
+        <tr>
+            <th data-field="titulo">Titulo</th>
+            <th data-field="horario">Horario</th>
+        </tr>
+    </thead>
+</table>
 
 </body>
 </html>')
 	}
 	
-
+//<ul>Lista de Actividades
+//
+//<li>'+actividades.map[a|
+//	a.titulo +
+//	'  en horario '+ a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
+//].join('</li><li>')+'
+//
+//</ul>
 	
 	
 //	def compile (Resource resource) '''
