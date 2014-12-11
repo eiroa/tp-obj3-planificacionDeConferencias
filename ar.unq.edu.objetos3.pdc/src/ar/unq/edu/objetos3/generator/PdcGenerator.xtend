@@ -9,6 +9,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import ar.unq.edu.objetos3.pdc.Schedule
 import ar.unq.edu.objetos3.pdc.Actividad
 import ar.unq.edu.objetos3.pdc.Orador
+import javax.sound.midi.Track
 
 /**
  * Genera el HTML del schedule
@@ -25,7 +26,30 @@ import ar.unq.edu.objetos3.pdc.Orador
 class PdcGenerator implements IGenerator {
 	
 	
-	
+		def String getTrack(Actividad a){
+			if(a.track  == null){
+				return '-'
+			}else{
+				return a.track.name
+			}
+		}
+		
+		def String getOradores(Actividad a){
+			if(a.oradores  == null){
+				return '-'
+			}else{
+				var result = ''
+				for(Orador o : a.oradores){
+					if(a.oradores.indexOf(o) == a.oradores.size -1){
+						result =  result.concat(o.name)
+					}else{
+						result = result.concat(o.name +' , ')
+					}
+				}
+				return result
+			}
+		}
+			
 		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		var actividades = resource.allContents.filter(typeof(Actividad)).toList
 		.sortBy[a|a.horario.minutos]
@@ -33,7 +57,12 @@ class PdcGenerator implements IGenerator {
 		fsa.generateFile('actividades.json', 	'[
 
 {'+actividades.map[a|
-	" \"titulo\":"+"\""+ a.titulo +"\""+','+" \"horario\": "+"\""+a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
+	" \"titulo\":"+"\""+ a.titulo +"\""+','
+	+ "\"track\":"+"\""+ getTrack(a)+"\""+','
+	+ "\"espacio\":"+"\""+ a.espacio.name+"\""+','
+	+ "\"oradores\":"+"\""+ getOradores(a)+"\""+','
+	+ "\"duracion\":"+"\""+ a.duracion+"\""+','
+	+" \"horario\": "+"\""+a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
 ].join("\"},{")+"\"
     }]")
 		fsa.generateFile('schedule.html', 	'<!doctype html>
@@ -81,6 +110,10 @@ class PdcGenerator implements IGenerator {
     <thead>
         <tr>
             <th data-field="titulo">Titulo</th>
+			<th data-field="track">Temática</th>
+			<th data-field="oradores">Oradores</th>
+			<th data-field="espacio">Espacio</th>
+			<th data-field="duracion">Duración en minutos</th>
             <th data-field="horario">Horario</th>
         </tr>
     </thead>
