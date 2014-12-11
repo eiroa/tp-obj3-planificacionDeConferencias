@@ -49,9 +49,7 @@ public class HourTest {
 	
 	@Test
 	public void testPassMoreOfAnHour(){
-		System.out.println(horario.getHora() + ":" + horario.getMinutos());
 		horario = horario.pass(70);
-		System.out.println(horario.getHora() + ":" + horario.getMinutos());
 		assertEquals(Integer.valueOf(2),horario.getHora());
 		assertEquals(Integer.valueOf(35),horario.getMinutos());
 	}

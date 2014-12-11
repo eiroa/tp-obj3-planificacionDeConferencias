@@ -64,6 +64,9 @@ class ActivitiesExtension {
 		throw new Exception('No index found!')
 	}	
 
+	def Boolean inTheMiddleOf(Actividad act, Actividad in){
+		return act.horario.belongsTo(in.horario,in.horario.pass(in.duracion))
+	}
 	
 	//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
 	//Ahora debemos corroborar que no se superpongan

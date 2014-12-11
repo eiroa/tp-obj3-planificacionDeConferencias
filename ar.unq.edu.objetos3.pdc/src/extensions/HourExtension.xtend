@@ -38,8 +38,4 @@ class HourExtension {
 		return true
 	}
 	
-	def Boolean inTheMiddleOf(Actividad act, Actividad in){
-		return act.horario.belongsTo(in.horario,in.horario.pass(in.duracion))
-	}
-	
 }
