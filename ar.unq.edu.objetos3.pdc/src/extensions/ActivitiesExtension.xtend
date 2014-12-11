@@ -2,6 +2,8 @@ package extensions
 
 import ar.unq.edu.objetos3.pdc.Actividad
 import ar.unq.edu.objetos3.pdc.Schedule
+
+
 import java.util.List
 
 class ActivitiesExtension {
@@ -52,18 +54,19 @@ class ActivitiesExtension {
 				return acts.zip	
 		}
 	}
-	
-	def Integer indexOf(Actividad obj, List<Actividad> objs){
-		var count = 0
-		for(o : objs){
-			if(o.equals(obj))
-				return count	
-			else
-				count++
-		}
-		throw new Exception('No index found!')
-	}	
+//	
+//	def Integer indexOf(Actividad obj, List<Actividad> objs){
+//		var count = 0
+//		for(o : objs){
+//			if(o.equals(obj))
+//				return count	
+//			else
+//				count++
+//		}
+//		throw new Exception('No index found!')
+//	}	
 
+	
 	def Boolean inTheMiddleOf(Actividad act, Actividad in){
 		return act.horario.belongsTo(in.horario,in.horario.pass(in.duracion))
 	}

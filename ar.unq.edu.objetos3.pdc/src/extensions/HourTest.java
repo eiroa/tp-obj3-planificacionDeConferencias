@@ -36,22 +36,22 @@ public class HourTest {
 	@Test
 	public void testCreateHorario(){
 		Horario created = horario.createHour(1, 20);
-		assertEquals(Integer.valueOf(1),created.getHora());
-		assertEquals(Integer.valueOf(20),created.getMinutos());
+		assertEquals(1,created.getHora());
+		assertEquals(20,created.getMinutos());
 	}
 	
 	@Test
 	public void testPassTenMinutes(){
 		horario = horario.pass(10);
-		assertEquals(Integer.valueOf(1), horario.getHora());
-		assertEquals(Integer.valueOf(35),horario.getMinutos());
+		assertEquals(1, horario.getHora());
+		assertEquals(35,horario.getMinutos());
 	}
 	
 	@Test
 	public void testPassMoreOfAnHour(){
 		horario = horario.pass(70);
-		assertEquals(Integer.valueOf(2),horario.getHora());
-		assertEquals(Integer.valueOf(35),horario.getMinutos());
+		assertEquals(2,horario.getHora());
+		assertEquals(35,horario.getMinutos());
 	}
 	
 	@Test

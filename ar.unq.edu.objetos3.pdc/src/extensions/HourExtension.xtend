@@ -1,7 +1,7 @@
 package extensions
 
+import ar.unq.edu.objetos3.pdc.PdcFactory
 import ar.unq.edu.objetos3.pdc.Horario
-import ar.unq.edu.objetos3.pdc.Actividad
 
 class HourExtension {
 		
@@ -10,23 +10,23 @@ class HourExtension {
 	}
 	
 	def createHour(Horario h, Integer hora, Integer minutos){
-		h.setHora(hora)
-		h.setMinutos(minutos)
-		return h
+		var horario = PdcFactory.eINSTANCE.createHorario()
+		horario.hora = hora
+		horario.minutos = minutos
+		return horario
 	}
 	
-	def Horario pass(Horario h, Integer n){ 
-		var hora = h.hora
-		var minutos = h.minutos + n
-		if(minutos >= 60 ){
-			hora = hora+1
-			minutos = minutos - 60
-			return pass(h.createHour(hora,minutos),minutos)
-		}
-		return h.createHour(h.hora,minutos)
+	def Horario pass(Horario h,Integer n){ 
+		if(n >= 60)
+			return h.createHour(h.hora+1,h.minutos).pass(n-60)
+		if(n < 60 && n > 0){
+			if((n+ h.minutos) >= 60)
+				return h.createHour(h.hora+1,h.minutos).pass(n-60)
+		}		
+		return h.createHour(h.hora,h.minutos+n)						
 	}
 	
-	def belongsTo(Horario h, Horario begin, Horario end){
+	def belongsTo(Horario h,Horario begin, Horario end){
 		if(begin.hora <= h.hora && h.hora <= end.hora)
 			return begin.minutos <= h.minutos && h.minutos <= end.minutos
 	}
