@@ -28,9 +28,9 @@ class PdcGenerator implements IGenerator {
 		
 		def String getKeynote(Actividad a){
 			if(a.keynote){
-				return "false"
-			}else{
 				return "true"
+			}else{
+				return "false"
 			}
 		}
 		
@@ -113,12 +113,12 @@ class PdcGenerator implements IGenerator {
 <table data-toggle="table" data-url="actividades.json" data-cache="false" data-height="299">
     <thead>
         <tr>
-            <th data-field="titulo" data-formatter="nameFormatter">Titulo</th>
-			<th data-field="track">Temática</th>
-			<th data-field="oradores">Oradores</th>
-			<th data-field="espacio">Espacio</th>
-			<th data-field="duracion">Duración en minutos</th>
-            <th data-field="horario">Horario</th>
+            <th data-field="titulo" data-formatter="nameFormatter" data-sortable="true" >Titulo</th>
+			<th data-field="track" data-sortable="true" >Temática</th>
+			<th data-field="oradores" data-sortable="true">Oradores</th>
+			<th data-field="espacio" data-sortable="true">Espacio</th>
+			<th data-field="duracion" data-sortable="true">Duración en minutos</th>
+            <th data-field="horario" data-sortable="true">Horario</th>
         </tr>
     </thead>
 </table>
@@ -147,24 +147,4 @@ class PdcGenerator implements IGenerator {
 </html>')
 	}
 	
-//<ul>Lista de Actividades
-//
-//<li>'+actividades.map[a|
-//	a.titulo +
-//	'  en horario '+ a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
-//].join('</li><li>')+'
-//
-//</ul>
-	
-	
-//	def compile (Resource resource) '''
-//	package schedule;
-//	 
-//	 public class Schedule {
-//	 	public static void main(String[] args){
-//	 		for(Actividad a : resource.actividades)
-//	 			System.Out.Println("<<a>>");
-//	 	}
-//	 } 
-//	'''
 }

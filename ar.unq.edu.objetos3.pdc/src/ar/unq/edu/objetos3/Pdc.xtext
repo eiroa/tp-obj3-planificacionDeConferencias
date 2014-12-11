@@ -9,6 +9,7 @@ PDC:
 	(losOradores+=Oradores)
 	(losEspacios+=Espacios)
 	(losTracks+=Tracks)
+	(losBloques+=Bloques)
 	schedule=Schedule
 ;
 
@@ -46,9 +47,20 @@ Orador:
 
 Espacio:
 	'Espacio' ':' name= ID ',' capacidad= INT (tieneComputadoras?='poseeComputadoras')?;
+	
+
+Bloques:
+	{Bloques}
+	'Bloques' '{' (bloques+=Bloque)* '}'
+;
+	
+Bloque:
+	'Bloque' name=ID 'constituido por' actividades+=[Actividad]*
+;
+
 
 Actividad:
-	  tipo=TipoDeActividad (keynote?='Keynote')?  (tipoDeBreak=TipoDeBreak)?  
+	  'Codigo: ' name=ID ',' tipo=TipoDeActividad (keynote?='Keynote')?  (tipoDeBreak=TipoDeBreak)?  
 	  ( 'parte de 'track=[Track])? ',' titulo= STRING ',' 'Duracion:'duracion= INT ','
 	 'Lugar:'espacio= [Espacio]',' 'Gente esperada:'genteEsperada= INT (',' 'Oradores:' oradores+=[Orador]* )?',' horario=Horario
 ;

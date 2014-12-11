@@ -49,7 +49,7 @@ class PdcValidator extends AbstractPdcValidator {
 			if (list.size - elementoActual > 1) {
 				var next = list.get(elementoActual + 1)
 				if (additionalValidation.apply(a) && seSolapanHorarios(a, next)) {
-					error(text1 + a.titulo + text2 + next.titulo + text3, a.eContainer(), a.eContainingFeature(), -1)
+					error(text1 + a.titulo + text2 + next.titulo + text3, a, null)
 				}
 				elementoActual++
 			}
@@ -94,7 +94,7 @@ class PdcValidator extends AbstractPdcValidator {
 	@Check
 	def checkOradoresDeDistintaOrganizacion(Actividad actividad) {
 		if (actividad.tipo.eClass.name.equals("Mesa de debate") && actividad.oradores.map[organizacion].toSet.size < 2) {
-			error('Una mesa de debate no puede estar asociada a una sola organizacion',
+			error('Los oradores participantes de una mesa de debate no pueden participar en la misma organización',
 				PdcPackage.Literals.ACTIVIDAD__ESPACIO, INVALID_NAME)
 		}
 	}
@@ -108,106 +108,22 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkActividadesConcurrentes(PDC pdc) {
-
-		//		Genero un mapa con actividades y espacio, si resulta que un espacio tiene dos actividades, 
-		//		verificar concurrencias 
 		pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
 			if (p2.length > 1) {
-
-				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
-				//Ahora debemos corroborar que no se superpongan
 				validarActividadesSolapadas(p2.sortByHorario(), [a|true], "Las actividades ", " y ",
 					" se superponen en el mismo lugar")
 			}
 		]
 	}
+	
+	def duracionBloque(Bloque b){
+		return b.actividades.fold(0)[resultado, actividad | actividad.duracion + resultado]
+	}
 
 	@Check
-	def checkBloquesValidos(PDC pdc) {
-		pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
-			// Premisa: Un bloque representa actividades encerradas entre 2 breaks, por lo tanto, espacios
-			// con menos de 3 actividades no califican
-			if (p2.length > 3) {
-				var sortedValues = p2.sortByHorario()
-
-				var primerBreakEncontrado = false
-
-				var duracionTotal = 0
-				var List tracks = new ArrayList
-				val List organizaciones = new ArrayList
-
-				for (a : sortedValues) {
-					if (primerBreakEncontrado && !a.tipo.eClass.name.equals("Break")) {
-
-						//Encontramos una actividad del bloque
-						duracionTotal = duracionTotal + a.duracion
-
-						//Agregamos el track
-						tracks.add(a.track)
-
-						//Agregamos organizaciones involucradas
-						a.oradores.forEach [ o |
-							organizaciones.add(o.organizacion)
-						]
-					}
-					if (primerBreakEncontrado && a.tipo.eClass.name.equals("Break")) {
-
-						//Encontramos el segundo break, verificar si es bloque
-						if (tracks.size > 1) {
-
-							//Hay al menos 2 actividades, se ha encontrado un bloque
-							if (duracionTotal > 120) {
-
-								//El bloque dura más de 2 horas
-								error(
-									"Existe un bloque de actividades en el lugar " + p1.name +
-										" con una duracion mayor de 2 horas", PdcPackage.Literals.PDC__SCHEDULE,
-									INVALID_NAME)
-							}
-							if (tracks.toSet.size > 1) {
-
-								//El bloque posee tracks distintos
-								error(
-									"Existe un bloque de actividades en el lugar " + p1.name +
-										" cuyos tracks no corresponden al mismo", PdcPackage.Literals.PDC__SCHEDULE,
-									INVALID_NAME)
-							}
-							if (organizaciones.toSet.size == 1) {
-
-								//El bloque esta compuesto por una sola organizacion
-								warning(
-									"Existe un bloque de actividades en el lugar " + p1.name +
-										" perteneciente a una unica organizacion",
-									PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
-							}
-
-							//Bloque encontrado y validado, reiniciar valores y continuar checkeo
-							duracionTotal = 0
-							tracks = new ArrayList
-							organizaciones.clear
-						} else {
-
-							//Solo 1 actividad entre dos Breaks, no califica como bloque y el break se toma
-							//como posible inicio de otro bloque
-							duracionTotal = 0
-							tracks = new ArrayList
-							organizaciones.clear
-						}
-					}
-
-					if (!primerBreakEncontrado) {
-						if (a.tipo.eClass.name.equals("Break")) {
-
-							//Encontramos el primer Break, posible bloque
-							println("primer break encontrado...")
-							primerBreakEncontrado = true
-						}
-					}
-
-				/////////////////
-				}
-			}
-		]
+	def checkBloquesValidos(Bloque bloque) {
+		if(bloque.duracionBloque() >120)
+			error('Los bloques no pueden durar más de 2 horas', bloque, null)
 	}
 
 	@Check
@@ -232,12 +148,15 @@ class PdcValidator extends AbstractPdcValidator {
 						if (a.minutosTotalesConDuracion() == next.minutosTotalesSinDuracion()) {
 							warning(
 								"Advertencia, el orador " + p1.name + " esta asignado a las actividades adyacentes" +
-									a.titulo + " y " + next.titulo, p1.eContainer(), p1.eContainingFeature(), -1)
+									a.titulo + " y " + next.titulo, a.eContainer(), a.eContainingFeature(), sortedValues.indexOf(a))
 						} else {
 							if (seSolapanHorarios(a, next)) {
+//								error(
+//									"Las actividades " + a.titulo + " y " + next.titulo + " del orador " + p1.name +
+//										" se superponen", a.eContainer(), a.eContainingFeature(), sortedValues.indexOf(a))
 								error(
 									"Las actividades " + a.titulo + " y " + next.titulo + " del orador " + p1.name +
-										" se superponen", p1.eContainer(), p1.eContainingFeature(), -1)
+										" se superponen", a, null)
 							}
 						}
 						x++
