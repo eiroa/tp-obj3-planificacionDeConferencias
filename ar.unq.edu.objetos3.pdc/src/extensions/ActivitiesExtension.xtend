@@ -5,6 +5,7 @@ import ar.unq.edu.objetos3.pdc.Schedule
 
 
 import java.util.List
+import java.util.HashMap
 
 class ActivitiesExtension {
 	extension HourExtension = new HourExtension
@@ -21,54 +22,28 @@ class ActivitiesExtension {
 		return acts.sortBy[horario.minutos].sortBy[horario.hora].reverse
 	}
 
-	def fst(List<Actividad> l){ l.get(0) }
+	def fst(List<Actividad> l){ l.head }
 	
 	def snd(List<Actividad> l){ l.get(1) } 
 
-	//Precondición: 
-	//				l1 y l2 deben tener el mismo tamaño
-	def List<List<Actividad>> zip(List<Actividad> l1){
-		var zipped = newArrayList
-		if(l1.size > 2){
-			zipped.add(l1.take(2).toList)
-			zipped.addAll(zip(l1.tail.toList))
-		}else
-			zipped.add(l1)
-		
-		return zipped.toList		
+	
+	def activitiesSortedBySpeakerAndTime(Schedule schedule){
+		val map = new HashMap()
+		var oradores = schedule.actividades.fold(#[],[result, a|a.oradores])
+		oradores.forEach [ o |
+			var actividadesRelacionadas = schedule.actividades.filter[act|act.oradores.contains(o)]
+			map.put(o, actividadesRelacionadas)
+		]
+		return map
 	}
 	
-	def even(Integer n){ (n % Integer.valueOf(2)) == 0 }
-	
-	
-	
-	def Boolean isZippeable(List<Actividad> l1){
-		return (l1.size > 1) && !l1.size.even
+	def endTime(Actividad act){
+		return act.horario.pass(act.duracion)
 	}
-
-	def List<List<Actividad>> consecutiveActs(List<Actividad> acts){
-		if(acts.isZippeable){
-			if(acts.size.equals(2))
-				return #[acts]
-			else	
-				return acts.zip	
-		}
-	}
-//	
-//	def Integer indexOf(Actividad obj, List<Actividad> objs){
-//		var count = 0
-//		for(o : objs){
-//			if(o.equals(obj))
-//				return count	
-//			else
-//				count++
-//		}
-//		throw new Exception('No index found!')
-//	}	
-
+	
 	
 	def Boolean inTheMiddleOf(Actividad act, Actividad in){
-		return act.horario.belongsTo(in.horario,in.horario.pass(in.duracion))
+		return act.horario.belongsTo(in.horario,in.endTime)
 	}
 	
 	//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario

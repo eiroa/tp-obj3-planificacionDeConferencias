@@ -82,22 +82,6 @@ class PdcValidator extends AbstractPdcValidator {
 			}
 		]	
 	}
-
-//	@Check
-//	def checkActividadesConcurrentes(PDC pdc) {
-//		var sortedValues = activitiesSortedByPlaceAndTime(pdc.schedule) 
-//			
-//		for(p : sortedValues.keySet){	
-//			for(acts : sortedValues.get(p).consecutiveActs) {
-//					if(acts.hayHorariosSuperpuestos){
-//						error(
-//							"Las actividades" + acts.fst.titulo + " y " + acts.snd.titulo + " superpuestas",
-//							PdcPackage.Literals.PDC__SCHEDULE,INVALID_HOUR)
-//				}			
-//			}
-//		}
-//	
-//	}
 		
 	
 	@Check
@@ -184,42 +168,27 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkConcurrenciaDeOradores(PDC pdc) {
-		val map = new HashMap()
+		val map = pdc.schedule.activitiesSortedBySpeakerAndTime
 
-		//		Genero un mapa con actividades y oradores
-		pdc.losOradores.head.oradores.forEach [ o |
-			var actividadesRelacionadas = pdc.schedule.actividades.filter[act|act.oradores.contains(o)]
-//			println("orador: " + o.toString + " posee las actividades: " + actividadesRelacionadas)
-			map.put(o, actividadesRelacionadas)
-		]
-		map.forEach [ p1, p2 |
-			if (p2.length > 1) {
-				var sortedValues = p2.sortBy[horario.minutos]
-				sortedValues = sortedValues.sortBy[horario.hora]
-
-				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
-				//Ahora debemos corroborar que no se superpongan
-				var x = 0
-				for (a : sortedValues) {
-					var totalMinutes = a.horario.hora * 60 + a.horario.minutos + a.duracion
-					if (sortedValues.size - x > 1) {
-						var next = sortedValues.get(x + 1)
-						var nextTotalMinutes = next.horario.hora * 60 + next.horario.minutos
-						if (totalMinutes == nextTotalMinutes) {
+		map.forEach [ orador, acts |
+		var actividades = acts.toList
+		var cursor = new Cursor(actividades)
+			while(cursor.hasNext){
+				var act = cursor.current as Actividad
+				var nextAct = cursor.next as Actividad
+				print(act.endTime.equal(nextAct.horario))
+				if (act.endTime.equal(nextAct.horario)) {
 							warning(
-								"Advertencia, el orador " + p1.name + " esta asignado a las actividades adyacentes" +
-									a.titulo + " y " + next.titulo, PdcPackage.Literals.PDC__LOS_ORADORES,
+								"Advertencia, el orador " + orador.name + " esta asignado a las actividades adyacentes" +
+									act.titulo + " y " + nextAct.titulo, PdcPackage.Literals.PDC__LOS_ORADORES,
 								INVALID_NAME)
-						} else {
-							if (totalMinutes > nextTotalMinutes) {
-								error(
-									"Las actividades " + a.titulo + " y " + next.titulo + " del orador " + p1.name +
-										" se superponen", PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+				} else {
+						if (nextAct.inTheMiddleOf(act)) {
+							error(
+								"Las actividades " + act.titulo + " y " + nextAct.titulo + " del orador " + orador.name +
+								" se superponen", PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
 							}
 						}
-						x++
-					}
-				}
 			}
 		]
 	}

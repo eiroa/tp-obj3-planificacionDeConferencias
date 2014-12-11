@@ -9,6 +9,10 @@ class HourExtension {
 		h.hora * 60 + h.minutos
 	}
 	
+	def equal(Horario h1, Horario h2){
+		return h1.hora == h2.hora && h1.minutos == h2.minutos
+	}
+	
 	def createHour(Horario h, Integer hora, Integer minutos){
 		var horario = PdcFactory.eINSTANCE.createHorario()
 		horario.hora = hora
