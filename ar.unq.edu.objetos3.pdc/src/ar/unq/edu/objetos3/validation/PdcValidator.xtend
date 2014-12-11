@@ -4,11 +4,13 @@
 package ar.unq.edu.objetos3.validation
 
 import org.eclipse.xtext.validation.Check
-import ar.unq.edu.objetos3.pdc.*
 import java.util.HashMap
 import java.util.List
 import java.util.ArrayList
-import java.lang.reflect.Array
+import extensions.ActivitiesExtension
+import ar.unq.edu.objetos3.pdc.*
+import extensions.HourExtension
+import extensions.Cursor
 
 //import org.eclipse.xtext.validation.Check
 /**
@@ -19,7 +21,11 @@ import java.lang.reflect.Array
 class PdcValidator extends AbstractPdcValidator {
 
 	public static val INVALID_NAME = 'invalidName'
-
+	public static val INVALID_HOUR = 'invalidHour'
+	
+	extension ActivitiesExtension = new ActivitiesExtension
+	extension HourExtension = new HourExtension
+	
 	@Check
 	def checkActividadEmpiezaConMayuscula(Actividad actividad) {
 		if (!Character.isUpperCase(actividad.titulo.charAt(0))) {
@@ -64,33 +70,35 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkActividadesConcurrentes(PDC pdc) {
-
-		//		Genero un mapa con actividades y espacio, si resulta que un espacio tiene dos actividades, 
-		//		verificar concurrencias 
-		pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
-			if (p2.length > 1) {
-				var sortedValues = p2.sortBy[horario.minutos]
-				sortedValues = sortedValues.sortBy[horario.hora]
-
-				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
-				//Ahora debemos corroborar que no se superpongan
-				var x = 0
-				for (a : sortedValues) {
-					var totalMinutes = a.horario.hora * 60 + a.horario.minutos + a.duracion
-					if (sortedValues.size - x > 1) {
-						var next = sortedValues.get(x + 1)
-						var nextTotalMinutes = next.horario.hora * 60 + next.horario.minutos
-						if (totalMinutes > nextTotalMinutes) {
-							error(
-								"Las actividades " + a.titulo + " y " + next.titulo + " se superponen en el mismo lugar",
-								PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
-						}
-						x++
-					}
-				}
+		pdc.schedule.activitiesSortedByPlaceAndTime.forEach[e,acts |
+			var cursor = new Cursor(acts)
+			while(cursor.hasNext){
+				var act = cursor.current as Actividad
+				var nextAct = cursor.next as Actividad
+				if (nextAct.inTheMiddleOf(act)) {
+					error("Las actividades " + act.titulo + " y " + nextAct.titulo + " se superponen en el mismo espacio",
+							PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
+				}	
 			}
-		]
+		]	
 	}
+
+//	@Check
+//	def checkActividadesConcurrentes(PDC pdc) {
+//		var sortedValues = activitiesSortedByPlaceAndTime(pdc.schedule) 
+//			
+//		for(p : sortedValues.keySet){	
+//			for(acts : sortedValues.get(p).consecutiveActs) {
+//					if(acts.hayHorariosSuperpuestos){
+//						error(
+//							"Las actividades" + acts.fst.titulo + " y " + acts.snd.titulo + " superpuestas",
+//							PdcPackage.Literals.PDC__SCHEDULE,INVALID_HOUR)
+//				}			
+//			}
+//		}
+//	
+//	}
+		
 	
 	@Check
 	def checkBloquesValidos(PDC pdc){
