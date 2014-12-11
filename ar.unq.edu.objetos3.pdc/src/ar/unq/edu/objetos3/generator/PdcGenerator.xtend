@@ -24,64 +24,63 @@ import javax.sound.midi.Track
  * 
  */
 class PdcGenerator implements IGenerator {
-	
-		
-		def String getKeynote(Actividad a){
-			if(a.keynote){
-				return "true"
-			}else{
-				return "false"
-			}
-		}
-		
-		def String getTrack(Actividad a){
-			if(a.track  == null){
-				return '-'
-			}else{
-				return a.track.name
-			}
-		}
-		
-		def String getOradores(Actividad a){
-			if(a.oradores  == null){
-				return '-'
-			}else{
-				var result = ''
-				for(Orador o : a.oradores){
-					if(a.oradores.indexOf(o) == a.oradores.size -1){
-						result =  result.concat(o.name + ' de '+o.organizacion.name)
-					}else{
-						result = result.concat(o.name + ' de '+o.organizacion.name +' , ')
-					}
-				}
-				return result
-			}
-		}
-			
-		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		var actividades = resource.allContents.filter(typeof(Actividad)).toList
-		.sortBy[a|a.horario.minutos]
-		.sortBy[a|a.horario.hora]
-		fsa.generateFile('actividades.json', 	'[
 
-{'+actividades.map[a|
-	" \"titulo\":"+"\""+ a.titulo +"\""+','
-	+ "\"track\":"+"\""+ getTrack(a)+"\""+','
-	+ "\"keynote\":"+"\""+ getKeynote(a)+"\""+','
-	+ "\"espacio\":"+"\""+ a.espacio.name+"\""+','
-	+ "\"oradores\":"+"\""+ getOradores(a)+"\""+','
-	+ "\"duracion\":"+"\""+ a.duracion+"\""+','
-	+" \"horario\": "+"\""+a.horario.hora+ ':' +a.horario.minutos + if(a.horario.minutos ==0){'0'}else{''}
-].join("\"},{")+"\"
+	def String getKeynote(Actividad a) {
+		if (a.keynote) {
+			return "true"
+		} else {
+			return "false"
+		}
+	}
+
+	def String getTrack(Actividad a) {
+		if (a.track == null) {
+			return '-'
+		} else {
+			return a.track.name
+		}
+	}
+
+	def String getOradores(Actividad a) {
+		if (a.oradores == null) {
+			return '-'
+		} else {
+			var result = ''
+			for (Orador o : a.oradores) {
+				if (a.oradores.indexOf(o) == a.oradores.size - 1) {
+					result = result.concat(o.name + ' de ' + o.organizacion.name)
+				} else {
+					result = result.concat(o.name + ' de ' + o.organizacion.name + ' , ')
+				}
+			}
+			return result
+		}
+	}
+
+	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+		var actividades = resource.allContents.filter(typeof(Actividad)).toList.sortBy[a|a.horario.minutos].sortBy[a|
+			a.horario.hora]
+		fsa.generateFile('actividades.json',
+			'[
+
+{' + actividades.map [ a |
+				" \"titulo\":" + "\"" + a.titulo + "\"" + ',' + "\"track\":" + "\"" + getTrack(a) + "\"" + ',' +
+					"\"keynote\":" + "\"" + getKeynote(a) + "\"" + ',' + "\"espacio\":" + "\"" + a.espacio.name + "\"" +
+					',' + "\"oradores\":" + "\"" + getOradores(a) + "\"" + ',' + "\"duracion\":" + "\"" + a.duracion +
+					"\"" + ',' + " \"horario\": " + "\"" + a.horario.hora + ':' + a.horario.minutos +
+					if (a.horario.minutos == 0) {
+						'0'
+					} else {
+						''
+					}
+			].join("\"},{") + "\"
     }]")
-		fsa.generateFile('schedule.html', 	'<!doctype html>
+		fsa.generateFile('schedule.html',
+			'<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>' +resource.allContents
-				.filter(typeof(Schedule))
-				.map[nombre]
-				.join +'</title>
+<title>' + resource.allContents.filter(typeof(Schedule)).map[nombre].join + '</title>
 <meta name="description" content="">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,19 +97,19 @@ class PdcGenerator implements IGenerator {
 <body ng-app="schedule" class="">
 	
 <div class="jumbotron">
-<h1 class="text-center text-info">'+ resource.allContents
-				.filter(typeof(Schedule))
-				.map[nombre]
-				.join+ '</h1>
+<h1 class="text-center text-info">' + resource.allContents.filter(typeof(Schedule)).map[nombre].join + '</h1>
 </div>
 
 
 
 <script>
 </script>
-<div class="">
+<div class="" id="print-content">
+<form>
+
+  
 <p class="text-center text-danger">Cronograma oficial para la conferencia</p>
-<table data-toggle="table" data-url="actividades.json" data-cache="false" data-height="299">
+<table data-toggle="table" data-url="actividades.json"  data-height="500">
     <thead>
         <tr>
             <th data-field="titulo" data-formatter="nameFormatter" data-sortable="true" >Titulo</th>
@@ -141,10 +140,22 @@ class PdcGenerator implements IGenerator {
                 value.substring(1) +
                 \'</div>\';
     }
+function printDiv(divName) {
+ var printContents = document.getElementById(divName).innerHTML;
+ w=window.open();
+ w.document.write(printContents);
+ w.print();
+ w.close();
+}
 </script>
 </div>
+<span class="glyphicon glyphicon-print">
+<input type="button"  class="btn btn-success" onclick="printDiv(\'print-content\')" value="Imprimir cronograma">
+  </input>
+</form>
+
 </body>
 </html>')
 	}
-	
+
 }
