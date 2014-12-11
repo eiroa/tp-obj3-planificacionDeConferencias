@@ -88,12 +88,12 @@ class PdcGenerator implements IGenerator {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.4.0/bootstrap-table.min.js"></script>
 <body ng-app="schedule" class="">
 	
-<h4 class"text-right">'+ 'Cronograma para conferencia'+'</h4>
+<div class="jumbotron">
 <h1 class="text-center text-info">'+ resource.allContents
 				.filter(typeof(Schedule))
 				.map[nombre]
 				.join+ '</h1>
-
+</div>
 
 <ul>Lista de Oradores
 
@@ -106,6 +106,8 @@ class PdcGenerator implements IGenerator {
 
 <script>
 </script>
+<div class="">
+<p class="text-center text-danger">Cronograma oficial para la conferencia</p>
 <table data-toggle="table" data-url="actividades.json" data-cache="false" data-height="299">
     <thead>
         <tr>
@@ -118,7 +120,7 @@ class PdcGenerator implements IGenerator {
         </tr>
     </thead>
 </table>
-
+</div>
 </body>
 </html>')
 	}
