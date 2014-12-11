@@ -25,7 +25,15 @@ import javax.sound.midi.Track
  */
 class PdcGenerator implements IGenerator {
 	
-	
+		
+		def String getKeynote(Actividad a){
+			if(a.keynote){
+				return "false"
+			}else{
+				return "true"
+			}
+		}
+		
 		def String getTrack(Actividad a){
 			if(a.track  == null){
 				return '-'
@@ -41,9 +49,9 @@ class PdcGenerator implements IGenerator {
 				var result = ''
 				for(Orador o : a.oradores){
 					if(a.oradores.indexOf(o) == a.oradores.size -1){
-						result =  result.concat(o.name)
+						result =  result.concat(o.name + ' de '+o.organizacion.name)
 					}else{
-						result = result.concat(o.name +' , ')
+						result = result.concat(o.name + ' de '+o.organizacion.name +' , ')
 					}
 				}
 				return result
@@ -59,6 +67,7 @@ class PdcGenerator implements IGenerator {
 {'+actividades.map[a|
 	" \"titulo\":"+"\""+ a.titulo +"\""+','
 	+ "\"track\":"+"\""+ getTrack(a)+"\""+','
+	+ "\"keynote\":"+"\""+ getKeynote(a)+"\""+','
 	+ "\"espacio\":"+"\""+ a.espacio.name+"\""+','
 	+ "\"oradores\":"+"\""+ getOradores(a)+"\""+','
 	+ "\"duracion\":"+"\""+ a.duracion+"\""+','
@@ -95,13 +104,6 @@ class PdcGenerator implements IGenerator {
 				.join+ '</h1>
 </div>
 
-<ul>Lista de Oradores
-
-<li>'+resource.allContents.filter(typeof(Orador)).map[name].join('</li><li>')+'
-
-</ul>
-
-
 
 
 <script>
@@ -111,7 +113,7 @@ class PdcGenerator implements IGenerator {
 <table data-toggle="table" data-url="actividades.json" data-cache="false" data-height="299">
     <thead>
         <tr>
-            <th data-field="titulo">Titulo</th>
+            <th data-field="titulo" data-formatter="nameFormatter">Titulo</th>
 			<th data-field="track">Temática</th>
 			<th data-field="oradores">Oradores</th>
 			<th data-field="espacio">Espacio</th>
@@ -120,6 +122,26 @@ class PdcGenerator implements IGenerator {
         </tr>
     </thead>
 </table>
+
+<script>
+    function nameFormatter(value, row) {
+		if(row.keynote == "true"){
+			return \'<i class="glyphicon glyphicon-star"></i> \' + value;
+		}else{
+			return value;
+		}
+        
+    }
+
+    function priceFormatter(value) {
+        // 16777215 == ffffff in decimal
+        var color = \'#\'+Math.floor(Math.random() * 6777215).toString(16);
+        return \'<div  style="color: \' + color + \'">\' +
+                \'<i class="glyphicon glyphicon-usd"></i>\' +
+                value.substring(1) +
+                \'</div>\';
+    }
+</script>
 </div>
 </body>
 </html>')

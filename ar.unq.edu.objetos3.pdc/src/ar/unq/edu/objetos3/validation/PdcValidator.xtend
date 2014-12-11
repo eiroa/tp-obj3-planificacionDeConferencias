@@ -285,7 +285,8 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkDuracionAlmuerzo(Actividad actividad) {
-		if (actividad.tipo.eClass.name.equals("Break") && actividad.tipoDeBreak.eClass.name.equals("Almuerzo") && actividad.duracion < 45) {
+		if (actividad.tipo.eClass.name.equals("Break") && actividad.tipoDeBreak.eClass.name.equals("Almuerzo") &&
+			actividad.duracion < 45) {
 			error('Los almuerzos no pueden durar menos de 45 minutos', PdcPackage.Literals.ACTIVIDAD__DURACION,
 				INVALID_NAME)
 		}
@@ -301,9 +302,18 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkTallerDebeTenerComputadoras(Actividad actividad) {
-		if (actividad.tipo.eClass.name.equals("Taller")&& !actividad.espacio.tieneComputadoras) {
+		if (actividad.tipo.eClass.name.equals("Taller") && !actividad.espacio.tieneComputadoras) {
 			error('Un taller solo puede llevarse a cabo en un aula con maquinas', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
 				INVALID_NAME)
+		}
+	}
+
+	@Check
+	def actividadesRegistracionYEventoIniciales(PDC pdc) {
+		var sorted = pdc.schedule.actividades.sortByHorario()
+		if (!sorted.head.tipo.eClass.name.equals("Registracion")) {
+			error(
+				"La primer actividad debe ser la registración ", sorted.head.eContainer(), sorted.head.eContainingFeature(), -1)
 		}
 	}
 
