@@ -9,6 +9,7 @@ import java.util.HashMap
 import java.util.List
 import java.util.ArrayList
 import java.lang.reflect.Array
+import org.eclipse.xtend.typesystem.Type
 
 //import org.eclipse.xtext.validation.Check
 /**
@@ -19,7 +20,47 @@ import java.lang.reflect.Array
 class PdcValidator extends AbstractPdcValidator {
 
 	public static val INVALID_NAME = 'invalidName'
-
+	
+	 def sortByHorario(Iterable<Actividad> list){
+		return list
+		.sortBy[horario.minutos]
+		.sortBy[horario.hora]
+	}
+	
+	def minutosTotalesConDuracion(Actividad a){
+		return a.horario.hora * 60 + a.horario.minutos + a.duracion
+	}
+	
+	def minutosTotalesSinDuracion(Actividad a){
+		a.horario.hora * 60 + a.horario.minutos
+	}
+	
+	def seSolapanHorarios(Actividad a1, Actividad a2){
+		return a1.minutosTotalesConDuracion() > a2.minutosTotalesSinDuracion()
+	}
+	
+	
+	def validarActividadesSolapadas(Iterable<Actividad> list,(Actividad)=>Boolean additionalValidation,
+		String text1, String text2, String text3
+	){
+		var elementoActual = 0
+		for (a : list) {
+			if (list.size - elementoActual > 1) {
+				var next = list.get(elementoActual + 1)
+				if (additionalValidation.apply(a) && seSolapanHorarios(a,next)) {
+					error(
+						text1
+						+ a.titulo 
+						+ text2
+						+ next.titulo
+						+text3,
+						PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+				}
+				elementoActual++
+			}
+		}
+	}
+	
 	@Check
 	def checkActividadEmpiezaConMayuscula(Actividad actividad) {
 		if (!Character.isUpperCase(actividad.titulo.charAt(0))) {
@@ -54,12 +95,12 @@ class PdcValidator extends AbstractPdcValidator {
 				INVALID_NAME)
 		}
 	}
-	
+
 	@Check
-	def checkOradoresDeDistintaOrganizacion(Actividad actividad){
-		if(actividad.esMesaDeDebate && actividad.oradores.map[organizacion].toSet.size <2 ){
-			error('Una mesa de debate no puede estar asociada a una sola organizacion', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
-				INVALID_NAME)
+	def checkOradoresDeDistintaOrganizacion(Actividad actividad) {
+		if (actividad.esMesaDeDebate && actividad.oradores.map[organizacion].toSet.size < 2) {
+			error('Una mesa de debate no puede estar asociada a una sola organizacion',
+				PdcPackage.Literals.ACTIVIDAD__ESPACIO, INVALID_NAME)
 		}
 	}
 
@@ -77,106 +118,103 @@ class PdcValidator extends AbstractPdcValidator {
 		//		verificar concurrencias 
 		pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
 			if (p2.length > 1) {
-				var sortedValues = p2.sortBy[horario.minutos]
-				sortedValues = sortedValues.sortBy[horario.hora]
+				var sortedValues = p2.sortByHorario()
 
 				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
 				//Ahora debemos corroborar que no se superpongan
-				var x = 0
-				for (a : sortedValues) {
-					var totalMinutes = a.horario.hora * 60 + a.horario.minutos + a.duracion
-					if (sortedValues.size - x > 1) {
-						var next = sortedValues.get(x + 1)
-						var nextTotalMinutes = next.horario.hora * 60 + next.horario.minutos
-						if (totalMinutes > nextTotalMinutes) {
-							error(
-								"Las actividades " + a.titulo + " y " + next.titulo + " se superponen en el mismo lugar",
-								PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
-						}
-						x++
-					}
-				}
+				validarActividadesSolapadas(
+					p2.sortByHorario(),
+					[a|true],
+					"Las actividades ",
+					" y ",
+					" se superponen en el mismo lugar")
 			}
 		]
 	}
-	
+
 	@Check
-	def checkBloquesValidos(PDC pdc){
-				pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
-				
-				
-				// Premisa: Un bloque representa actividades encerradas entre 2 breaks, por lo tanto, espacios
-				// con menos de 3 actividades no califican
+	def checkBloquesValidos(PDC pdc) {
+		pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
+			// Premisa: Un bloque representa actividades encerradas entre 2 breaks, por lo tanto, espacios
+			// con menos de 3 actividades no califican
 			if (p2.length > 3) {
-				println("Actividades posibles de constituir bloque para espacio " +p1+ " ---> " +p2)
-				var sortedValues = p2.sortBy[horario.minutos]
-				sortedValues = sortedValues.sortBy[horario.hora]
+				var sortedValues = p2.sortByHorario()
 
 				var primerBreakEncontrado = false
-				
+
 				var duracionTotal = 0
 				var List tracks = new ArrayList
 				val List organizaciones = new ArrayList
-				
+
 				for (a : sortedValues) {
-					if(primerBreakEncontrado && !a.esBreak){
+					if (primerBreakEncontrado && !a.esBreak) {
+
 						//Encontramos una actividad del bloque
-						println("posible actividad de bloque...")
-						duracionTotal =  duracionTotal + a.duracion
+						duracionTotal = duracionTotal + a.duracion
+
 						//Agregamos el track
-						println("Duracion hasta el momento: "+duracionTotal)
 						tracks.add(a.track)
-						println("tracks al momento: "+tracks)
+
 						//Agregamos organizaciones involucradas
-						a.oradores.forEach[o | 
+						a.oradores.forEach [ o |
 							organizaciones.add(o.organizacion)
 						]
-						println("organizaciones de momento... " + organizaciones)
 					}
-					if(primerBreakEncontrado && a.esBreak){
+					if (primerBreakEncontrado && a.esBreak) {
+
 						//Encontramos el segundo break, verificar si es bloque
-						println("Encontrado el segundo Break")
-						if(tracks.size >1){
+						if (tracks.size > 1) {
+
 							//Hay al menos 2 actividades, se ha encontrado un bloque
-							if(duracionTotal > 120){
+							if (duracionTotal > 120) {
+
 								//El bloque dura más de 2 horas
 								error(
-								"Existe un bloque de actividades en el lugar " +p1.name + " con una duracion mayor de 2 horas",
-								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+									"Existe un bloque de actividades en el lugar " + p1.name +
+										" con una duracion mayor de 2 horas", PdcPackage.Literals.PDC__SCHEDULE,
+									INVALID_NAME)
 							}
-							if(tracks.toSet.size > 1){
+							if (tracks.toSet.size > 1) {
+
 								//El bloque posee tracks distintos
 								error(
-								"Existe un bloque de actividades en el lugar " +p1.name + " cuyos tracks no corresponden al mismo",
-								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+									"Existe un bloque de actividades en el lugar " + p1.name +
+										" cuyos tracks no corresponden al mismo", PdcPackage.Literals.PDC__SCHEDULE,
+									INVALID_NAME)
 							}
-							if(organizaciones.toSet.size == 1){
+							if (organizaciones.toSet.size == 1) {
+
 								//El bloque esta compuesto por una sola organizacion
 								warning(
-								"Existe un bloque de actividades en el lugar " +p1.name + " perteneciente a una unica organizacion",
-								PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
+									"Existe un bloque de actividades en el lugar " + p1.name +
+										" perteneciente a una unica organizacion",
+									PdcPackage.Literals.PDC__LOS_ESPACIOS, INVALID_NAME)
 							}
+
 							//Bloque encontrado y validado, reiniciar valores y continuar checkeo
-							duracionTotal= 0
+							duracionTotal = 0
 							tracks = new ArrayList
 							organizaciones.clear
-						}else{
+						} else {
+
 							//Solo 1 actividad entre dos Breaks, no califica como bloque y el break se toma
 							//como posible inicio de otro bloque
-							duracionTotal= 0
+							duracionTotal = 0
 							tracks = new ArrayList
 							organizaciones.clear
 						}
 					}
 
-					if(!primerBreakEncontrado ){
-						if(a.esBreak){
+					if (!primerBreakEncontrado) {
+						if (a.esBreak) {
+
 							//Encontramos el primer Break, posible bloque
 							println("primer break encontrado...")
 							primerBreakEncontrado = true
 						}
 					}
-					/////////////////
+
+				/////////////////
 				}
 			}
 		]
@@ -189,29 +227,24 @@ class PdcValidator extends AbstractPdcValidator {
 		//		Genero un mapa con actividades y oradores
 		pdc.losOradores.head.oradores.forEach [ o |
 			var actividadesRelacionadas = pdc.schedule.actividades.filter[act|act.oradores.contains(o)]
-//			println("orador: " + o.toString + " posee las actividades: " + actividadesRelacionadas)
 			map.put(o, actividadesRelacionadas)
 		]
 		map.forEach [ p1, p2 |
 			if (p2.length > 1) {
-				var sortedValues = p2.sortBy[horario.minutos]
-				sortedValues = sortedValues.sortBy[horario.hora]
-
+				var sortedValues = p2.sortByHorario()
 				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
 				//Ahora debemos corroborar que no se superpongan
 				var x = 0
 				for (a : sortedValues) {
-					var totalMinutes = a.horario.hora * 60 + a.horario.minutos + a.duracion
 					if (sortedValues.size - x > 1) {
 						var next = sortedValues.get(x + 1)
-						var nextTotalMinutes = next.horario.hora * 60 + next.horario.minutos
-						if (totalMinutes == nextTotalMinutes) {
+						if (a.minutosTotalesConDuracion() == next.minutosTotalesSinDuracion()) {
 							warning(
 								"Advertencia, el orador " + p1.name + " esta asignado a las actividades adyacentes" +
 									a.titulo + " y " + next.titulo, PdcPackage.Literals.PDC__LOS_ORADORES,
 								INVALID_NAME)
 						} else {
-							if (totalMinutes > nextTotalMinutes) {
+							if (seSolapanHorarios(a,next)) {
 								error(
 									"Las actividades " + a.titulo + " y " + next.titulo + " del orador " + p1.name +
 										" se superponen", PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
@@ -225,24 +258,17 @@ class PdcValidator extends AbstractPdcValidator {
 	}
 	
 	@Check
-	def checkExclusividadCharlasKeynote(PDC pdc){
-		var sortedValues =pdc.schedule.actividades.filter[act | act.esCharla].sortBy[horario.minutos]
-		sortedValues = sortedValues.sortBy[horario.hora]
-		var x = 0
-				for (a : sortedValues) {
-					var totalMinutes = a.horario.hora * 60 + a.horario.minutos + a.duracion
-					if (sortedValues.size - x > 1) {
-						var next = sortedValues.get(x + 1)
-						var nextTotalMinutes = next.horario.hora * 60 + next.horario.minutos
-						if ( a.keynote && totalMinutes > nextTotalMinutes) {
-							error(
-								"La charla keynote " + a.titulo +" se superpone con el horario de la actividad " + next.titulo,
-								PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
-						}
-						x++
-					}
-				}
+	def checkExclusividadCharlasKeynote(PDC pdc) {
+		validarActividadesSolapadas(
+			pdc.schedule.actividades.filter[act|act.esCharla].sortByHorario()
+			,[a|a.keynote]
+			,"La charla keynote "
+			," se superpone con el horario de la actividad "
+			,""
+		)
 	}
+	
+	
 
 	@Check
 	def checkMesaDebate2Oradores(Actividad actividad) {
@@ -260,7 +286,6 @@ class PdcValidator extends AbstractPdcValidator {
 			error('Minutos invalidos utilice valores entre 0 y 59', PdcPackage.Literals.HORARIO__MINUTOS, INVALID_NAME)
 		}
 	}
-
 
 	@Check
 	def checkDuracionBreak(Actividad actividad) {
@@ -285,10 +310,10 @@ class PdcValidator extends AbstractPdcValidator {
 				INVALID_NAME)
 		}
 	}
-	
-		@Check
+
+	@Check
 	def checkTallerDebeTenerComputadoras(Actividad actividad) {
-		if (actividad.esTaller && actividad.espacio.tieneComputadoras) {
+		if (actividad.esTaller && !actividad.espacio.tieneComputadoras) {
 			error('Un taller solo puede llevarse a cabo en un aula con maquinas', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
 				INVALID_NAME)
 		}
@@ -299,15 +324,19 @@ class PdcValidator extends AbstractPdcValidator {
 		val x = actividad.genteEsperada
 		switch (x) {
 			case null:
-				error('Especifique la gente esperada para la actividad ' + actividad.titulo, PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA, INVALID_NAME)
-			case x > actividad.espacio.capacidad:
-				error('No hay suficiente espacio en actividad ' + actividad.titulo, PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA, INVALID_NAME)
-			case x < (actividad.espacio.capacidad / 2):
-				warning('Existe demasiado espacio en actividad ' +actividad.titulo+ ' sin usar', PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA,
-					INVALID_NAME)
-			case x > ( (90 * actividad.espacio.capacidad) / 100):
-				warning('La cantidad de gente esperada para la actividad ' + actividad.titulo+ ' es próxima a la capacidad máxima del lugar',
+				error('Especifique la gente esperada para la actividad ' + actividad.titulo,
 					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA, INVALID_NAME)
+			case x > actividad.espacio.capacidad:
+				error('No hay suficiente espacio en actividad ' + actividad.titulo,
+					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA, INVALID_NAME)
+			case x < (actividad.espacio.capacidad / 2):
+				warning('Existe demasiado espacio en actividad ' + actividad.titulo + ' sin usar',
+					PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA, INVALID_NAME)
+			case x > ( (90 * actividad.espacio.capacidad) / 100):
+				warning(
+					'La cantidad de gente esperada para la actividad ' + actividad.titulo +
+						' es próxima a la capacidad máxima del lugar', PdcPackage.Literals.ACTIVIDAD__GENTE_ESPERADA,
+					INVALID_NAME)
 		}
 
 	}
