@@ -54,7 +54,7 @@ class PdcValidator extends AbstractPdcValidator {
 						+ text2
 						+ next.titulo
 						+text3,
-						PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+						a.eContainer(), a.eContainingFeature(),-1)
 				}
 				elementoActual++
 			}
@@ -118,7 +118,6 @@ class PdcValidator extends AbstractPdcValidator {
 		//		verificar concurrencias 
 		pdc.schedule.actividades.groupBy[a|a.espacio].forEach [ p1, p2 | //key,value
 			if (p2.length > 1) {
-				var sortedValues = p2.sortByHorario()
 
 				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
 				//Ahora debemos corroborar que no se superpongan
@@ -241,13 +240,12 @@ class PdcValidator extends AbstractPdcValidator {
 						if (a.minutosTotalesConDuracion() == next.minutosTotalesSinDuracion()) {
 							warning(
 								"Advertencia, el orador " + p1.name + " esta asignado a las actividades adyacentes" +
-									a.titulo + " y " + next.titulo, PdcPackage.Literals.PDC__LOS_ORADORES,
-								INVALID_NAME)
+									a.titulo + " y " + next.titulo,p1.eContainer(),p1.eContainingFeature(),-1)
 						} else {
 							if (seSolapanHorarios(a,next)) {
 								error(
 									"Las actividades " + a.titulo + " y " + next.titulo + " del orador " + p1.name +
-										" se superponen", PdcPackage.Literals.PDC__SCHEDULE, INVALID_NAME)
+										" se superponen",p1.eContainer(),p1.eContainingFeature(),-1)
 							}
 						}
 						x++
