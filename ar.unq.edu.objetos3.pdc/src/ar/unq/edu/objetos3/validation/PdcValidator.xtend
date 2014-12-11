@@ -20,47 +20,42 @@ import org.eclipse.xtend.typesystem.Type
 class PdcValidator extends AbstractPdcValidator {
 
 	public static val INVALID_NAME = 'invalidName'
-	
-	 def sortByHorario(Iterable<Actividad> list){
-		return list
-		.sortBy[horario.minutos]
-		.sortBy[horario.hora]
+
+	def sortByHorario(Iterable<Actividad> list) {
+		return list.sortBy[horario.minutos].sortBy[horario.hora]
 	}
-	
-	def minutosTotalesConDuracion(Actividad a){
+
+	def minutosTotalesConDuracion(Actividad a) {
 		return a.horario.hora * 60 + a.horario.minutos + a.duracion
 	}
-	
-	def minutosTotalesSinDuracion(Actividad a){
+
+	def minutosTotalesSinDuracion(Actividad a) {
 		a.horario.hora * 60 + a.horario.minutos
 	}
-	
-	def seSolapanHorarios(Actividad a1, Actividad a2){
+
+	def seSolapanHorarios(Actividad a1, Actividad a2) {
 		return a1.minutosTotalesConDuracion() > a2.minutosTotalesSinDuracion()
 	}
-	
-	
-	def validarActividadesSolapadas(Iterable<Actividad> list,(Actividad)=>Boolean additionalValidation,
-		String text1, String text2, String text3
-	){
+
+	def validarActividadesSolapadas(
+		Iterable<Actividad> list,
+		(Actividad)=>Boolean additionalValidation,
+		String text1,
+		String text2,
+		String text3
+	) {
 		var elementoActual = 0
 		for (a : list) {
 			if (list.size - elementoActual > 1) {
 				var next = list.get(elementoActual + 1)
-				if (additionalValidation.apply(a) && seSolapanHorarios(a,next)) {
-					error(
-						text1
-						+ a.titulo 
-						+ text2
-						+ next.titulo
-						+text3,
-						a.eContainer(), a.eContainingFeature(),-1)
+				if (additionalValidation.apply(a) && seSolapanHorarios(a, next)) {
+					error(text1 + a.titulo + text2 + next.titulo + text3, a.eContainer(), a.eContainingFeature(), -1)
 				}
 				elementoActual++
 			}
 		}
 	}
-	
+
 	@Check
 	def checkActividadEmpiezaConMayuscula(Actividad actividad) {
 		if (!Character.isUpperCase(actividad.titulo.charAt(0))) {
@@ -82,7 +77,7 @@ class PdcValidator extends AbstractPdcValidator {
 	@Check
 	def checkCharlaDuracion(Actividad actividad) {
 
-		if (actividad.esCharla && actividad.duracion < 30) {
+		if (actividad.tipo.eClass.name.equals("Charla") && actividad.duracion < 30) {
 			error('Una charla no puede durar menos de 30 minutos', PdcPackage.Literals.ACTIVIDAD__DURACION,
 				INVALID_NAME)
 		}
@@ -90,7 +85,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkMesaDebateDuracion(Actividad actividad) {
-		if (actividad.esMesaDeDebate && actividad.duracion < 60) {
+		if (actividad.tipo.eClass.name.equals("Mesa de debate") && actividad.duracion < 60) {
 			error('Una mesa de debate no puede durar menos de 1 hora', PdcPackage.Literals.ACTIVIDAD__DURACION,
 				INVALID_NAME)
 		}
@@ -98,7 +93,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkOradoresDeDistintaOrganizacion(Actividad actividad) {
-		if (actividad.esMesaDeDebate && actividad.oradores.map[organizacion].toSet.size < 2) {
+		if (actividad.tipo.eClass.name.equals("Mesa de debate") && actividad.oradores.map[organizacion].toSet.size < 2) {
 			error('Una mesa de debate no puede estar asociada a una sola organizacion',
 				PdcPackage.Literals.ACTIVIDAD__ESPACIO, INVALID_NAME)
 		}
@@ -121,11 +116,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
 				//Ahora debemos corroborar que no se superpongan
-				validarActividadesSolapadas(
-					p2.sortByHorario(),
-					[a|true],
-					"Las actividades ",
-					" y ",
+				validarActividadesSolapadas(p2.sortByHorario(), [a|true], "Las actividades ", " y ",
 					" se superponen en el mismo lugar")
 			}
 		]
@@ -146,7 +137,7 @@ class PdcValidator extends AbstractPdcValidator {
 				val List organizaciones = new ArrayList
 
 				for (a : sortedValues) {
-					if (primerBreakEncontrado && !a.esBreak) {
+					if (primerBreakEncontrado && !a.tipo.eClass.name.equals("Break")) {
 
 						//Encontramos una actividad del bloque
 						duracionTotal = duracionTotal + a.duracion
@@ -159,7 +150,7 @@ class PdcValidator extends AbstractPdcValidator {
 							organizaciones.add(o.organizacion)
 						]
 					}
-					if (primerBreakEncontrado && a.esBreak) {
+					if (primerBreakEncontrado && a.tipo.eClass.name.equals("Break")) {
 
 						//Encontramos el segundo break, verificar si es bloque
 						if (tracks.size > 1) {
@@ -205,7 +196,7 @@ class PdcValidator extends AbstractPdcValidator {
 					}
 
 					if (!primerBreakEncontrado) {
-						if (a.esBreak) {
+						if (a.tipo.eClass.name.equals("Break")) {
 
 							//Encontramos el primer Break, posible bloque
 							println("primer break encontrado...")
@@ -231,6 +222,7 @@ class PdcValidator extends AbstractPdcValidator {
 		map.forEach [ p1, p2 |
 			if (p2.length > 1) {
 				var sortedValues = p2.sortByHorario()
+
 				//En este punto ya tenemos las actividades de un mismo espacio ordenadas segun el horario
 				//Ahora debemos corroborar que no se superpongan
 				var x = 0
@@ -240,12 +232,12 @@ class PdcValidator extends AbstractPdcValidator {
 						if (a.minutosTotalesConDuracion() == next.minutosTotalesSinDuracion()) {
 							warning(
 								"Advertencia, el orador " + p1.name + " esta asignado a las actividades adyacentes" +
-									a.titulo + " y " + next.titulo,p1.eContainer(),p1.eContainingFeature(),-1)
+									a.titulo + " y " + next.titulo, p1.eContainer(), p1.eContainingFeature(), -1)
 						} else {
-							if (seSolapanHorarios(a,next)) {
+							if (seSolapanHorarios(a, next)) {
 								error(
 									"Las actividades " + a.titulo + " y " + next.titulo + " del orador " + p1.name +
-										" se superponen",p1.eContainer(),p1.eContainingFeature(),-1)
+										" se superponen", p1.eContainer(), p1.eContainingFeature(), -1)
 							}
 						}
 						x++
@@ -254,23 +246,21 @@ class PdcValidator extends AbstractPdcValidator {
 			}
 		]
 	}
-	
+
 	@Check
 	def checkExclusividadCharlasKeynote(PDC pdc) {
 		validarActividadesSolapadas(
-			pdc.schedule.actividades.filter[act|act.esCharla].sortByHorario()
-			,[a|a.keynote]
-			,"La charla keynote "
-			," se superpone con el horario de la actividad "
-			,""
+			pdc.schedule.actividades.filter[act|act.tipo.eClass.name.equals("Charla")].sortByHorario(),
+			[a|a.keynote],
+			"La charla keynote ",
+			" se superpone con el horario de la actividad ",
+			""
 		)
 	}
-	
-	
 
 	@Check
 	def checkMesaDebate2Oradores(Actividad actividad) {
-		if (actividad.esMesaDeDebate && actividad.oradores.length < 2) {
+		if (actividad.tipo.eClass.name.equals("Mesa de debate") && actividad.oradores.length < 2) {
 			error('Mesa de debate necesita 2 oradores al menos', PdcPackage.Literals.ACTIVIDAD__ORADORES, INVALID_NAME)
 		}
 	}
@@ -287,7 +277,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkDuracionBreak(Actividad actividad) {
-		if (actividad.esBreak && actividad.duracion < 15) {
+		if (actividad.tipo.eClass.name.equals("Break") && actividad.duracion < 15) {
 			error('Los breaks no pueden durar menos de 15 minutos', PdcPackage.Literals.ACTIVIDAD__DURACION,
 				INVALID_NAME)
 		}
@@ -295,7 +285,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkDuracionAlmuerzo(Actividad actividad) {
-		if (actividad.esBreak && actividad.tipoDeBreak.eClass.name.equals("Almuerzo") && actividad.duracion < 45) {
+		if (actividad.tipo.eClass.name.equals("Break") && actividad.tipoDeBreak.eClass.name.equals("Almuerzo") && actividad.duracion < 45) {
 			error('Los almuerzos no pueden durar menos de 45 minutos', PdcPackage.Literals.ACTIVIDAD__DURACION,
 				INVALID_NAME)
 		}
@@ -303,7 +293,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkAulasConMaquinasSoloParaTalleres(Actividad actividad) {
-		if (actividad.espacio.tieneComputadoras && !actividad.esTaller) {
+		if (actividad.espacio.tieneComputadoras && !actividad.tipo.eClass.name.equals("Taller")) {
 			error('Un aula con computadoras solo puede utilizarse para talleres', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
 				INVALID_NAME)
 		}
@@ -311,7 +301,7 @@ class PdcValidator extends AbstractPdcValidator {
 
 	@Check
 	def checkTallerDebeTenerComputadoras(Actividad actividad) {
-		if (actividad.esTaller && !actividad.espacio.tieneComputadoras) {
+		if (actividad.tipo.eClass.name.equals("Taller")&& !actividad.espacio.tieneComputadoras) {
 			error('Un taller solo puede llevarse a cabo en un aula con maquinas', PdcPackage.Literals.ACTIVIDAD__ESPACIO,
 				INVALID_NAME)
 		}
@@ -338,4 +328,5 @@ class PdcValidator extends AbstractPdcValidator {
 		}
 
 	}
+
 }

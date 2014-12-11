@@ -48,11 +48,44 @@ Espacio:
 	'Espacio' ':' name= ID ',' capacidad= INT (tieneComputadoras?='poseeComputadoras')?;
 
 Actividad:
-	  (esCharla?='Charla')? (esMesaDeDebate?='Mesa de debate')? (esTaller?='Taller')? 
-	  (esBreak?='Break')? (esEventoDeInauguracion?='Evento de Inauguración')? (esRegistracion?='Registracion')?  
-	  (esEventoDeCierre?='Evento de cierre')? (keynote?='Keynote')?  (tipoDeBreak=TipoDeBreak)?  
+	  tipo=TipoDeActividad (keynote?='Keynote')?  (tipoDeBreak=TipoDeBreak)?  
 	  ( 'parte de 'track=[Track])? ',' titulo= STRING ',' 'Duracion:'duracion= INT ','
 	 'Lugar:'espacio= [Espacio]',' 'Gente esperada:'genteEsperada= INT (',' 'Oradores:' oradores+=[Orador]* )?',' horario=Horario
+;
+
+
+TipoDeActividad:
+	Charla | MesaDeDebate | Taller | EventoInauguracion | Registracion | EventoCierre | Break
+;
+
+Charla:
+	{Charla}
+	'Charla' 
+;
+
+MesaDeDebate:
+	{MesaDeDebate}
+	'Mesa de debate' 
+;
+Taller:
+	{Taller}
+	'Taller' 
+;
+EventoInauguracion:
+	{EventoInauguracion}
+	'Evento de inauguracion' 
+;
+Registracion:
+	{Registracion}
+	'Registracion' 
+;
+EventoCierre:
+	{EventoCierre}
+	'EventoCierre' 
+;
+Break:
+	{Break}
+	'Break' 
 ;
 
 
